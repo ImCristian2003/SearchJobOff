@@ -1,0 +1,737 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/*------------------HEADER DE LA PAGINA PRINCIPAL------------------*/
+
+header {
+    height: 100vh;
+    margin-bottom: 50px;
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.logo {
+    background-color: rgba(105, 183, 185, 1);
+    color: #fff;
+    height: auto;
+    padding: 15px;
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.logo h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 50px;
+    letter-spacing: 2px;
+    margin: 0px 10px;
+}
+
+nav.logeo {
+    background-color: rgba(105, 183, 185, 1);
+    height: auto;
+    padding: 15px;
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+nav.logeo a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0px 10px;
+    text-decoration: none;
+}
+
+.entrada {
+    background: url(../img/fondo-header.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    clip-path: polygon(0 0, 100% 0, 100% 87%, 50% 100%, 0 87%);
+    height: 90%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.entrada h2 {
+    color: #fff;
+    font-family: 'Dancing Script', cursive;
+    font-size: 70px;
+    letter-spacing: 2px;
+    margin: 10px 10px;
+}
+
+.entrada p {
+    color: #fff;
+    margin: 30px 10px;
+}
+
+.entrada form {
+    display: flex;
+    justify-content: center;
+}
+
+.entrada form input[type="text"] {
+    border: none;
+    border-right: 1px solid rgb(121, 120, 120);
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 8px;
+    width: 35%;
+}
+
+.entrada form select {
+    border: none;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 8px;
+    width: 35%;
+}
+
+.entrada .details {
+    background-color: rgba(105, 183, 185, .8);
+    border-radius: 10px;
+    padding: 80px 40px;
+    width: 65%;
+}
+
+/*--------------SECCIONES DE POR QUE NOSOTROS--------------------*/
+/*--------------PRIMERA SECCIÓN----------------------------------*/
+
+.nosotros-principal {
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.nosotros-principal .nosotros1 {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nosotros-principal .nosotros1 h2 {
+    margin: 20px 20px;
+}
+
+.nosotros-principal .nosotros1 p {
+    margin: 20px 20px;
+}
+
+.nosotros-principal .nosotros1 ul {
+    list-style-type: none;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+}
+
+.nosotros-principal .nosotros1 ul li {
+    margin: 10px;
+}
+
+.nosotros-principal .nosotros1 ul li span {
+    color: rgb(102, 184, 20);
+    font-size: 25px;
+}
+
+.nosotros-principal .nosotros2 {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nosotros-principal .nosotros2 img {
+    border-radius: 50%;
+    height: 85%;
+    width: 85%;
+}
+
+/*-----------------------SEGUNDA SECCIÓN----------------------------*/
+
+.nosotros-secundaria {
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.nosotros-secundaria .nosotros1 {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nosotros-secundaria .nosotros1 h2 {
+    margin: 20px 20px;
+}
+
+.nosotros-secundaria .nosotros1 p {
+    margin: 20px 20px;
+}
+
+.nosotros-secundaria .nosotros1 ul {
+    list-style-type: none;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+}
+
+.nosotros-secundaria .nosotros1 ul li {
+    margin: 10px;
+}
+
+.nosotros-secundaria .nosotros1 ul li span {
+    color: rgb(102, 184, 20);
+    font-size: 25px;
+}
+
+.nosotros-secundaria .nosotros2 {
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nosotros-secundaria .nosotros2 img {
+    border-radius: 50%;
+    height: 85%;
+    width: 85%;
+}
+
+/*--------------INTEGRANTES/DESARROLLADORES-----------------------*/
+
+.equipo {
+    height: 100vh;
+    margin-bottom: 40px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.equipo .equipo1 {
+    height: 30%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.equipo .equipo1 h2 {
+    font-weight: 900s;
+    margin: 20px;
+}
+
+.equipo .equipo1 p {
+    font-size: 20px;
+}
+
+.equipo .equipo2 {
+    height: 70%;
+    padding: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/*---------------TARJETA DEL ESCLAVO-------------------------------*/
+
+.equipo .equipo2 .tarjeta1 {
+    background: url(../img/esclavo.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    height: 100%;
+    width: 23%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.equipo .equipo2 .tarjeta1 .details-tarjeta {
+    background-color: rgba(67, 67, 67, .8);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: #fff;
+    height: 50%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.equipo .equipo2 .tarjeta1 .details-tarjeta .iconos {
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.equipo .equipo2 .tarjeta1 .details-tarjeta .iconos span {
+    font-size: 22px;
+    margin: 0px 10px;
+}
+
+.equipo .equipo2 .tarjeta1 .details-tarjeta .details {
+    padding: 13px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.equipo .equipo2 .tarjeta1 .details-tarjeta .details ul {
+    list-style-type: none;
+}
+
+.equipo .equipo2 .tarjeta1 .details-tarjeta .details p {
+    color: #bbb6b6;
+    margin-bottom: 10px;
+}
+
+/*---------------TARJETA DEL VICIOSO-------------------------------*/
+
+.equipo .equipo2 .tarjeta2 {
+    background: url(../img/vicioso.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    height: 100%;
+    width: 23%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.equipo .equipo2 .tarjeta2 .details-tarjeta {
+    background-color: rgba(67, 67, 67, .8);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: #fff;
+    height: 50%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.equipo .equipo2 .tarjeta2 .details-tarjeta .iconos {
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.equipo .equipo2 .tarjeta2 .details-tarjeta .iconos span {
+    font-size: 22px;
+    margin: 0px 10px;
+}
+
+.equipo .equipo2 .tarjeta2 .details-tarjeta .details {
+    padding: 13px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.equipo .equipo2 .tarjeta2 .details-tarjeta .details ul {
+    list-style-type: none;
+}
+
+.equipo .equipo2 .tarjeta2 .details-tarjeta .details p {
+    color: #bbb6b6;
+    margin-bottom: 10px;
+}
+
+/*---------------TARJETA DEL PARACO-------------------------------*/
+
+.equipo .equipo2 .tarjeta3 {
+    background: url(../img/paraco.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 15px;
+    height: 100%;
+    width: 23%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.equipo .equipo2 .tarjeta3 .details-tarjeta {
+    background-color: rgba(67, 67, 67, .8);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: #fff;
+    height: 50%;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.equipo .equipo2 .tarjeta3 .details-tarjeta .iconos {
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.equipo .equipo2 .tarjeta3 .details-tarjeta .details {
+    padding: 13px;
+
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.equipo .equipo2 .tarjeta3 .details-tarjeta .iconos span {
+    font-size: 22px;
+    margin: 0px 10px;
+}
+
+.equipo .equipo2 .tarjeta3 .details-tarjeta .details ul {
+    list-style-type: none;
+}
+
+.equipo .equipo2 .tarjeta3 .details-tarjeta .details p {
+    color: #bbb6b6;
+    margin-bottom: 10px;
+}
+
+/*-------------------------PIE DE PAGINA--------------------------*/
+
+footer {
+    height: 100vh;
+    margin-top: 20px;
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer .footer1 {
+    padding: 35px;
+    width: 50%;
+}
+
+footer .footer1 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+}
+
+footer .footer1 .footer1-det1 h2{
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+    letter-spacing: 4px;
+    margin: 20px 10px;
+}
+
+footer .footer1 .footer1-det1 span{
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin: 20px 10px;
+}
+
+footer .footer1 .footer1-det2 h3{
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 20px 10px;
+}
+
+footer .footer1 .footer1-det2 a{
+    background: #a6a6a6;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 8px 17px;
+    text-decoration: none;
+}
+
+footer .footer2 {
+    background: rgb(105, 183, 185);;
+    width: 50%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+footer .footer2 .footer2-det1 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px auto;
+    padding: 20px;
+    text-align: center;
+    width: 90%;
+}
+
+footer .footer2 .footer2-det1 h2 {
+    color: #fff;
+    letter-spacing: 2px;
+    margin: 20px 10px;
+}
+
+footer .footer2 .footer2-det1 form input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;  
+    color: #fff;
+    font-weight: bold;
+    letter-spacing:2px;
+    margin: 15px 10px;
+    padding: 7px;
+    width: 40%;
+}
+
+
+
+footer .footer2 .footer2-det1 form input[type="email"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing:2px;
+    margin: 10px 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 85%;
+}
+
+footer .footer2 .footer2-det1 form textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: #fff;
+    font-weight: bold;
+    letter-spacing:2px;
+    padding: 5px;
+    width: 85%;
+}
+
+footer .footer2 .footer2-det1 form input[type="submit"] {
+    background: #a6a6a6;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 20px 10px;
+    padding: 9px 10px;
+    width: 45%;
+}
+
+footer .footer2 .footer2-det1 form input::placeholder {
+    color: #fff;
+}
+
+footer .footer2 .footer2-det1 form textarea::placeholder {
+    color: #fff;
+}
+
+footer .footer2 .footer2-det2 {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+footer .footer2 .footer2-det2 span {
+    font-size: 20px;
+}
+
+footer .footer3 {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+footer .footer3-det1 {
+    background: #69b7b9;
+    padding: 10px;
+    width: 50%; 
+
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: center;
+}
+
+footer .footer3-det1 p {
+    color: #fff;
+    margin: 0px 20px;
+}
+
+footer .footer3-det1 p span {
+    margin: 0px 10px;
+}
+
+footer .footer3-det2 {
+    background: rgb(105, 183, 185);
+    padding: 10px;
+    width: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+footer .footer3-det2 a {
+    color: #fff;
+    margin: 0px 10px;
+    text-decoration: none;
+}
+
+footer .footer3-det2 span {
+    color: #fff;
+}
+
+/*------------------------MEDIA QUERIES--------------------------*/
+
+@media (max-width: 900px) {
+    /*------------NOSOTROS PRINCIPAL------------------------------*/
+    .nosotros-principal {
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+    }
+    .nosotros-principal .nosotros1 {
+        width: 80%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .nosotros-principal .nosotros1 .nosotros1-details {
+        width: 100%;
+    }
+    .nosotros-principal .nosotros2 {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .nosotros-principal .nosotros2 img {
+        border-radius: 20px;
+        height: 100%;
+        margin-top: 40px;
+        width: 80%;
+    }
+
+    /*------------NOSOTROS SECUNDARIO------------------------------*/
+
+    .nosotros-secundaria {
+        flex-direction: column;
+
+        justify-content: center;
+        align-items: center;
+    }
+    .nosotros-secundaria .nosotros1 {
+        width: 80%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .nosotros-secundaria .nosotros1 .nosotros1-details {
+        width: 100%;
+    }
+    .nosotros-secundaria .nosotros2 {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .nosotros-secundaria .nosotros2 img {
+        border-radius: 20px;
+        height: 100%;
+        margin-top: 40px;
+        width: 80%;
+    }
+    /*----------------TARJETAS DE PRESENTACIÓN--------------------*/
+    .equipo {
+        height: auto;
+    }
+    .equipo .equipo2 {
+        flex-direction: column;
+    }
+}
+
+svg {
+    background: rgba(105, 183, 185, 1);
+    margin: 0;
+    width: 100%;
+}
