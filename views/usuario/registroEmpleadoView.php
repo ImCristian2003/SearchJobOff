@@ -11,9 +11,9 @@
                 <strong>Registro fallido</strong>
 
     <?php   endif;  ?>
-    <?php Utils::deleteSession('register'); ?>
+    <?php //Utils::deleteSession('register'); ?>
 
-    <form action="<?=base_url?>usuario/save" method="post">
+    <form action="" method="post">
 
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" required>
