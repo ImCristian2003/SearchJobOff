@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/icons/style.css">
+    <title>Registro</title>
+    <style>
+        
+        * {
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background: linear-gradient(to left,rgba(105, 183, 185, .8), rgb(0, 0, 0, .8)), 
+            url(assets/img/trabajo.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100vh;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .container .container-details {
+            background: rgba(105, 183, 185, 1);
+            border-radius: 10px;
+            height: 70%;
+            padding: 30px;
+            position: relative;
+            width: 60%;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container .container-details h2 {
+            color: #fff;
+            font-size: 50px;
+            letter-spacing: 2px;
+            margin: 10px 20px;
+            margin-bottom: 70px;
+        }
+
+        .container .container-details a.link {
+            background: #fff;
+            border-radius: 10px;
+            color: rgb(58, 58, 58);
+            font-weight: bold;
+            margin: 20px auto;
+            padding: 18px 30px;
+            text-decoration: none;
+            width: 90%;
+        }
+
+        .container .container-details a span {
+            background: #fff;
+            border-radius: 50%;
+            color: rgba(105, 183, 185, 1);
+            padding: 8px;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container-details">
+            <h2>Registro</h2>
+            <a href="views/empresa/registroEmpresa.php" class="link">Registrarme como Empresa</a>
+            <a href="views/usuario/registroEmpleado.php" class="link">Registrarme como Empleado</a>
+            <a href="index.php"><span class="icon-cross"></span></a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <?php
 
-    class UsuarioModel{
+    class EmpleadoModel{
 
         //Se asignan los campos correspondientes a la base de datos
         private $id;
@@ -9,18 +9,18 @@
         private $telefono;
         private $direccion;
         private $correo;
-        private $password;
+        private $contrasena;
         private $perfil;
         private $hoja_vida;
         private $db;
 
-        /////////////////////////////CONSTRUCTOR
+        //Constructor que hace uso de la conexión a la base de datos
         public function __construct()
         {
             $this->db = Conexion::connection();
         }
 
-        /////////////////////////////GET Y SET PARA EL ID
+        //Get y Set para id
         public function getId(){
             return $this->id;
         }
@@ -29,7 +29,7 @@
             $this->id = $id;
         }
 
-        /////////////////////////////GET Y SET PARA EL NOMBRE
+        //Get y Set para nombre
         public function getNombre(){
             return $this->nombre;
         }
@@ -38,7 +38,7 @@
             $this->nombre = $this->db->real_escape_string($nombre);
         }
 
-        /////////////////////////////GET Y SET PARA EL APELLIDOS
+        //Get y Set para apellidos
         public function getApellidos(){
             return $this->apellidos;
         }
@@ -47,7 +47,7 @@
             $this->apellidos = $this->db->real_escape_string($apellidos);
         }
 
-        /////////////////////////////GET Y SET PARA EL TELEFONO
+        //Get y Set para telefono
         public function getTelefono(){
             return $this->telefono;
         }
@@ -56,7 +56,7 @@
             $this->telefono = $this->db->real_escape_string($telefono);
         }
 
-        /////////////////////////////GET Y SET PARA LA DIRECCION
+        //Get y Set para direccion
         public function getDireccion(){
             return $this->direccion;
         }
@@ -65,7 +65,7 @@
             $this->direccion = $this->db->real_escape_string($direccion);
         }
 
-        /////////////////////////////GET Y SET PARA EL CORREO
+        //Get y Set para correo
         public function getCorreo(){
             return $this->correo;
         }
@@ -74,16 +74,16 @@
             $this->correo = $this->db->real_escape_string($correo);
         }
 
-        /////////////////////////////GET Y SET PARA EL PASSWORD
-        public function getPassword(){
-            return $this->password;
+        //Get y Set para contraseña
+        public function getContrasena(){
+            return password_hash($this->db->real_escape_string($this->contrasena), PASSWORD_BCRYPT, ['cost'=>4]);
         }
 
-        public function setPassword($password){
-            $this->password = password_hash($this->db->real_escape_string($password), PASSWORD_BCRYPT, ['cost'=>4]);
+        public function setContrasena($contrasena){
+            $this->contrasena = $contrasena;
         }
 
-        /////////////////////////////GET Y SET PARA EL ROL
+        //Get y Set para perfil
         public function getPerfil(){
             return $this->perfil;
         }
@@ -92,7 +92,7 @@
             $this->perfil = $perfil;
         }
 
-        /////////////////////////////GET Y SET PARA EL IMAGE
+        //Get y Set para hoja de vida
         public function getHojaVida(){
             return $this->hoja_vida;
         }
@@ -101,11 +101,11 @@
             $this->hoja_vida = $hoja_vida;
         }
         
-        /////////////////////////////METODOS PARA CONSULTAR A LA BD
-        public function save(){
+        //Funciones para consultar a la base de datos
+        public function guardarEmpleado(){
             
             
-            $sql = "INSERT INTO usuarios VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getPassword()}','{$this->getPerfil()}','{$this->getHojaVida()}')";
+            $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},'{$this->getHojaVida()}')";
             $save = $this->db->query($sql);
 
             $result = false;
