@@ -10,6 +10,7 @@
         private $email;
         private $contrasena;
         private $perfil;
+        private $imagen;
         //Variable que hace uso de la conexión a la base de datos
         private $db;
 
@@ -82,12 +83,21 @@
             $this->perfil = $perfil;
         }
 
+        //Get y Set para imagen de perfil
+        public function getImagen(){
+            return $this->imagen;
+        }
+
+        public function setImagen($imagen){
+            $this->imagen = $imagen;
+        }
+
         //Funciones para hacer consultas a la base de datos
         //Funciones para guardar una empresa
         public function guardarEmpresa(){
             
             
-            $sql = "INSERT INTO usuario VALUES('{$this->getNit()}','{$this->getNombre()}',null,'{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},null)";
+            $sql = "INSERT INTO usuario VALUES('{$this->getNit()}','{$this->getNombre()}',null,'{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},null,null)";
             $save = $this->db->query($sql);
 
             $result = false;

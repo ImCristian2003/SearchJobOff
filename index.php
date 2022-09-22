@@ -32,7 +32,7 @@
         </section>
         <nav class="logeo">
             <a href="registro.html">Crear Cuenta</a>
-            <a href="login-register/login.php">Acceder</a>
+            <a href="login.php">Acceder</a>
         </nav>
         <section class="entrada">
             <div class="details">

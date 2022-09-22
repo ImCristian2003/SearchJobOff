@@ -112,12 +112,12 @@
 
                         }else{
                             //En caso de que no se suba el archivo con el formato correcto
-                            $filename = "sin_imagen";
+                            $filename = "sin_hoja_vida";
                         }
 
                 }else{
                     //En caso de que no se suba el archivo, se le asignará null
-                    $filename = "sin_imagen";
+                    $filename = "sin_hoja_vida";
                 }
 
                 //Validación de que no hallan errores

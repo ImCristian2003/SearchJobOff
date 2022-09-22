@@ -1,6 +1,7 @@
 <?php
 
-    class EmpleadoModel{
+    //Clase para la tabla usuario - modelo
+    class usuarioModel{
 
         //Se asignan los campos correspondientes a la base de datos
         private $id;
@@ -12,8 +13,6 @@
         private $contrasena;
         private $perfil;
         private $hoja_vida;
-        private $imagen;
-        //Variable que hace uso de la conexión a la base de datos
         private $db;
 
         //Constructor que hace uso de la conexión a la base de datos
@@ -113,21 +112,38 @@
         }
         
         //Funciones para consultar a la base de datos
-        public function guardarEmpleado(){
-            
-            
-            $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},'{$this->getHojaVida()}',null)";
-            $save = $this->db->query($sql);
+        //Funcion para comprobar la identificación del usuario
+        public function login(){
 
+            //Variable que se retorna
             $result = false;
-            if($save){
-                $result = true;
+            //Campos que utiliza el login
+            $id = $this->id;
+            $contrasena = $this->contrasena;
+
+            //Comprobar si existe el usuario
+            $sql = "SELECT * FROM usuario WHERE id='$id'";
+            $login = $this->db->query($sql);
+
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($login && $login->num_rows == 1){
+                //Convertir lo que retorna la consulta a un array asociativo
+                $usuario = $login->fetch_object();
+
+                //Verificacion de la contraseña
+                $verify = password_verify($contrasena, $usuario->contrasena);
+
+                //Verificar que la contraseña coincida
+                if($verify){
+                    //Pasar los datos del usuario a una variable
+                    $result = $usuario;
+                }
+
             }
-            
+
+            //Retornar el resultado del proceso
             return $result;
 
         }
-    
-        
 
     }
