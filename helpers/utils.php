@@ -12,7 +12,7 @@
 
         if(isset($sesion[$campo])){
 
-            echo "<div class='alerta alerta-error'>".$sesion[$campo]."</div>";
+            echo "<div class='alert alert-danger' style='background-color:#FF0000; color:#fff; border-radius:8px; padding:4px;'>".$sesion[$campo]."</div>";
 
         }
 

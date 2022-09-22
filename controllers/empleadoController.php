@@ -30,7 +30,7 @@
                     $id_validado = true;
                 }else{
                     $id_validado = false;
-                    $errores['id'] = "Solo se permiten numeros";
+                    $errores['id'] = "Solo se permiten números";
                 }
 
                 //VALIDACIÓN PARA EL NOMBRE
@@ -38,7 +38,7 @@
                     $nombre_validado = true;
                 }else{
                     $nombre_validado = false;
-                    $errores['nombre'] = "No se permiten numeros en este campo";
+                    $errores['nombre'] = "No se permiten números en este campo";
                 }
 
                 //VALIDACIÓN PARA LOS APELLIDOS
@@ -46,7 +46,7 @@
                     $apellido_validado = true;
                 }else{
                     $apellido_validado = false;
-                    $errores['apellido'] = "No se permiten numeros en este campo";
+                    $errores['apellido'] = "No se permiten números en este campo";
                 }
 
                 //VALIDACIÓN PARA EL TELEFONO
@@ -54,7 +54,7 @@
                     $telefono_validado = true;
                 }else{
                     $telefono_validado = false;
-                    $errores['telefono'] = "Solo se permiten numeros";
+                    $errores['telefono'] = "Solo se permiten números";
                 }
 
                 //VALIDACIÓN PARA LA DIRECCIÓN
@@ -68,7 +68,7 @@
                 if(!empty($correo) && filter_var($correo, FILTER_VALIDATE_EMAIL)){
                     $correo_validado = true;
                 }else{
-                    $errores['correo'] = "Formato de correo invalido";
+                    $errores['correo'] = "Formato de correo inválido";
                 }
 
                 //VALIDACIÓN PARA LA CONTRASEÑA
@@ -82,7 +82,7 @@
                 if(!empty($perfil) && is_numeric($perfil) && preg_match("/[0-9]/",$perfil)){
                     $perfil_validado = true;
                 }else{
-                    $errores['perfil'] = "Perfil no valido";
+                    $errores['perfil'] = "Perfil no válido";
                 }
 
                 //Validar que exista el archivo que corresponderá a la hoja de vida

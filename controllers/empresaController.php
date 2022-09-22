@@ -33,7 +33,7 @@
                     $nombre_validado = true;
                 }else{
                     $nombre_validado = false;
-                    $errores['nombre'] = "No se permiten numeros en este campo";
+                    $errores['nombre'] = "No se permiten números en este campo";
                 }
 
                 //VALIDACIÓN PARA EL TELEFONO
@@ -41,7 +41,7 @@
                     $telefono_validado = true;
                 }else{
                     $telefono_validado = false;
-                    $errores['telefono'] = "Solo se permiten numeros";
+                    $errores['telefono'] = "Solo se permiten números";
                 }
 
                 //VALIDACIÓN PARA LA DIRECCIÓN
@@ -55,21 +55,21 @@
                 if(!empty($correo) && filter_var($correo, FILTER_VALIDATE_EMAIL)){
                     $correo_validado = true;
                 }else{
-                    $errores['correo'] = "Formato de correo invalido";
+                    $errores['correo'] = "Formato de correo inválido";
                 }
 
                 //VALIDACIÓN PARA LA CONTRASEÑA
                 if(!empty($contrasena)){
                     $contrasena_validado = true;
                 }else{
-                    $errores['contrasena'] = "La contraseña no puede estár vacía";
+                    $errores['contrasena'] = "La contraseña no puede estar vacía";
                 }
 
                 //VALIDACIÓN PARA EL PERFIL
                 if(!empty($perfil) && is_numeric($perfil) && preg_match("/[0-9]/",$perfil)){
                     $perfil_validado = true;
                 }else{
-                    $errores['perfil'] = "Perfil no valido";
+                    $errores['perfil'] = "Perfíl no válido";
                 }
 
                 if(count($errores) == 0){
