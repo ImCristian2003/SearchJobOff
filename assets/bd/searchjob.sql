@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
+-- version 4.4.12
+-- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-09-2022 a las 04:52:55
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.10
+-- Tiempo de generación: 23-09-2022 a las 19:29:54
+-- Versión del servidor: 5.6.25
+-- Versión de PHP: 5.6.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -25,78 +24,93 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionActualizar` (IN `Pcodigo` INT(3), IN `Pusuario` VARCHAR(11), IN `Pnumero` INT(5), IN `Pdescripcion` VARCHAR(600))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionActualizar`(IN `Pcodigo` INT(3), IN `Pusuario` VARCHAR(11), IN `Pnumero` INT(5), IN `Pdescripcion` VARCHAR(600))
+BEGIN
 UPDATE calificacion
 SET usuario = Pusuario, numero = Pnumero, descripcion = Pdescripcion
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionEliminar` (IN `Pcodigo` INT(3))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionEliminar`(IN `Pcodigo` INT(3))
+BEGIN
 DELETE FROM calificacion
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionInsertar` (IN `Pusuario` VARCHAR(11), IN `Pnumero` INT(5), IN `Pdescripcion` VARCHAR(600))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionInsertar`(IN `Pusuario` VARCHAR(11), IN `Pnumero` INT(5), IN `Pdescripcion` VARCHAR(600))
+BEGIN
 INSERT INTO calificacion
 VALUES (null,Pusuario,Pnumero,Pdescripcion);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionLeerConCodigos` (IN `Pcodigo` INT(3))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionLeerConCodigos`(IN `Pcodigo` INT(3))
+BEGIN
 SELECT * FROM calificacion
 WHERE codigo = Pcodigo;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionLeerSinCodigos` (IN `Pcodigo` INT(3))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcalificacionLeerSinCodigos`(IN `Pcodigo` INT(3))
+BEGIN
 SELECT ca.codigo, concat(us.id,' - ',us.nombre,' - ',us.apellido) as 'Usuario', ca.numero, ca.descripcion FROM calificaion as ca
 INNER JOIN usuario as us
 ON ca.usuario = us.id
 WHERE ca.codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoActualizar` (IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(600))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoActualizar`(IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(600))
+BEGIN
 UPDATE cargo
 SET nombre = Pnombre
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoEliminar` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoEliminar`(IN `Pcodigo` INT(2))
+BEGIN
 DELETE FROM cargo
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoInsertar` (IN `Pnombre` VARCHAR(600))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoInsertar`(IN `Pnombre` VARCHAR(600))
+BEGIN
 INSERT INTO cargo
 VALUES(null,Pnombre);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoLeer` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPcargoLeer`(IN `Pcodigo` INT(2))
+BEGIN
 SELECT * FROM cargo
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoActualizar` (IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(25))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoActualizar`(IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(25))
+BEGIN
 UPDATE departamento
 SET nombre = Pnombre
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoEliminar` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoEliminar`(IN `Pcodigo` INT(2))
+BEGIN
 DELETE FROM departamento
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoInsertar` (IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(25))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoInsertar`(IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(25))
+BEGIN
 INSERT INTO departamento
 VALUES(Pcodigo,Pnombre);
+
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoLeer` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPdepartamentoLeer`(IN `Pcodigo` INT(2))
+BEGIN
 SELECT * FROM departamento
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoActualizar` (IN `Pcodigo` INT(5), IN `Pnombre` VARCHAR(30), IN `Pmunicipio` INT(5), IN `Pdireccion` VARCHAR(100), IN `Pcargo` INT(2), IN `Pvacantes` INT(3), IN `Pjornada` VARCHAR(15), IN `Pexperiencia` VARCHAR(30), IN `Psector` INT(2), IN `Pfuncion` VARCHAR(1000), IN `Pempresa` VARCHAR(11), IN `Pdescripcion` VARCHAR(600), IN `Psalario` INT(8), IN `Ptipo_contrato` INT(1))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoActualizar`(IN `Pcodigo` INT(5), IN `Pnombre` VARCHAR(30), IN `Pmunicipio` INT(5), IN `Pdireccion` VARCHAR(100), IN `Pcargo` INT(2), IN `Pvacantes` INT(3), IN `Pjornada` VARCHAR(15), IN `Pexperiencia` VARCHAR(30), IN `Psector` INT(2), IN `Pfuncion` VARCHAR(1000), IN `Pempresa` VARCHAR(11), IN `Pdescripcion` VARCHAR(600), IN `Psalario` INT(8), IN `Ptipo_contrato` INT(1))
+BEGIN
 UPDATE empleo
 SET nombre = Pnombre, 
 municipio = Pmunicipio,
@@ -106,6 +120,7 @@ vacantes = Pvacantes,
 jornada = Pjornada,
 experiencia = Pexperiencia,
 sector = Psector,
+
 funcion = Pfuncion,
 empresa = Pempresa,
 descripcion = Pdescripcion,
@@ -114,23 +129,27 @@ tipo_contrato = Ptipo_contrato
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoEliminar` (IN `Pcodigo` INT(5))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoEliminar`(IN `Pcodigo` INT(5))
+BEGIN
 DELETE FROM empleo
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoInsertar` (IN `Pnombre` VARCHAR(30), IN `Pmunicipio` INT(5), IN `Pdireccion` VARCHAR(100), IN `Pcargo` INT(2), IN `Pvacantes` INT(3), IN `Pjornada` VARCHAR(15), IN `Pexperiencia` VARCHAR(30), IN `Psector` INT(2), IN `Pfuncion` VARCHAR(1000), IN `Pempresa` VARCHAR(11), IN `Pdescripcion` VARCHAR(600), IN `Psalario` INT(8), IN `Ptipo_contrato` INT(1))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoInsertar`(IN `Pnombre` VARCHAR(30), IN `Pmunicipio` INT(5), IN `Pdireccion` VARCHAR(100), IN `Pcargo` INT(2), IN `Pvacantes` INT(3), IN `Pjornada` VARCHAR(15), IN `Pexperiencia` VARCHAR(30), IN `Psector` INT(2), IN `Pfuncion` VARCHAR(1000), IN `Pempresa` VARCHAR(11), IN `Pdescripcion` VARCHAR(600), IN `Psalario` INT(8), IN `Ptipo_contrato` INT(1))
+BEGIN
 INSERT INTO empleo
 VALUES(null,Pnombre,Pmunicipio,Pdireccion,Pcargo,Pvacantes,Pjornada,Pexperiencia,Psector,Pfuncion,Pempresa,Pdescripcion,Psalario,
        Ptipo_contrato);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoLeerConCodigos` (IN `Pcodigo` INT(5))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoLeerConCodigos`(IN `Pcodigo` INT(5))
+BEGIN
 SELECT * FROM empleo
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoLeerSinCodigos` (IN `Pcodigo` INT(5))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPempleoLeerSinCodigos`(IN `Pcodigo` INT(5))
+BEGIN
 SELECT em.codigo, em.nombre, concat(mu.codigo,' - ',mu.nombre) as 'Informacion municipio', em.direccion,
 concat(ca.codigo,' - ',ca.nombre) as 'Informacion cargo', em.vacantes, em.jornada, em.experiencia,
 concat(se.codigo,' - ',se.nombre) as 'Informacion sector', em.funcion, em.empresa, em.descripcion, 
@@ -147,78 +166,93 @@ ON em.tipo_contrato = tc.codigo
 HAVING em.codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioActualizar` (IN `Pcodigo` INT(5), IN `Pnombre` VARCHAR(40), IN `Pdepartamento` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioActualizar`(IN `Pcodigo` INT(5), IN `Pnombre` VARCHAR(40), IN `Pdepartamento` INT(2))
+BEGIN
 UPDATE municipio
 SET nombre = Pnombre, departamento = Pdepartamento
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioEliminar` (IN `Pcodigo` INT(5))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioEliminar`(IN `Pcodigo` INT(5))
+BEGIN
 DELETE FROM municipio
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioInsertar` (IN `Pcodigo` INT(5), IN `Pnombre` VARCHAR(40), IN `Pdepartamento` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioInsertar`(IN `Pcodigo` INT(5), IN `Pnombre` VARCHAR(40), IN `Pdepartamento` INT(2))
+BEGIN
 INSERT INTO municipio
 VALUES(Pcodigo, Pnombre, Pdepartamento);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioLeerConCodigos` (IN `Pcodigo` INT(5))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioLeerConCodigos`(IN `Pcodigo` INT(5))
+BEGIN
 SELECT * FROM municipio
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioLeerSinCodigos` (IN `Pcodigo` INT(5))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPmunicipioLeerSinCodigos`(IN `Pcodigo` INT(5))
+BEGIN
 SELECT mu.codigo, mu.nombre as 'Nombre Municipio', de.nombre as 'Nombre Departamento' FROM municipio as mu
 INNER JOIN departamento as de
 ON mu.departamento = de.codigo
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilActualizar` (IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(40))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilActualizar`(IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(40))
+BEGIN
 UPDATE perfil
 SET nombre = Pnombre
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilEliminar` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilEliminar`(IN `Pcodigo` INT(2))
+BEGIN
 DELETE FROM perfil
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilInsertar` (IN `Pnombre` VARCHAR(40))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilInsertar`(IN `Pnombre` VARCHAR(40))
+BEGIN
 INSERT INTO perfil
 VALUES(null,Pnombre);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilLeer` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPperfilLeer`(IN `Pcodigo` INT(2))
+BEGIN
 SELECT * FROM perfil
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionActualizar` (IN `Pcodigo` INT(4), IN `Pusuario` VARCHAR(11), IN `Pempleo` INT(5), IN `Pestado` TINYINT(1), IN `Pfecha` DATETIME)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionActualizar`(IN `Pcodigo` INT(4), IN `Pusuario` VARCHAR(11), IN `Pempleo` INT(5), IN `Pestado` TINYINT(1), IN `Pfecha` DATETIME)
+BEGIN
 UPDATE postulacion
 SET usuario = Pusuario, empleo = Pempleo, estado = Pestado, fecha = Pfecha
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionEliminar` (IN `Pcodigo` INT(4))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionEliminar`(IN `Pcodigo` INT(4))
+BEGIN
 DELETE FROM postulacion
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionInsertar` (IN `Pusuario` VARCHAR(11), IN `Pempleo` INT(5), IN `Pestado` TINYINT(1), IN `Pfecha` DATETIME)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionInsertar`(IN `Pusuario` VARCHAR(11), IN `Pempleo` INT(5), IN `Pestado` TINYINT(1), IN `Pfecha` DATETIME)
+BEGIN
 INSERT INTO postulacion
+
 VALUES(null, Pusuario, Pempleo, Pestado, Pfecha);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionLeerConCodigos` (IN `Pcodigo` INT(4))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionLeerConCodigos`(IN `Pcodigo` INT(4))
+BEGIN
 SELECT * FROM postulacion
 WHERE codigo = Pcodigo;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionLeerSinCodigos` (IN `Pcodigo` INT(4))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPpostulacionLeerSinCodigos`(IN `Pcodigo` INT(4))
+BEGIN
 SELECT po.codigo, concat(us.id,' - ',us.nombre,' - ',us.apellido) as 'Informacion usuario', concat(em.codigo,' - ',em.nombre) as 'Informacion Empleo', po.estado, po.fecha 
 FROM postulacion as po 
 INNER JOIN usuario as us 
@@ -228,72 +262,85 @@ ON po.empleo = em.codigo
 HAVING po.codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorActualizar` (IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorActualizar`(IN `Pcodigo` INT(2), IN `Pnombre` VARCHAR(30))
+BEGIN
 UPDATE sector
 SET nombre = Pnombre
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorEliminar` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorEliminar`(IN `Pcodigo` INT(2))
+BEGIN
 DELETE FROM sector
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorInsertar` (IN `Pnombre` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorInsertar`(IN `Pnombre` VARCHAR(30))
+BEGIN
 INSERT INTO sector
 VALUES(null, Pnombre);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorLeer` (IN `Pcodigo` INT(2))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPsectorLeer`(IN `Pcodigo` INT(2))
+BEGIN
 SELECT * FROM sector
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoActualizar` (IN `Pcodigo` INT(1), IN `Pnombre` VARCHAR(70))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoActualizar`(IN `Pcodigo` INT(1), IN `Pnombre` VARCHAR(70))
+BEGIN
 UPDATE tipo_contrato
 SET nombre = Pnombre
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoEliminar` (IN `Pcodigo` INT(1))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoEliminar`(IN `Pcodigo` INT(1))
+BEGIN
 DELETE FROM tipo_contrato
 WHERE codigo = Pcodigo;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoInsertar` (IN `Pnombre` VARCHAR(70))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoInsertar`(IN `Pnombre` VARCHAR(70))
+BEGIN
 INSERT INTO tipo_contrato
 VALUES(null, Pnombre);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoLeer` (IN `Pcodigo` INT(1))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPtipo_contratoLeer`(IN `Pcodigo` INT(1))
+BEGIN
 SELECT * FROM tipo_contrato
 WHERE codigo = Pcodigo;
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioActualizar` (IN `Pid` VARCHAR(11), IN `Pnombre` VARCHAR(40), IN `Papellido` VARCHAR(40), IN `Ptelefono` VARCHAR(11), IN `Pdireccion` VARCHAR(60), IN `Pcorreo` VARCHAR(50), IN `Pcontrasena` VARCHAR(40), IN `Pperfil` INT(2), IN `Phoja_vida` VARCHAR(260), IN `Pimagen` VARCHAR(255))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioActualizar`(IN `Pid` VARCHAR(11), IN `Pnombre` VARCHAR(40), IN `Papellido` VARCHAR(40), IN `Ptelefono` VARCHAR(11), IN `Pdireccion` VARCHAR(60), IN `Pcorreo` VARCHAR(50), IN `Pcontrasena` VARCHAR(40), IN `Pperfil` INT(2), IN `Phoja_vida` VARCHAR(260), IN `Pimagen` VARCHAR(255))
+BEGIN
 UPDATE usuario
 SET nombre = Pnombre, apellido = Papellido, telefono = Ptelefono, direccion = Pdireccion, correo = Pcorreo,
 contrasena = Pcontrasena, perfil = Pperfil, hoja_vida = Phoja_vida, imagen = Pimagen
 WHERE id = Pid;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioEliminar` (IN `Pid` VARCHAR(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioEliminar`(IN `Pid` VARCHAR(11))
+BEGIN
 DELETE FROM usuario
 WHERE id = Pid;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioInsertar` (IN `Pid` VARCHAR(11), IN `Pnombre` VARCHAR(40), IN `Papellido` VARCHAR(40), IN `Ptelefono` VARCHAR(11), IN `Pdireccion` VARCHAR(60), IN `Pcorreo` VARCHAR(50), IN `Pcontrasena` VARCHAR(40), IN `Pperfil` INT(2), IN `Phoja_vida` VARCHAR(260), IN `Pimagen` VARCHAR(255))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioInsertar`(IN `Pid` VARCHAR(11), IN `Pnombre` VARCHAR(40), IN `Papellido` VARCHAR(40), IN `Ptelefono` VARCHAR(11), IN `Pdireccion` VARCHAR(60), IN `Pcorreo` VARCHAR(50), IN `Pcontrasena` VARCHAR(40), IN `Pperfil` INT(2), IN `Phoja_vida` VARCHAR(260), IN `Pimagen` VARCHAR(255))
+BEGIN
 INSERT INTO usuario
 VALUES(Pid, Pnombre, Papellido, Ptelefono, Pdireccion, Pcorreo, Pcontrasena, Pperfil, Phoja_vida, Pimagen);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioLeerConCodigos` (IN `Pid` VARCHAR(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioLeerConCodigos`(IN `Pid` VARCHAR(11))
+BEGIN
 SELECT * FROM usuario
 WHERE id = Pid;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioLeerSinCodigo` (IN `Pid` VARCHAR(11))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPusuarioLeerSinCodigo`(IN `Pid` VARCHAR(11))
+BEGIN
 SELECT us.id, us.nombre, us.apellido, us.telefono, us.direccion, us.correo, us.contrasena, 
 concat(pe.codigo,' - ',pe.nombre) as 'Informacion perfil', us.hoja_vida
 FROM usuario as us
@@ -310,12 +357,12 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `calificacion`
 --
 
-CREATE TABLE `calificacion` (
+CREATE TABLE IF NOT EXISTS `calificacion` (
   `codigo` int(3) NOT NULL,
   `usuario` varchar(11) NOT NULL,
   `numero` int(5) NOT NULL,
   `descripcion` varchar(600) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -323,10 +370,10 @@ CREATE TABLE `calificacion` (
 -- Estructura de tabla para la tabla `cargo`
 --
 
-CREATE TABLE `cargo` (
+CREATE TABLE IF NOT EXISTS `cargo` (
   `codigo` int(2) NOT NULL,
   `nombre` varchar(600) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1018 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `cargo`
@@ -349,7 +396,7 @@ INSERT INTO `cargo` (`codigo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `departamento`
 --
 
-CREATE TABLE `departamento` (
+CREATE TABLE IF NOT EXISTS `departamento` (
   `codigo` int(2) NOT NULL,
   `nombre` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -388,7 +435,7 @@ INSERT INTO `departamento` (`codigo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `empleo`
 --
 
-CREATE TABLE `empleo` (
+CREATE TABLE IF NOT EXISTS `empleo` (
   `codigo` int(5) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `municipio` int(5) NOT NULL,
@@ -404,7 +451,7 @@ CREATE TABLE `empleo` (
   `salario` int(8) NOT NULL,
   `tipo_contrato` int(1) NOT NULL,
   `logo` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `empleo`
@@ -429,7 +476,7 @@ INSERT INTO `empleo` (`codigo`, `nombre`, `municipio`, `direccion`, `cargo`, `va
 -- Estructura de tabla para la tabla `municipio`
 --
 
-CREATE TABLE `municipio` (
+CREATE TABLE IF NOT EXISTS `municipio` (
   `codigo` int(5) NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `departamento` int(2) NOT NULL
@@ -457,10 +504,10 @@ INSERT INTO `municipio` (`codigo`, `nombre`, `departamento`) VALUES
 -- Estructura de tabla para la tabla `perfil`
 --
 
-CREATE TABLE `perfil` (
+CREATE TABLE IF NOT EXISTS `perfil` (
   `codigo` int(2) NOT NULL,
   `nombre` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `perfil`
@@ -477,13 +524,21 @@ INSERT INTO `perfil` (`codigo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `postulacion`
 --
 
-CREATE TABLE `postulacion` (
+CREATE TABLE IF NOT EXISTS `postulacion` (
   `codigo` int(4) NOT NULL,
   `usuario` varchar(11) NOT NULL,
   `empleo` int(5) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` varchar(30) NOT NULL,
   `fecha` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `postulacion`
+--
+
+INSERT INTO `postulacion` (`codigo`, `usuario`, `empleo`, `estado`, `fecha`) VALUES
+(21, '1005', 12, 'Pendiente', '2022-09-23 00:00:00'),
+(22, '1008', 3, 'Pendiente', '2022-09-23 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -491,10 +546,10 @@ CREATE TABLE `postulacion` (
 -- Estructura de tabla para la tabla `sector`
 --
 
-CREATE TABLE `sector` (
+CREATE TABLE IF NOT EXISTS `sector` (
   `codigo` int(2) NOT NULL,
   `nombre` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `sector`
@@ -518,10 +573,10 @@ INSERT INTO `sector` (`codigo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `tipo_contrato`
 --
 
-CREATE TABLE `tipo_contrato` (
+CREATE TABLE IF NOT EXISTS `tipo_contrato` (
   `codigo` int(1) NOT NULL,
   `nombre` varchar(70) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tipo_contrato`
@@ -541,7 +596,7 @@ INSERT INTO `tipo_contrato` (`codigo`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE `usuario` (
+CREATE TABLE IF NOT EXISTS `usuario` (
   `id` varchar(11) NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `apellido` varchar(40) DEFAULT NULL,
@@ -560,7 +615,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `telefono`, `direccion`, `correo`, `contrasena`, `perfil`, `hoja_vida`, `imagen`) VALUES
 ('0345', 'Juan Jose', 'Baretas', '3816283634', 'Calle34 #vivalamoña', 'bareta@gmail.com', '$2y$04$pwxiY3ZqaF5YOQIw4OusVOUERtoxuxo/gmvh0cH5gtJTpvNEcgesG', 2, NULL, 'descarga.jpg'),
-('1005', 'Juan Esteban', 'Motomami', '123412344', 'Calle34 #56-54', 'bareta@gmail.com', '$2y$04$tN.d6Ay3DbMYAliAPk4f.e.PEKyW2onVyQa7a0PBIilX.gp/Tb51a', 1, 'ExamennprnncticondenDisennonconnFigmanynAPPnInventornnn33618c0a1a200adnnn___74619648785a9d1___ (1).pdf', '4c615759ec1374cae02697727ae8a35b--cabin-fever-dream-homes.jpg'),
+('04563', 'La Lechera', NULL, '125631653', 'Calle 78 #45-67', 'lechita@gmail.com', '$2y$04$0EE0HlC3oEdQ34q70.wejO7WTLTSnBb4MeJC35.ZYKC/bWPs41rGe', 2, NULL, NULL),
+('1005', 'Juan Carlos', 'Roldan Aristizabal', '75836583', 'Carrera 32 con calle 56', 'bareta@gmail.com', '$2y$04$tN.d6Ay3DbMYAliAPk4f.e.PEKyW2onVyQa7a0PBIilX.gp/Tb51a', 1, '14863153152.pdf', '5.png'),
 ('1008', 'Juan Jose', 'Baretas', '3816283634', 'Calle34 #vivalamoña', 'bareta@gmail.com', '$2y$04$JEaVkvDEoF7ZcjGapvujhek78QjGt75aXCFIHSRo.SdN7cXaY/bWm', 1, 'Pasabordo Cristian Camilo.pdf', 'descarga.jpg');
 
 --
@@ -645,44 +701,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `codigo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `codigo` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1018;
-
+  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1018;
 --
 -- AUTO_INCREMENT de la tabla `empleo`
 --
 ALTER TABLE `empleo`
-  MODIFY `codigo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
+  MODIFY `codigo` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `postulacion`
 --
 ALTER TABLE `postulacion`
-  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
+  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `sector`
 --
 ALTER TABLE `sector`
-  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
-
+  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT de la tabla `tipo_contrato`
 --
 ALTER TABLE `tipo_contrato`
-  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Restricciones para tablas volcadas
 --
@@ -720,7 +769,6 @@ ALTER TABLE `postulacion`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `FK_usuario_perfil` FOREIGN KEY (`perfil`) REFERENCES `perfil` (`codigo`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

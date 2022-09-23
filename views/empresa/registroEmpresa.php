@@ -21,9 +21,7 @@
             font-size:62.5%;
             font-family:'Roboto', sans-serif;
         }
-        body{
-            
-        }
+
         .obligatorio{
             color:red;
         }
