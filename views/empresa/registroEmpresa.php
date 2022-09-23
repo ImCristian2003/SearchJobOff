@@ -21,6 +21,9 @@
             font-size:62.5%;
             font-family:'Roboto', sans-serif;
         }
+        body{
+            
+        }
         .obligatorio{
             color:red;
         }
@@ -30,21 +33,30 @@
             background-size:cover;
             height:100vh;
             width:100%;
-
             position:relative;
+
             display:flex;
             justify-content:center;
             align-items:center;
             text-align:center;
         }
+        .details{
+            padding: 50px;
+            width: 40%;
+        }
         .details h1{
-            right:1;
-            font-size:4rem;
-            font-family:;
+            color:#fff;
             margin:2rem;
+            font-size:6rem;
+            position:absolute;
+            right:3rem;
+            top:3rem;
         }
         .details form{ 
             font-size:2rem;
+            width:100%;
+            margin-top:17rem;
+            padding:4rem;
 
             display:flex;
             flex-direction:column;
@@ -70,10 +82,11 @@
             border-radius:8px;
             background-color:#B8B8B8;
             color:#fff;
+            cursor:pointer;
             font-weight:bold;
             font-size:1.6rem;
             height:3.2rem;
-            margin: 1.5rem;
+            margin: 5rem 15rem;
         }
         form label{
             text-align:left;
@@ -86,11 +99,10 @@
     </style>
 </head>
 <body>
-    
+
     <div class="container-form">
         <div class="details">
-
-            <h1>Sistema de Registro Empresa</h1>
+        <h1>Registro como Empresa</h1>
 
             <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
                         
