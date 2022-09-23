@@ -11,9 +11,9 @@
 
             //Validar que exista el metodo post
             if(isset($_POST)){
-
+                
                 //Se reciben todos los campos enviados para verificar que existan
-                $id = isset($_POST['id']) ? $_POST['id'] : false;
+                $id = isset($_POST['id']) ? (int) $_POST['id'] : false;
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
                 $apellido = isset($_POST['apellido']) ? $_POST['apellido'] : false;
                 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
@@ -120,6 +120,42 @@
                     $filename = "sin_hoja_vida";
                 }
 
+                //En caso de que el usuario suba una imagen para su perfil
+                if(isset($_FILES['imagen'])){
+
+                    $imagen = $_FILES['imagen'];
+                    //Guardar en una variable el nombre de la imagen
+                    $imagenname = $imagen['name'];
+                    //Guardar en una variable el tipo de la imagen (pdf, jpg, etc)
+                    $mimetype = $imagen['type'];
+
+                        //Validar que lo que llegue si sea un archivo valido
+                        if($mimetype == "image/jpeg" || $mimetype == "image/jpg" 
+                        || $mimetype == "image/png"){
+
+                            //Si no existe un directorio donde guardar
+                            //Las imagenes, con esta validacion el
+                            //directorio se creará por si solo
+                            if(!is_dir('uploads/usuarios_perfil')){
+                                //Permisos que se concederán
+                                //El true sirve para hacerle saber que es
+                                //un directorio recursivo
+                                mkdir('uploads/usuarios_perfil',0777,true);
+                            }
+
+                            //Funcion para poner el archivo en la carpeta con su respectivo nombre
+                            move_uploaded_file($imagen['tmp_name'], 'uploads/usuarios_perfil/'.$imagenname);
+
+                        }else{
+                            //En caso de que no se suba el archivo con el formato correcto
+                            $imagenname = "sin_perfil";
+                        }
+
+                }else{
+                    //En caso de que no se suba el archivo, se le asignará null
+                    $imagenname = "sin_perfil";
+                }
+
                 //Validación de que no hallan errores
                 if(count($errores) == 0){
 
@@ -143,15 +179,52 @@
                     if($save){
                         $_SESSION['registro'] = "Complete";
                     }else{
-                    //En caso de el metodo save retorne un flase, se crea una sesión para
+                    //En caso de el metodo save retorne un false, se crea una sesión para
                     //indicar que algo falló
                         $_SESSION['registro_fail'] = "Fail";
                     }
 
-                }else{
+                }else if(count($errores) != 0 && !isset($_GET['modificar'])){
                     //En caso de que hallan errores, se crea una sesión para
                     //imprimir todos los errores
                     $_SESSION['errores'] = $errores;
+                }else{
+                    $val = false;
+                }
+
+                //Condición para cuando se vaya a modificar algún campo
+                if(isset($_GET['modificar']) && count($errores) == 1){
+
+                    //Instancia de la clase modelo del empleado
+                    $modificar = new EmpleadoModel();
+                    //Sets para cargar todos los datos correspondientes
+                    $modificar->setId($id);
+                    $modificar->setNombre($nombre);
+                    $modificar->setApellidos($apellido);
+                    $modificar->setTelefono($telefono);
+                    $modificar->setDireccion($direccion);
+                    $modificar->setCorreo($correo);
+                    $modificar->setHojaVida($filename);
+                    $modificar->setImagen($imagenname);
+                    //Metodo para cargar los datos
+                    $mod = $modificar->modificarEmpleado();
+
+                    //En caso de el metodo mod retorne un true, se crea una sesión para
+                    //indicar que todo funcionó de forma correcta
+                    if($mod){
+                        $_SESSION['modificado'] = "Complete";
+                    }else{
+                    //En caso de el metodo mod retorne un false, se crea una sesión para
+                    //indicar que algo falló
+                        $_SESSION['modificado_fail'] = "Fail";
+                    }
+
+                }else if(isset($_GET['modificar']) && count($errores) > 1){
+                    //En caso de que hallan errores, se crea una sesión para
+                    //imprimir todos los errores
+                    $_SESSION['errores'] = $errores;
+                }else{
+                    $val = false;
                 }
 
             }else{
@@ -160,7 +233,22 @@
                 $_SESSION['registro_fail'] = "Fail";
             }
             //Redireccionar al registro
-            header("Location: views/usuario/registroEmpleado.php");
+            if(!isset($_GET['modificar'])){
+                header("Location: views/usuario/registroEmpleado.php");
+            }else{
+                header("Location: views/usuario/datosUsuario.php");
+            }
+
+        }
+
+        public function logout(){
+
+            if(isset($_SESSION['empleado'])){
+                unset($_SESSION['empleado']);
+
+            }
+
+            header("Location: index.php");
 
         }
 

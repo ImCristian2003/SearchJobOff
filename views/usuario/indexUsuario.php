@@ -52,8 +52,10 @@
             font-size: 4rem;
             font-weight: bold;
         }
-        .caja-izquierda img{
+        .caja-izquierda .caja-izquierda-uno .imagen{
             border-radius:50%;
+            height: auto;
+            width: 60%;
         }
         .caja-izquierda div.caja-izquierda-uno h2{
             color: var(--blanco);
@@ -124,8 +126,19 @@
         <div class="caja-izquierda">
             <div class="caja-izquierda-uno">
                 <h1>SearchJob</h1>
-                <img src="assets/img/putin.jpg" alt="">
-                <h2><?=$_SESSION['usuario']['nombre'] ?></h2>
+                <?php
+
+                    if(is_null($_SESSION['empleado']->imagen)){
+                        $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
+                    }else{
+                        $url_imagen = "../../uploads/usuarios_perfil/".$_SESSION['empleado']->imagen;
+                    }
+
+                ?>
+                <a href="">
+                    <img src="<?=$url_imagen?>" alt="" class="imagen">
+                </a>
+                <h2><?=$_SESSION['empleado']->nombre ?></h2>
             </div>
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
@@ -133,14 +146,14 @@
                     <a href="#">Empleos Disponibles <span class="icon-clipboard"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
-                    <a href="#">Datos Personales <span class="icon-address-book"></span></a>   
-                    <a href="login-register/logout.php">Cerrar Sesión <span class="icon-exit"></span></a>   
+                    <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
+                    <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
                 </div>    
             </div>
         </div>
         <div class="caja-derecha">
             <div class="caja-derecha-details">
-                <h1>Bienvenido <?=$_SESSION['usuario']['nombre'] ?></h1>
+                <h1>Bienvenido <?=$_SESSION['empleado']->nombre ?></h1>
                 <p>En esta sesión podrás encontrar varias funcionalidades que te harán los procesos mucho mas cortos y cómodos, navega y esperamos
                     que sea de tu gusto</p>
             </div>

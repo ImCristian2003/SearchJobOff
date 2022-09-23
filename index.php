@@ -39,10 +39,10 @@
                 <h2>SearchJob</h2>
                 <p>Estamos aquí para ayudarte a encontrar el trabajo ideal para tí <br>
                 Registrate en nuestra pagina y empieza a navegar entre los tantos empleos disponibles.</p>
-                <form action="buscar-empleo.php" method="post">
+                <form action="views/empleo/buscarEmpleo.php" method="post">
                     <input type="text" placeholder="Busqueda manual" name="nombre">
-                    <select name="id" id="">
-                        <option value="ninguno">Todos</option>
+                    <select name="id">
+                        <option value="0">Todos</option>
                         <?php 
                             
                             $municipio = new municipioController();
@@ -50,8 +50,8 @@
 
                         ?>
                         <?php while($municipio = $mun->fetch_object()): ?>
-                        
-                            <option value="<?=$municipio->id ?>">
+                            
+                            <option value="<?=$municipio->codigo ?>">
                                 <?=$municipio->nombre ?>
                             </option>
                         

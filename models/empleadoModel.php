@@ -115,19 +115,65 @@
         //Funciones para consultar a la base de datos
         public function guardarEmpleado(){
             
-            
+            //Consulta para insertar los datos a la tabla usuario
             $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},'{$this->getHojaVida()}',null)";
             $save = $this->db->query($sql);
 
+            //Variable que se retorna
             $result = false;
+            //Evaluar que la consulta se halla ejecutado correctamente
             if($save){
                 $result = true;
             }
-            
+            //Retorno de la variable
             return $result;
 
         }
     
-        
+        public function modificarEmpleado(){
+
+            //Variables para capturar los archivos
+            $hojaVida = $this->hoja_vida;
+            $imagen = $this->imagen;
+
+            var_dump($hojaVida);
+            var_dump($imagen);
+
+            //Consulta para modificar los datos de la base de datos
+            $sql = "UPDATE usuario 
+            SET nombre = '{$this->getNombre()}',
+            apellido = '{$this->getApellidos()}',
+            telefono = '{$this->getTelefono()}',
+            direccion = '{$this->getDireccion()}',
+            correo = '{$this->getCorreo()}'";
+
+            //Condición en caso de que la hoja de vida no halla sido enviada
+            if($hojaVida == "sin_hoja_vida"){
+                $hv = true;
+            }else{//En caso de que la envíe, se le concatena a la consulta un 
+                //pedazo de codigo para guardar ese campo
+                $sql .= ", hoja_vida = '{$this->getHojaVida()}' ";
+            }
+
+            //Condición en caso de que la imagen de perfil no halla sido enviada
+            if($imagen == "sin_perfil"){
+                $img = true;
+            }else{//En caso de que la envíe, se le concatena a la consulta un 
+                //pedazo de codigo para guardar ese campo
+                $sql .= ", imagen = '{$this->getImagen()}' ";
+            }
+
+            $sql .= " WHERE id='{$this->getId()}'";
+
+            $modificar = $this->db->query($sql);
+
+            $modificado = false;
+            if($modificar){
+                $modificado = true;
+            }
+
+            return $modificado;
+
+        }
 
     }

@@ -1,6 +1,6 @@
 <?php
 
-    
+    var_dump($_SESSION['empresa']);
 
 ?>
 <!DOCTYPE html>
@@ -128,8 +128,13 @@
         <div class="caja-izquierda">
             <div class="caja-izquierda-uno">
                 <h1>SearchJob</h1>
+                <?php
+
+                    var_dump($_SESSION['empresa']);
+
+                ?>
                 <img src="../assets/img/fuma.jpg" alt="">
-                <h2><?=$_SESSION['usuario']['nombre'] ?></h2>
+                <h2><?=$_SESSION['empresa']['nombre'] ?></h2>
             </div>
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
