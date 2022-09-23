@@ -41,7 +41,7 @@
             <form action="../../execute.php?controller=empleado&action=guardarEmpleado&modificar=1" method="post" enctype="multipart/form-data">
 
                 <label for="id">Identificación</label>
-                <input type="text" name="id" value="<?=$_SESSION['empleado']->id?>">
+                <input type="text" name="id" value="<?=$_SESSION['empleado']->id?>" id="id">
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'id') : ""; ?>
 
                 <label for="nombre">Nombre</label>
@@ -83,6 +83,12 @@
 
         </div>
     </div>
+    
+    <script>
 
+        alert("Si modificas tus datos la sesión se cerrará de forma automaticamente");
+        document.getElementById("id").style.display = "none";
+
+    </script>
 </body>
 </html>

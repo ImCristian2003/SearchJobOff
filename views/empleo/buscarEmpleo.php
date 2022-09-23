@@ -87,6 +87,13 @@
                 <span class="icon-twitter"></span>
                 <span class="icon-whatsapp"></span>
             </div>
+            <div class="volver">
+                <?php if(isset($_SESSION['empleado'])): ?>
+                    <a href="../usuario/empleosBuscar.php">Volver</a>
+                <?php else: ?>
+                    <a href="../../index.php">Volver</a>
+                <?php endif; ?>
+            </div>
         </div>
         <div class="empleos">
             <?php 

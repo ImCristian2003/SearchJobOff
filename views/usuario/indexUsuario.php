@@ -16,10 +16,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/icons/style.css">
+    <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
     <title>Postúlate al empleo</title>
     <style>
+
+        body{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         :root{
             --primario: rgb(105, 183, 185);
             --secundario: #f5f2f2;
@@ -54,8 +60,8 @@
         }
         .caja-izquierda .caja-izquierda-uno .imagen{
             border-radius:50%;
-            height: auto;
-            width: 60%;
+            height: 20%;
+            width: 50%;
         }
         .caja-izquierda div.caja-izquierda-uno h2{
             color: var(--blanco);
@@ -135,15 +141,15 @@
                     }
 
                 ?>
-                <a href="">
-                    <img src="<?=$url_imagen?>" alt="" class="imagen">
-                </a>
-                <h2><?=$_SESSION['empleado']->nombre ?></h2>
+
+                <img src="<?=$url_imagen?>" alt="" class="imagen">
+    
+                <h2><?=$_SESSION['empleado']->nombre ?> <?=$_SESSION['empleado']->apellido ?></h2>
             </div>
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
                     <a href="#">Mis Postulaciones <span class="icon-folder"></span></a> 
-                    <a href="#">Empleos Disponibles <span class="icon-clipboard"></span></a>
+                    <a href="empleosBuscar.php">Empleos Disponibles <span class="icon-clipboard"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
                     <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
