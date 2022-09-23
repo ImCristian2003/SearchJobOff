@@ -1,6 +1,10 @@
 <?php
 
-    var_dump($_SESSION['empresa']);
+    session_start();
+    require_once "../../config/conexion.php";
+    if(!isset($_SESSION['empresa'])){
+        header('Location: ../../index.php');
+    } 
 
 ?>
 <!DOCTYPE html>
@@ -130,11 +134,15 @@
                 <h1>SearchJob</h1>
                 <?php
 
-                    var_dump($_SESSION['empresa']);
+                    if(is_null($_SESSION['empresa']->imagen)){
+                        $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
+                    }else{
+                        $url_imagen = "../../uploads/usuarios_perfil/".$_SESSION['empresa']->imagen;
+                    }
 
                 ?>
-                <img src="../assets/img/fuma.jpg" alt="">
-                <h2><?=$_SESSION['empresa']['nombre'] ?></h2>
+                <img src="<?=$url_imagen?>" alt="">
+                <h2><?=$_SESSION['empresa']->nombre ?></h2>
             </div>
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
@@ -143,13 +151,13 @@
                 </div>
                 <div class="caja-izquierda-dos-aa">
                     <a href="#">Datos Personales <span class="icon-address-book"></span></a>   
-                    <a href="logout.php">Cerrar Sesión <span class="icon-exit"></span></a>   
+                    <a href="../../execute.php?controller=empresa&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
                 </div>    
             </div>
         </div>
         <div class="caja-derecha">
             <div class="caja-derecha-details">
-                <h1>Bienvenido <?=$_SESSION['usuario']['nombre'] ?></h1>
+                <h1>Bienvenido <?=$_SESSION['empresa']->nombre ?></h1>
                 <p>En esta sesión podrás encontrar varias funcionalidades que te harán los procesos mucho mas cortos y cómodos, navega y esperamos
                     que sea de tu gusto</p>
             </div>

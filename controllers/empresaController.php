@@ -112,5 +112,16 @@
             header("Location: views/empresa/registroEmpresa.php");
 
         }
+
+        public function logout(){
+
+            if(isset($_SESSION['empresa'])){
+                unset($_SESSION['empresa']);
+
+            }
+
+            header("Location: index.php");
+
+        }
         
     }

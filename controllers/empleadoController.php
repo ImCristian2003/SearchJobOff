@@ -213,6 +213,10 @@
                     //indicar que todo funcionó de forma correcta
                     if($mod){
                         $_SESSION['modificado'] = "Complete";
+                        if(isset($_SESSION['empleado'])){
+                            unset($_SESSION['empleado']);
+                            header("Location: login.php");
+                        }
                     }else{
                     //En caso de el metodo mod retorne un false, se crea una sesión para
                     //indicar que algo falló

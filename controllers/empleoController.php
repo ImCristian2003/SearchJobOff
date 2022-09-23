@@ -1,5 +1,8 @@
 <?php
 
+    //Se usa el modelo de municipio
+    require_once "../../models/municipioModel.php";
+    //Se usa el model del empleo
     require_once "../../models/empleoModel.php";
 
     class EmpleoController{
@@ -29,4 +32,13 @@
 
         }
 
+        public function mostrarMunicipios(){
+
+            $municipio = new MunicipioModel();
+            $municipios = $municipio->conseguirMunicipios();
+
+            return $municipios;
+
+        }
+    
     }
