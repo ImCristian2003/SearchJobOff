@@ -107,7 +107,7 @@
                     <div class="details-empleo">
                         <div class="img">
 
-                            <?php if($empleos->logo == "none"): ?>
+                            <?php if($empleos->logo == "sin_logo"): ?>
                                 <img src="../../uploads/empleos_logo/empresa.png" alt="perfil_usuario">
                             <?php else: ?>
                                 <img src="../../uploads/empleos_logo/<?=$empleos->logo?>" alt="perfil_usuario">

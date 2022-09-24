@@ -4,6 +4,10 @@
     require_once "../../models/municipioModel.php";
     //Se usa el model del empleo
     require_once "../../models/empleoModel.php";
+    require_once "../../models/municipioModel.php";
+    require_once "../../models/cargoModel.php";
+    require_once "../../models/sectorModel.php";
+    require_once "../../models/tipoContratoModel.php";
 
     class EmpleoController{
 
@@ -32,6 +36,7 @@
 
         }
 
+        //Funciones para traer los datos de todas las claves foraneas
         public function mostrarMunicipios(){
 
             $municipio = new MunicipioModel();
@@ -39,6 +44,33 @@
 
             return $municipios;
 
+        }
+
+        public function mostrarCargos(){
+
+            $cargo = new CargoModel();
+            $cargos = $cargo->conseguirCargos();
+
+            return $cargos;
+
+        }
+
+        public function mostrarSector(){
+
+            $sector = new SectorModel();
+            $sectores = $sector->conseguirSector();
+
+            return $sectores;
+            
+        }
+
+        public function mostrarTipoContrato(){
+
+            $tipo = new TipoContratoModel();
+            $tipos = $tipo->conseguirTipoContrato();
+
+            return $tipos;
+            
         }
     
     }

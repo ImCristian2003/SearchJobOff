@@ -1,3 +1,16 @@
+<?php 
+
+    //Inicia la sesión
+    session_start();
+
+    //Clase que ayudará a cargar automaticamente todos los controladores
+    require_once "autoload.php"; 
+    //Conexión a la base de datos
+    require_once 'config/conexion.php';
+    //Librería de funciones
+    require_once 'helpers/utils.php';
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -154,6 +167,13 @@
             text-decoration: none;
         }
 
+        .sesion_fallida{
+            background: red;
+            border-radius: 5px;
+            color: #fff;
+            padding: 5px 8px;
+        }
+
     </style>
 </head>
 <body>
@@ -182,7 +202,9 @@
             <a href="index.php"><span class="icon-cross"></span></a>
             <div class="details-form">
                 <h2>Iniciar Sesión</h2>
-                <?php  ?>
+                <?php if(isset($_SESSION['fail']) && $_SESSION['fail'] == "Inicio de Sesión Fallido"): ?>
+                    <p class="sesion_fallida">Inicio de Sesión fallido</p>
+                <?php endif; ?>
                 <form action="execute.php?controller=usuario&action=login" method="post">
                     <label for="id">Identificación</label>
                     <input type="text" name="id">
@@ -190,6 +212,7 @@
                     <input type="password" name="contrasena">
                     <input type="submit" value="Iniciar Sesión">
                 </form>
+                <?php borrarSesion('fail'); ?>
                 <p>No tienes una cuenta? <b><a href="registro.html">Regístrate</a></b></p>
                 <a href="">Olvidaste tu contraseña?</a>
             </div>

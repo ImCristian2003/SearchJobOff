@@ -203,4 +203,27 @@
 
         }
 
+        public function guardarEmpleo(){
+
+            $sql = "INSERT INTO empleo VALUES(null,'{$this->getNombre()}',
+            {$this->getMunicipio()},'{$this->getDireccion()}',{$this->getCargo()},
+            {$this->getVacantes()},'{$this->getJornada()}','{$this->getExperiencia()}',
+            {$this->getSector()},'{$this->getFuncion()}','{$this->getEmpresa()}',
+            '{$this->getDescripcion()}',{$this->getSalario()},{$this->getTipoContrato()},
+            '{$this->getLogo()}')";
+
+            echo $sql;
+            die();
+
+            $guardar = $this->db->query($sql);
+
+            $validar = false;
+            if($guardar){
+                $validar = true;
+            }
+
+            return $validar;
+
+        }
+
     }

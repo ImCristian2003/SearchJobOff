@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/icons/style.css">
+    <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
     <title>Postúlate al empleo</title>
     <style>
@@ -147,7 +147,7 @@
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
                 <a href="#"> Postulados  <span class="icon-paste"></span></a> 
-                    <a href="#"> Publicar Empleo     <span class="icon-folder-upload"></span></a>
+                    <a href="registrarEmpleo.php"> Publicar Empleo  <span class="icon-folder-upload"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
                     <a href="#">Datos Personales <span class="icon-address-book"></span></a>   
