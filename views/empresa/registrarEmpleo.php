@@ -3,6 +3,7 @@
     session_start();
     require_once "../../config/conexion.php";
     require_once "../../autoload.php";
+    require_once "../../helpers/utils.php";
     if(!isset($_SESSION['empresa'])){
         header('Location: ../../index.php');
     } 
@@ -21,10 +22,23 @@
     <div class="container-empleo">
         <div class="details">
 
+            <h2>Añade un Nuevo Empleo</h2>
+
+            <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
+                        
+                        <strong>Empleo añadido de forma exitosa</strong>
+                
+            <?php   elseif(isset($_SESSION['registro_fail']) && $_SESSION['registro_fail'] == 'Fail'):  ?>
+
+                        <strong>Registro de empleo fallido</strong>
+
+            <?php   endif; ?>
+
             <form action="../../execute.php?controller=empleoExecute&action=guardarEmpleo" method="post" enctype="multipart/form-data">
 
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'nombre') : ""; ?>
                 <br>
                 <label for="municipio">Municipio</label>
                 <select name="municipio" id="">
@@ -49,6 +63,7 @@
                 <br>
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'direccion') : ""; ?>
                 <br>
                 <label for="cargo">Cargo</label>
                 <select name="cargo" id="">
@@ -73,12 +88,15 @@
                 <br>
                 <label for="vacantes">Vacantes</label>
                 <input type="number" name="vacantes">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'vacantes') : ""; ?>
                 <br>
                 <label for="jornada">Jornada</label>
                 <input type="text" name="jornada">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'jornada') : ""; ?>
                 <br>
                 <label for="experiencia">Experiencia</label>
                 <input type="text" name="experiencia">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'experiencia') : ""; ?>
                 <br>
                 <label for="sector">Sector</label>
                 <select name="sector" id="">
@@ -103,15 +121,19 @@
                 <br>
                 <label for="funcion">Función</label>
                 <input type="text" name="funcion">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'funcion') : ""; ?>
                 <br>
                 <label for="empresa">Empresa</label>
-                <input type="text" name="empresa" value="<?=$_SESSION['empresa']->id?>">
+                <input type="number" name="empresa" value="<?=$_SESSION['empresa']->id?>">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'empresa') : ""; ?>
                 <br>
                 <label for="descripcion">Descripcion</label>
                 <input type="text" name="descripcion">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'descripcion') : ""; ?>
                 <br>
                 <label for="salario">Salario</label>
                 <input type="number" name="salario">
+                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'salario') : ""; ?>
                 <br>
                 <label for="tipo_contrato">Tipo de Contrato</label>
                 <select name="tipo_contrato" id="">
@@ -140,7 +162,7 @@
                 <input type="submit" value="Enviar">
 
             </form>
-
+            <?php borrarSesion('registro'); borrarSesion('registro_fail'); borrarSesion('errores'); ?>
         </div>
     </div>
     

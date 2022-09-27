@@ -7,6 +7,7 @@
         private $empleo;
         private $estado;
         private $fecha;
+        private $empresa;
         //Variable que hace uso de la conexión a la base de datos
         private $db;
 
@@ -61,6 +62,15 @@
             $this->fecha = $fecha;
         }
 
+        //Get y set para empresa
+        public function getEmpresa(){
+            return $this->empresa;
+        }
+
+        public function setEmpresa($empresa){
+            $this->empresa = $empresa;
+        }
+
         //Funciones para consultar a la base de datos
         public function guardarPostulacion(){
 
@@ -73,6 +83,42 @@
             }
 
             return $save;
+
+        }
+
+        public function obtenerPostulados(){
+
+            $sql = "SELECT us.nombre as 'usuario', us.id , em.nombre as 'empleo',
+            em.funcion, em.descripcion, em.empresa,  po.estado, po.fecha 
+            FROM postulacion as po
+            INNER JOIN usuario as us
+            ON po.usuario = us.id
+            INNER JOIN empleo as em
+            ON po.empleo = em.codigo
+            WHERE em.empresa = {$this->getEmpresa()}";
+            $postulado = $this->db->query($sql);
+    
+            $mostrar = false;
+
+            if($postulado){
+                $mostrar = $postulado;
+            }
+
+            return $mostrar;
+
+        }
+
+        public function eliminarPostulacion(){
+
+            $sql = "DELETE FROM postulacion WHERE empleo = {$this->getEmpleo()}";
+            $eliminar = $this->db->query($sql);
+
+            $eliminado = false;
+            if($eliminar){
+                $eliminado = true;
+            }
+
+            return $eliminado;
 
         }
 

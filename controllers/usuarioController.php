@@ -34,6 +34,9 @@
                             $_SESSION['admin'] = true;
                         }
 
+                    }else{
+                        $_SESSION['fail'] = "Inicio de Sesión Fallido";
+                        header("Location: login.php");
                     }
 
                 }else{

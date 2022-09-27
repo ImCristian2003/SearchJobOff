@@ -212,9 +212,6 @@
             '{$this->getDescripcion()}',{$this->getSalario()},{$this->getTipoContrato()},
             '{$this->getLogo()}')";
 
-            echo $sql;
-            die();
-
             $guardar = $this->db->query($sql);
 
             $validar = false;
@@ -223,6 +220,69 @@
             }
 
             return $validar;
+
+        }
+
+        public function empleosPublicados(){
+
+            $sql = "SELECT em.*, mu.nombre as 'nombre_municipio', ca.nombre as 'nombre_cargo', se.nombre as 'nombre_sector', 
+            us.id as 'id_empresa', tp.nombre as 'nombre_tipocontrato' FROM empleo as em
+            INNER JOIN municipio as mu
+            ON em.municipio = mu.codigo
+            INNER JOIN cargo as ca
+            ON em.cargo = ca.codigo
+            INNER JOIN sector as se
+            ON em.sector = se.codigo
+            INNER JOIN usuario as us
+            ON em.empresa = us.id
+            INNER JOIN tipo_contrato as tp
+            ON em.tipo_contrato = tp.codigo
+            WHERE us.id = {$this->getEmpresa()}";
+
+            $consulta = $this->db->query($sql);
+
+            $mostrar = false;
+            if($consulta){
+                $mostrar = $consulta;
+            }
+
+            return $mostrar;
+
+        }
+
+        public function eliminarEmpleo(){
+
+            $sql = "DELETE FROM empleo WHERE codigo = {$this->getCodigo()}";
+            $eliminar = $this->db->query($sql);
+
+            $eliminado = false;
+            if($eliminar){
+                $eliminado = true;
+            }
+
+            return $eliminado;
+
+        }
+
+        public function modificarEmpleo(){
+
+            $sql = "UPDATE empleo SET nombre = '{$this->getNombre()}',
+            municipio = {$this->getMunicipio()}, direccion = '{$this->getDireccion()}',
+            cargo = {$this->getCargo()}, vacantes = {$this->getVacantes()},
+            jornada = '{$this->getJornada()}', experiencia = '{$this->getExperiencia()}',
+            sector = '{$this->getSector()}', funcion = '{$this->getFuncion()}',
+            descripcion = '{$this->getDescripcion()}', salario = {$this->getSalario()}, 
+            tipo_contrato = {$this->getTipoContrato()}, logo = '{$this->getLogo()}' 
+            WHERE codigo = {$this->getCodigo()}";
+
+            $mod = $this->db->query($sql);
+
+            $modificado = false;
+            if($mod){
+                $modificado = true;
+            }
+
+            return $modificado;
 
         }
 

@@ -10,6 +10,14 @@
     //Librería de funciones
     require_once 'helpers/utils.php';
 
+    if(isset($_SESSION['empleado'])){
+        header("Location: views/usuario/indexUsuario.php");
+    }
+
+    if(isset($_SESSION['empresa'])){
+        header("Location: views/empresa/indexEmpresa.php");
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

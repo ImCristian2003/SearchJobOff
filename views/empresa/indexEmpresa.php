@@ -146,8 +146,12 @@
             </div>
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
-                <a href="#"> Postulados  <span class="icon-paste"></span></a> 
+                    <form action="postulados.php" method="post">
+                        <input type="hidden" value="<?=$_SESSION['empresa']->id ?>" name="empresa">
+                        <input type="submit" value="Postulados"><span class="icon-paste"></span> 
+                    </form>
                     <a href="registrarEmpleo.php"> Publicar Empleo  <span class="icon-folder-upload"></span></a>
+                    <a href="empleosPublicados.php"> Empleos Publicados  <span class="icon-folder-upload"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
                     <a href="#">Datos Personales <span class="icon-address-book"></span></a>   

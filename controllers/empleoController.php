@@ -27,12 +27,42 @@
 
         public function detalleEmpleo(){
 
-            $codigo = $_GET['id'];
-            $detalle = new EmpleoModel();
-            $detalle->setCodigo($codigo);
-            $detalles = $detalle->obtenerUno();
-            
-            return $detalles;
+            if(isset($_GET['id'])){
+
+                $codigo = $_GET['id'];
+                $detalle = new EmpleoModel();
+                $detalle->setCodigo($codigo);
+                $detalles = $detalle->obtenerUno();
+                
+                return $detalles;
+
+            }else if(isset($_POST['id'])){
+
+                $codigo = $_POST['id'];
+                $detalle = new EmpleoModel();
+                $detalle->setCodigo($codigo);
+                $detalles = $detalle->obtenerUno();
+                
+                return $detalles;
+
+            }else{
+                header("Location: ../../index.php");
+            }
+
+        }
+
+        public function empleosPublicados(){
+
+            if(isset($_SESSION['empresa'])){
+                
+                $id = (int)$_SESSION['empresa']->id;
+                $empleo = new EmpleoModel();
+                $empleo->setEmpresa($id);
+                $empleos = $empleo->empleosPublicados();
+
+                return $empleos;
+
+            }
 
         }
 

@@ -86,7 +86,7 @@
     
     <script>
 
-        alert("Si modificas tus datos la sesión se cerrará de forma automaticamente");
+        alert("Si modificas tus datos la sesión se cerrará de forma automatica");
         document.getElementById("id").style.display = "none";
 
     </script>

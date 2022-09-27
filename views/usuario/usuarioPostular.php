@@ -21,6 +21,8 @@
     <div class="container-postulacion">
         <div class="details">
 
+            <?php if($_SESSION['empleado']->hoja_vida != "sin_hoja_vida"): ?>
+
             <h1>Postulación</h1>
             <form action="../../execute.php?controller=postulacion&action=guardarPostulacion" method="post">
 
@@ -28,11 +30,14 @@
                 <input type="text" name="usuario" value="<?=$_SESSION['empleado']->id?>">
                 <label for="">Empleo</label>
                 <input type="text" name="empleo" value="<?=$_POST['codigo']?>">
-
+                
                 <input type="submit" value="Postularme">
 
             </form>
 
+            <?php else: ?>
+                <h2>Debes cargar tu hoja de vida para postularte a un empleo</h2>
+            <?php endif; ?>
         </div>
     </div>
 

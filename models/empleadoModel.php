@@ -176,4 +176,19 @@
 
         }
 
+        public function detallesEmpleado(){
+
+            $sql = "SELECT * FROM usuario WHERE id = {$this->getId()}";
+            $detalle = $this->db->query($sql);
+
+            $mostrar = false;
+
+            if($detalle){
+                $mostrar = $detalle->fetch_object();
+            }
+
+            return $mostrar;
+
+        }
+
     }

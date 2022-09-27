@@ -4,6 +4,8 @@
     require_once "models/municipioModel.php";
     //Se usa el model del empleo
     require_once "models/empleoModel.php";
+    //Se usa el model de las postulaciones
+    require_once "models/postulacionModel.php";
 
     class EmpleoExecuteController{
 
@@ -41,7 +43,7 @@
                     $direccion_validado = true;
                 }else{
                     $direccion_validado = false;
-                    $errores['direccion'] = "No se permiten números en este campo";
+                    $errores['direccion'] = "Este campo no puede estar vacío";
                 }
 
                 //Validació para vacantes
@@ -53,27 +55,27 @@
                 }
 
                 //Validación para jornada
-                if(!empty($jornada) && !is_numeric($jornada) && !preg_match("/[0-9]/",$jornada)){
+                if(!empty($jornada)){
                     $jornada_validado = true;
                 }else{
                     $jornada_validado = false;
-                    $errores['jornada'] = "No se permiten números en este campo";
+                    $errores['jornada'] = "Este campo no puede estar vacío";
                 }
 
                 //Validación para experiencia
-                if(!empty($experiencia) && !is_numeric($experiencia) && !preg_match("/[0-9]/",$experiencia)){
+                if(!empty($experiencia)){
                     $experiencia_validado = true;
                 }else{
                     $experiencia_validado = false;
-                    $errores['experiencia'] = "No se permiten números en este campo";
+                    $errores['experiencia'] = "Este campo no puede estar vacío";
                 }
 
                 //Validación para funcion
-                if(!empty($funcion) && !is_numeric($funcion) && !preg_match("/[0-9]/",$funcion)){
+                if(!empty($funcion)){
                     $funcion_validado = true;
                 }else{
                     $funcion_validado = false;
-                    $errores['funcion'] = "No se permiten números en este campo";
+                    $errores['funcion'] = "Este campo no puede estar vacío";
                 }
 
                 //Validación para empresa
@@ -85,27 +87,28 @@
                 }
 
                 //Validación para descripcion
-                if(!empty($descripcion) && !is_numeric($descripcion) && !preg_match("/[0-9]/",$descripcion)){
+                if(!empty($descripcion)){
                     $descripcion_validado = true;
                 }else{
                     $descripcion_validado = false;
-                    $errores['descripcion'] = "No se permiten números en este campo";
+                    $errores['descripcion'] = "Este campo no puede estar vacío";
                 }
 
                 //Validación para salario
-                if(!empty($salario) && is_numeric($salario) && preg_match("/[0-9]/",$salario)){
+                if(!empty($salario)){
                     $salario_validado = true;
                 }else{
                     $salario_validado = false;
-                    $errores['salario'] = "Solo se permiten numeros en este campo";
+                    $errores['salario'] = "Este campo no puede estar vacío";
                 }
 
                 //Validación para el logo de la empresa
-                if(isset($_FILES['logo'])){
+                if(isset($_FILES['logo']) && !empty($_FILES['logo']['name'])){
 
                     $logo = $_FILES['logo'];
                         //Guardar en una variable el nombre de la imagen
                         $logoname = $logo['name'];
+                        $logo_name_mod = $logo['name'];
                         //Guardar en una variable el tipo de la imagen (pdf, jpg, etc)
                         $mimetype = $logo['type'];
 
@@ -134,9 +137,10 @@
                 }else{
                     //En caso de que no se suba el archivo, se le asignará null
                     $logoname = "sin_logo";
+                    $logo_name_mod = $_POST['logo_nombre'];
                 }
                 
-                if(count($errores) == 0){
+                if(count($errores) == 0 && !isset($_GET['modificar'])){
 
                     $empleo = new EmpleoModel();
                     $empleo->setNombre($nombre);
@@ -154,10 +158,104 @@
                     $empleo->setTipoContrato($tipo_contrato);
                     $empleo->setLogo($logoname);
                     $empleos = $empleo->guardarEmpleo();
-                    var_dump($empleos);
+                    
+                    //En caso de el metodo empleos retorne un true, se crea una sesión para
+                    //indicar que todo funcionó de forma correcta
+                    if($empleos){
+                        $_SESSION['registro'] = "Complete";
+                        header("Location: views/empresa/registrarEmpleo.php");
+                    }else{
+                    //En caso de el metodo empleos retorne un false, se crea una sesión para
+                    //indicar que algo falló
+                        $_SESSION['registro_fail'] = "Fail";
+                        header("Location: views/empresa/registrarEmpleo.php");
+                    }
 
+                }else if(count($errores) == 0 && isset($_GET['modificar'])){
+
+                    $codigo = $_GET['codigo'];
+
+                    $empleo = new EmpleoModel();
+                    $empleo->setCodigo($codigo);
+                    $empleo->setNombre($nombre);
+                    $empleo->setMunicipio($municipio);
+                    $empleo->setDireccion($direccion);
+                    $empleo->setCargo($cargo);
+                    $empleo->setVacantes($vacantes);
+                    $empleo->setJornada($jornada);
+                    $empleo->setExperiencia($experiencia);
+                    $empleo->setSector($sector);
+                    $empleo->setFuncion($funcion);
+                    $empleo->setEmpresa($empresa);
+                    $empleo->setDescripcion($descripcion);
+                    $empleo->setSalario($salario);
+                    $empleo->setTipoContrato($tipo_contrato);
+                    $empleo->setLogo($logo_name_mod);
+                    $empleos = $empleo->modificarEmpleo();
+
+                    //En caso de el metodo empleos retorne un true, se crea una sesión para
+                    //indicar que todo funcionó de forma correcta
+                    if($empleos){
+                        $_SESSION['registro'] = "Complete";
+                        header("Location: views/empresa/empleosPublicados.php");
+                    }else{
+                    //En caso de el metodo empleos retorne un false, se crea una sesión para
+                    //indicar que algo falló
+                        $_SESSION['registro_fail'] = "Fail";
+                        header("Location: views/empresa/empleosPublicados.php");
+                    }
+
+                }else{
+                    $_SESSION['errores'] = $errores;
+                    if(!isset($_GET['modificar'])){
+                        header("Location: views/empresa/registrarEmpleo.php");
+                    }else{
+                        header("Location: views/empresa/empleosPublicados.php");
+                    }
                 }
 
+            }else{
+                $_SESSION['errores'] = $errores;
+                if(!isset($_GET['modificar'])){
+                    header("Location: views/empresa/registrarEmpleo.php");
+                }else{
+                    header("Location: views/empresa/empleosPublicados.php");
+                }
+            }
+
+        }
+
+        public function eliminarEmpleo(){
+
+            if(isset($_GET['id'])){
+
+                $id = $_GET['id'];
+                $postulacion = new PostulacionModel();
+                $postulacion->setEmpleo($id);
+                $postulaciones = $postulacion->eliminarPostulacion();
+
+                if($postulaciones){
+
+                    $empleo = new EmpleoModel();
+                    $empleo->setCodigo($id);
+                    $empleos = $empleo->eliminarEmpleo();
+
+                    if($empleos){
+                        $_SESSION['complete'] = "Complete";
+                        header("Location: views/empresa/empleosPublicados.php");
+                    }else{
+                        $_SESSION['fail'] = "Fail";
+                        header("Location: views/empresa/empleosPublicados.php");
+                    }
+
+                }else{
+                    $_SESSION['fail'] = "Fail";
+                    header("Location: views/empresa/empleosPublicados.php");
+                }
+
+            }else{
+                $_SESSION['fail'] = "Fail";
+                header("Location: views/empresa/empleosPublicados.php");
             }
 
         }
