@@ -7,13 +7,28 @@
 
         public function obtenerPostulados(){
 
-            if(isset($_POST['empresa'])){
-                $empresa = (int)$_POST['empresa'];
+            if(isset($_SESSION['empresa'])){
+
+                $empresa = (int)$_SESSION['empresa']->id;
                 $postulado = new PostulacionModel();
                 $postulado->setEmpresa($empresa);
                 $postulados = $postulado->obtenerPostulados();
 
                 return $postulados;
+
+            }
+
+        }
+
+        public function obtenerPostulaciones(){
+
+            if(isset($_SESSION['empleado'])){
+                $empleado = (int)$_SESSION['empleado']->id;
+                $postulacion = new PostulacionModel();
+                $postulacion->setUsuario($empleado);
+                $postulaciones = $postulacion->obtenerPostulaciones();
+
+                return $postulaciones;
             }
 
         }

@@ -191,7 +191,19 @@
 
         public function obtenerUno(){
 
-            $sql = "SELECT * FROM empleo WHERE codigo='{$this->codigo}'";
+            $sql = "SELECT em.*, mu.nombre as 'nombre_municipio', ca.nombre as 'nombre_cargo', se.nombre as 'nombre_sector', 
+            us.id as 'id_empresa', us.nombre as 'nombre_empresa', tp.nombre as 'nombre_tipocontrato' FROM empleo as em
+            INNER JOIN municipio as mu
+            ON em.municipio = mu.codigo
+            INNER JOIN cargo as ca
+            ON em.cargo = ca.codigo
+            INNER JOIN sector as se
+            ON em.sector = se.codigo
+            INNER JOIN usuario as us
+            ON em.empresa = us.id
+            INNER JOIN tipo_contrato as tp
+            ON em.tipo_contrato = tp.codigo
+             WHERE em.codigo='{$this->codigo}'";
             $empleo = $this->db->query($sql);
         
             $val = false;
@@ -283,6 +295,21 @@
             }
 
             return $modificado;
+
+        }
+
+        public function restarVacante(){
+
+            $sql = "UPDATE empleo SET vacantes = {$this->getVacantes()}
+            WHERE codigo = '{$this->getCodigo()}'";
+            $vacante = $this->db->query($sql);
+
+            $vacantes = false;
+            if($vacante){
+                $vacantes = true;
+            }
+
+            return $vacantes;
 
         }
 

@@ -29,11 +29,11 @@
         echo "<br>";
         echo $empleos->nombre;
         echo "<br>";
-        echo $empleos->municipio;
+        echo $empleos->nombre_municipio;
         echo "<br>";
         echo $empleos->direccion;
         echo "<br>";
-        echo $empleos->cargo;
+        echo $empleos->nombre_cargo;
         echo "<br>";
         echo $empleos->vacantes;
         echo "<br>";
@@ -41,17 +41,17 @@
         echo "<br>";
         echo $empleos->experiencia;
         echo "<br>";
-        echo $empleos->sector;
+        echo $empleos->nombre_sector;
         echo "<br>";
         echo $empleos->funcion;
         echo "<br>";
-        echo $empleos->empresa;
+        echo $empleos->nombre_empresa;
         echo "<br>";
         echo $empleos->descripcion;
         echo "<br>";
         echo $empleos->salario;
         echo "<br>";
-        echo $empleos->tipo_contrato;
+        echo $empleos->nombre_tipocontrato;
         echo "<br>";
     ?>
 
@@ -60,13 +60,20 @@
     <?php else: ?>
         <img src="../../uploads/empleos_logo/<?=$empleos->logo?>" alt="perfil_usuario">
     <?php endif; ?>
-
-    <?php if(isset($_SESSION['empleado'])): ?>
+    
+    <?php if($empleos->vacantes == 0): ?>
+        <p>
+            Lo sentimos, pero parece que esta oferta de empleo ya no cuenta con
+            vacantes disponibles
+        </p>
+    <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && !isset($_GET['aut'])): ?>
         <form action="../usuario/usuarioPostular.php" method="post">
             <input type="hidden" value="<?=$empleos->codigo?>" name="codigo">
             <input type="hidden" value="<?=$empleos->nombre?>" name="nombre">
             <input type="submit" value="Postularme">
         </form>
+    <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && isset($_GET['aut'])): ?>
+        <a href="../usuario/usuarioPostulaciones.php">Volver</a>
     <?php else:?>
         <p>Ups! Parece que no estás registrado</p>
     <?php endif; ?>

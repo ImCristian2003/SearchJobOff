@@ -148,7 +148,7 @@
             </div>
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
-                    <a href="#">Mis Postulaciones <span class="icon-folder"></span></a> 
+                    <a href="usuarioPostulaciones.php">Mis Postulaciones <span class="icon-folder"></span></a> 
                     <a href="empleosBuscar.php">Empleos Disponibles <span class="icon-clipboard"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
