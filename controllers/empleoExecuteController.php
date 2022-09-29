@@ -31,11 +31,11 @@
                 $errores = array();
 
                 //Validación para nombre
-                if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/",$nombre)){
+                if(!empty($nombre)){
                     $nombre_validado = true;
                 }else{
                     $nombre_validado = false;
-                    $errores['nombre'] = "No se permiten números en este campo";
+                    $errores['nombre'] = "Este campo no puede estar vacío";
                 }
 
                 //Validación para direccion
@@ -229,7 +229,6 @@
 
             }else{
                 //Sesión para mostrar los errores
-                $_SESSION['errores'] = $errores;
                 if(!isset($_GET['modificar'])){
                     //Redireccion en caso de que no exista 'modificar'
                     header("Location: views/empresa/registrarEmpleo.php");

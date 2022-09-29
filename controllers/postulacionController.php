@@ -44,17 +44,17 @@
                     
                     //Redireccion en caso de que se postule bien
                     if($postulacion){
-                        header("Location: usuarioPostulaciones.php");
+                        header("Location: views/usuario/usuarioPostulaciones.php");
                     }
 
                 }else{
                     //Redireccion a las postulaciones
-                    header("Location: usuarioPostulaciones.php");
+                    header("Location: views/usuario/usuarioPostulaciones.php");
                 }
 
             }else{
                 //Redireccion a las postulaciones
-                header("Location: usuarioPostulaciones.php");
+                header("Location: views/usuario/usuarioPostulaciones.php");
             }
 
         }
