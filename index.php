@@ -215,7 +215,7 @@
             </div>
             <div class="footer1-det2">
                 <h3>¿Te gustó nuestra pagina?</h3>
-                <a href="">¡Danos tu opinión!</a>
+                <a href="views/calificacion/indexCalificacion.php">¡Danos tu opinión!</a>
             </div>
         </section>
         <section class="footer2">

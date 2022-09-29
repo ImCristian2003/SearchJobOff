@@ -150,6 +150,7 @@
                 <div class="caja-izquierda-dos-a"> 
                     <a href="usuarioPostulaciones.php">Mis Postulaciones <span class="icon-folder"></span></a> 
                     <a href="empleosBuscar.php">Empleos Disponibles <span class="icon-clipboard"></span></a>
+                    <a href="../calificacion/indexCalificacion.php">Comentarios <span class="icon-bubble"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
                     <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
