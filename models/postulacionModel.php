@@ -183,4 +183,19 @@
 
         }
 
+        public function validarUnaPostulacion(){
+            
+            $sql = "SELECT * FROM postulacion WHERE usuario = '{$this->getUsuario()}' 
+            AND empleo = {$this->getEmpleo()}";
+            $empleo = $this->db->query($sql);
+
+            $validado = false;
+            if($empleo){
+                $validado = $empleo;
+            }
+
+            return $validado;
+
+        }
+
     }

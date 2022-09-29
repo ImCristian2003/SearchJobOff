@@ -10,9 +10,9 @@
     class EmpleoExecuteController{
 
         public function guardarEmpleo(){
-
+            //Verificar que exista post
             if(isset($_POST)){
-
+                //Validar que todos los post existan sino asignarles false
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
                 $municipio = isset($_POST['municipio']) ? (int) $_POST['municipio'] : false;
                 $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
@@ -139,10 +139,13 @@
                     $logoname = "sin_logo";
                     $logo_name_mod = $_POST['logo_nombre'];
                 }
-                
+                //En caso de que no hallan errores y no exista el metodo que indicará
+                //la modificación de datos
                 if(count($errores) == 0 && !isset($_GET['modificar'])){
 
+                    //Instancia del empleo
                     $empleo = new EmpleoModel();
+                    //Sets de todos los campos
                     $empleo->setNombre($nombre);
                     $empleo->setMunicipio($municipio);
                     $empleo->setDireccion($direccion);
@@ -157,6 +160,7 @@
                     $empleo->setSalario($salario);
                     $empleo->setTipoContrato($tipo_contrato);
                     $empleo->setLogo($logoname);
+                    //Ejecución del metodo para guardar los campos
                     $empleos = $empleo->guardarEmpleo();
                     
                     //En caso de el metodo empleos retorne un true, se crea una sesión para
@@ -171,11 +175,14 @@
                         header("Location: views/empresa/registrarEmpleo.php");
                     }
 
-                }else if(count($errores) == 0 && isset($_GET['modificar'])){
+                }//En caso de que exista el metodo que indica que se modificarán los datos
+                else if(count($errores) == 0 && isset($_GET['modificar'])){
 
+                    //Guardar el codigo del empleo
                     $codigo = $_GET['codigo'];
-
+                    //Instancia del empleo
                     $empleo = new EmpleoModel();
+                    //Sets de todos los campos
                     $empleo->setCodigo($codigo);
                     $empleo->setNombre($nombre);
                     $empleo->setMunicipio($municipio);
@@ -191,34 +198,43 @@
                     $empleo->setSalario($salario);
                     $empleo->setTipoContrato($tipo_contrato);
                     $empleo->setLogo($logo_name_mod);
+                    //Ejecución del metodo para cambiar los campos
                     $empleos = $empleo->modificarEmpleo();
 
                     //En caso de el metodo empleos retorne un true, se crea una sesión para
                     //indicar que todo funcionó de forma correcta
                     if($empleos){
                         $_SESSION['registro'] = "Complete";
+                        //Redireccion
                         header("Location: views/empresa/empleosPublicados.php");
                     }else{
                     //En caso de el metodo empleos retorne un false, se crea una sesión para
                     //indicar que algo falló
                         $_SESSION['registro_fail'] = "Fail";
+                        //Redireccion
                         header("Location: views/empresa/empleosPublicados.php");
                     }
 
                 }else{
+                    //Sesión para mostrar los errores
                     $_SESSION['errores'] = $errores;
                     if(!isset($_GET['modificar'])){
+                        //Redireccion en caso de que no exista 'modificar'
                         header("Location: views/empresa/registrarEmpleo.php");
                     }else{
+                        //Redireccion en caso de que exista 'modificar'
                         header("Location: views/empresa/empleosPublicados.php");
                     }
                 }
 
             }else{
+                //Sesión para mostrar los errores
                 $_SESSION['errores'] = $errores;
                 if(!isset($_GET['modificar'])){
+                    //Redireccion en caso de que no exista 'modificar'
                     header("Location: views/empresa/registrarEmpleo.php");
                 }else{
+                    //Redireccion en caso de que exista 'modificar'
                     header("Location: views/empresa/empleosPublicados.php");
                 }
             }
@@ -227,34 +243,50 @@
 
         public function eliminarEmpleo(){
 
+            //Verificar que exista el get del id
             if(isset($_GET['id'])){
 
+                //Almacenamiento del valor
                 $id = $_GET['id'];
+                //Instancia de la postulación
                 $postulacion = new PostulacionModel();
                 $postulacion->setEmpleo($id);
+                //Eliminar todas las postulaciones que contengan el codigo del empleo
                 $postulaciones = $postulacion->eliminarPostulacion();
 
+                //En caso de que funcione
                 if($postulaciones){
 
+                    //Instancia del empleo
                     $empleo = new EmpleoModel();
                     $empleo->setCodigo($id);
+                    //Se elimina el registro con el codigo del empleo
                     $empleos = $empleo->eliminarEmpleo();
 
+                    //En caso de que funcione
                     if($empleos){
+                        //Sesión para indicar que todo funcionó
                         $_SESSION['complete'] = "Complete";
+                        //Redirección
                         header("Location: views/empresa/empleosPublicados.php");
                     }else{
+                        //Sesión para indicar que algo falló
                         $_SESSION['fail'] = "Fail";
+                        //Redirección
                         header("Location: views/empresa/empleosPublicados.php");
                     }
 
                 }else{
+                    //Sesión para indicar que algo falló
                     $_SESSION['fail'] = "Fail";
+                    //Redirección
                     header("Location: views/empresa/empleosPublicados.php");
                 }
 
             }else{
+                //Sesión para indicar que algo falló
                 $_SESSION['fail'] = "Fail";
+                //Redirección
                 header("Location: views/empresa/empleosPublicados.php");
             }
 

@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Postúlate al empleo</title>
+    <title>Bienvenido</title>
     <style>
         *{
             box-sizing: border-box;
@@ -151,7 +151,7 @@
                     <a href="empleosPublicados.php"> Empleos Publicados  <span class="icon-folder-upload"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
-                    <a href="#">Datos Personales <span class="icon-address-book"></span></a>   
+                    <a href="datosEmpresa.php">Datos Personales <span class="icon-address-book"></span></a>   
                     <a href="../../execute.php?controller=empresa&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
                 </div>    
             </div>

@@ -129,7 +129,7 @@
             return $result;
 
         }
-    
+        //Función para modificar los datos de un empleado
         public function modificarEmpleado(){
 
             //Variables para capturar los archivos
@@ -162,12 +162,13 @@
                 //pedazo de codigo para guardar ese campo
                 $sql .= ", imagen = '{$this->getImagen()}' ";
             }
-
+            //Trozo de consulta para la condición de la misma
             $sql .= " WHERE id='{$this->getId()}'";
 
             $modificar = $this->db->query($sql);
 
             $modificado = false;
+            //Si la consulta ejecuta asignar true a la variable a retornar
             if($modificar){
                 $modificado = true;
             }
@@ -175,18 +176,19 @@
             return $modificado;
 
         }
-
+        //Función para conseguir los detalles de un empleado
         public function detallesEmpleado(){
-
+            //Consulta para seleccionar el registro correspondiente
             $sql = "SELECT * FROM usuario WHERE id = {$this->getId()}";
             $detalle = $this->db->query($sql);
-
+            //Variable a retornar
             $mostrar = false;
-
+            //Si la consulta ejecuta bien
             if($detalle){
+                //Convertir a array asociativo los datos
                 $mostrar = $detalle->fetch_object();
             }
-
+            //Retornar el resultado
             return $mostrar;
 
         }

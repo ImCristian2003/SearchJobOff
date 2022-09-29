@@ -13,6 +13,8 @@
         private $contrasena;
         private $perfil;
         private $hoja_vida;
+        private $imagen;
+        private $nueva;
         private $db;
 
         //Constructor que hace uso de la conexión a la base de datos
@@ -110,6 +112,15 @@
         public function setImagen($imagen){
             $this->imagen = $imagen;
         }
+
+        //Get y Set para contraseña
+        public function getNueva(){
+            return password_hash($this->db->real_escape_string($this->nueva), PASSWORD_BCRYPT, ['cost'=>4]);
+        }
+
+        public function setNueva($nueva){
+            $this->nueva = $nueva;
+        }
         
         //Funciones para consultar a la base de datos
         //Funcion para comprobar la identificación del usuario
@@ -137,6 +148,46 @@
                 if($verify){
                     //Pasar los datos del usuario a una variable
                     $result = $usuario;
+                }
+
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
+
+        public function cambiarContrasena(){
+
+            //Variable que se retorna
+            $result = false;
+            //Campos que utiliza el login
+            $id = $this->id;
+            $contrasena = $this->contrasena;
+
+            //Comprobar si existe el usuario
+            $sql = "SELECT * FROM usuario WHERE id='$id'";
+            $cambiar = $this->db->query($sql);
+
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($cambiar && $cambiar->num_rows == 1){
+                //Convertir lo que retorna la consulta a un array asociativo
+                $usuario = $cambiar->fetch_object();
+
+                //Verificacion de la contraseña
+                $verify = password_verify($contrasena, $usuario->contrasena);
+
+                //Verificar que la contraseña coincida
+                if($verify){
+
+                    $sql_cambiar = "UPDATE usuario SET contrasena = '{$this->getNueva()}'
+                    WHERE id=$id";
+                    $nueva = $this->db->query($sql_cambiar);
+
+                    if($nueva){
+                        $result = true;
+                    }
+
                 }
 
             }

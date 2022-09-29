@@ -51,7 +51,7 @@
             <p><?=$det->telefono?></p>
             <p><?=$det->direccion?></p>
             <p><?=$det->correo?></p>
-            <p><?=$det->hoja_vida?></p>
+            <p><a href="../../uploads/hojas_de_vida/<?=$det->hoja_vida?>" target="_blank">Ver Hoja de Vida</a></p>
             <form action="postulados.php" method="post">
                 <input type="hidden" value="<?=$_SESSION['empresa']->id ?>" name="empresa">
                 <input type="submit" value="Volver"><span class="icon-paste"></span> 

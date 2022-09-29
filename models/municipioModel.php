@@ -44,15 +44,17 @@
         //Funciones para consultar a la base de datos
         public function conseguirMunicipios(){
 
+            //Consulta para sacar todos los registros de un municipio
             $sql = "SELECT * FROM municipio ORDER BY nombre";
             $municipio = $this->db->query($sql);
-
+            //Variable a retornar
             $validar = false;
-
+            //En caso de que la consulta se ejecute bien, almacenar los datos en la variable
+            //a retornar
             if($municipio){
                 $validar = $municipio;
             }
-
+            //Retornar la variable
             return $validar;
 
         }

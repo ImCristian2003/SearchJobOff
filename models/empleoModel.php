@@ -162,35 +162,41 @@
         }
 
         //Funciones para hacer consultas a la base de datos
+        //Obtener empleos por busqueda
         public function obtenerEmpleos(){
-
+            //Trozo de consulta inicial
             $sql = "SELECT * FROM empleo ";
-
+            //En caso de que digite el nombre pero no filtre un municipio
             if(!empty($this->nombre) && $this->municipio == 0){
                 $sql .= " WHERE nombre LIKE '%{$this->nombre}%' ";
             }
+            //En caso de que no digite el nombre pero si filtre un municipio
             if(empty($this->nombre) && $this->municipio != 0){
                 $sql .= " WHERE municipio = {$this->municipio} ";
             }
+            //En caso de que digite el nombre y filtre un municipio
             if(!empty($this->nombre) && $this->municipio != 0){
                 $sql .= " WHERE nombre LIKE '%{$this->nombre}%' AND municipio = {$this->municipio} ";
             }
-
+            //Trozo final para priorizar los ultimos subidos
             $sql .= " ORDER BY codigo DESC ";
 
             $empleo = $this->db->query($sql);
-        
+            //Variable a retornar
             $val = false;
+            //En caso de que funcione la consulta
             if($empleo){
+                //Almacenamiento de datos
                 $val = $empleo;
             }
-
+            //Retorno del resultado
             return $val;
 
         }
-
+        //Obtener un solo empleo
         public function obtenerUno(){
-
+            //Consulta que trae todos los datos del empleo y además el nombre correspondiente
+            //de cada clave foranea(codigo -> nombre)
             $sql = "SELECT em.*, mu.nombre as 'nombre_municipio', ca.nombre as 'nombre_cargo', se.nombre as 'nombre_sector', 
             us.id as 'id_empresa', us.nombre as 'nombre_empresa', tp.nombre as 'nombre_tipocontrato' FROM empleo as em
             INNER JOIN municipio as mu
@@ -205,18 +211,20 @@
             ON em.tipo_contrato = tp.codigo
              WHERE em.codigo='{$this->codigo}'";
             $empleo = $this->db->query($sql);
-        
+            //Variable a retornar
             $val = false;
+            //En caso de que funcione
             if($empleo){
+                //Almacenar los campos ya convertidos a un array asociativo
                 $val = $empleo->fetch_object();
             }
-
+            //Retornar el resultado
             return $val;
 
         }
-
+        //Guardar un empleo
         public function guardarEmpleo(){
-
+            //Consulta que guarda el registro completo de un empleo
             $sql = "INSERT INTO empleo VALUES(null,'{$this->getNombre()}',
             {$this->getMunicipio()},'{$this->getDireccion()}',{$this->getCargo()},
             {$this->getVacantes()},'{$this->getJornada()}','{$this->getExperiencia()}',
@@ -225,18 +233,20 @@
             '{$this->getLogo()}')";
 
             $guardar = $this->db->query($sql);
-
+            //Variable a retornar
             $validar = false;
+            //En caso de que funcione asignarle un true a la variable a retornar
             if($guardar){
                 $validar = true;
             }
-
+            //Retorno del resultado
             return $validar;
 
         }
-
+        //Función que muesra los empleos publicados por una empresa
         public function empleosPublicados(){
-
+            //Consulta para mostrar todos los empleos publicados por una 
+            //su respectiva empresa
             $sql = "SELECT em.*, mu.nombre as 'nombre_municipio', ca.nombre as 'nombre_cargo', se.nombre as 'nombre_sector', 
             us.id as 'id_empresa', tp.nombre as 'nombre_tipocontrato' FROM empleo as em
             INNER JOIN municipio as mu
@@ -252,32 +262,34 @@
             WHERE us.id = {$this->getEmpresa()}";
 
             $consulta = $this->db->query($sql);
-
+            //Variable a retornar
             $mostrar = false;
+            //En caso de que funcione, asignar los datos a la variable a retornar
             if($consulta){
                 $mostrar = $consulta;
             }
-
+            //Retornar la variable
             return $mostrar;
 
         }
-
+        //Eliminar un empleo
         public function eliminarEmpleo(){
-
+            //Consulta que elimina el registro de un empleo correspondiente
             $sql = "DELETE FROM empleo WHERE codigo = {$this->getCodigo()}";
             $eliminar = $this->db->query($sql);
-
+            //Variable a retornar
             $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
             if($eliminar){
                 $eliminado = true;
             }
-
+            //Retornar la variable
             return $eliminado;
 
         }
-
+        //Modificar los datos de un empleo
         public function modificarEmpleo(){
-
+            //Consulta que modifica los datos correspondientes de un empleo en concreto
             $sql = "UPDATE empleo SET nombre = '{$this->getNombre()}',
             municipio = {$this->getMunicipio()}, direccion = '{$this->getDireccion()}',
             cargo = {$this->getCargo()}, vacantes = {$this->getVacantes()},
@@ -288,27 +300,29 @@
             WHERE codigo = {$this->getCodigo()}";
 
             $mod = $this->db->query($sql);
-
+            //Variable a retornar
             $modificado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
             if($mod){
                 $modificado = true;
             }
-
+            //Retornar el resultado
             return $modificado;
 
         }
-
+        //Restar vacantes a un empleo
         public function restarVacante(){
-
+            //Consulta que carga la nueva cantidad de vacantes
             $sql = "UPDATE empleo SET vacantes = {$this->getVacantes()}
             WHERE codigo = '{$this->getCodigo()}'";
             $vacante = $this->db->query($sql);
-
+            //Variable a retornar
             $vacantes = false;
+             //En caso de que funcione asignar un true a la variable a retornar
             if($vacante){
                 $vacantes = true;
             }
-
+            //Retornar el resultado
             return $vacantes;
 
         }

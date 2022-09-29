@@ -3,7 +3,7 @@
     session_start();
     require_once "../../config/conexion.php";
     require_once "../../helpers/utils.php";
-    if(!isset($_SESSION['empleado'])){
+    if(!isset($_SESSION['empresa'])){
         header('Location: ../../index.php');
     } 
 
@@ -38,40 +38,32 @@
                         <strong>Modificación fallida</strong>
 
             <?php   endif; ?>
-            <form action="../../execute.php?controller=empleado&action=guardarEmpleado&modificar=1" method="post" enctype="multipart/form-data">
+            <form action="../../execute.php?controller=empresa&action=guardarEmpresa&modificar=1" method="post" enctype="multipart/form-data">
 
                 <label for="id">Identificación</label>
-                <input type="text" name="id" value="<?=$_SESSION['empleado']->id?>" id="id">
+                <input type="text" name="nit" value="<?=$_SESSION['empresa']->id?>" id="id">
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'id') : ""; ?>
 
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" value="<?=$_SESSION['empleado']->nombre?>">
+                <input type="text" name="nombre" value="<?=$_SESSION['empresa']->nombre?>">
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'nombre') : ""; ?>
 
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" value="<?=$_SESSION['empleado']->apellido?>">
-                <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'apellido') : ""; ?>
-
                 <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" value="<?=$_SESSION['empleado']->telefono?>">
+                <input type="text" name="telefono" value="<?=$_SESSION['empresa']->telefono?>">
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'telefono') : ""; ?>
 
                 <label for="direccion">Dirección</label>
-                <input type="text" name="direccion" value="<?=$_SESSION['empleado']->direccion?>">
+                <input type="text" name="direccion" value="<?=$_SESSION['empresa']->direccion?>">
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'direccion') : ""; ?>
 
                 <label for="correo">Correo</label>
-                <input type="text" name="correo" value="<?=$_SESSION['empleado']->correo?>">
+                <input type="text" name="correo" value="<?=$_SESSION['empresa']->correo?>">
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'correo') : ""; ?>
-
-                <label for="hoja_vida">Hoja de Vida</label>
-                <input type="file" name="hoja_vida">
-                <span>Recuerda que debes cargar tu hoja de vida para postularte a un empleo</span>
 
                 <label for="imagen">Imagen</label>
                 <input type="file" name="imagen">
-                <?php if(!is_null($_SESSION['empleado']->imagen)): ?>
-                    <img src="../../uploads/usuarios_perfil/<?=$_SESSION['empleado']->imagen?>" alt="perfil_usuario">
+                <?php if(!is_null($_SESSION['empresa']->imagen)): ?>
+                    <img src="../../uploads/usuarios_perfil/<?=$_SESSION['empresa']->imagen?>" alt="perfil_usuario">
                 <?php else: ?>
                     <img src="../../uploads/usuarios_perfil/usuario.png" alt="perfil_usuario">
                 <?php endif; ?>
@@ -80,7 +72,7 @@
 
             </form>
             <form action="cambiarContrasena.php" method="post">
-                <input type="hidden" value="<?=$_SESSION['empleado']->id?>">
+                <input type="hidden" value="<?=$_SESSION['empresa']->id?>">
                 <input type="submit" value="Cambiar Contraseña">
             </form>
 
@@ -92,7 +84,7 @@
     <script>
 
         alert("Si modificas tus datos la sesión se cerrará de forma automatica");
-        document.getElementById("id").style.display = "none";
+        document.getElementById("id").style.display = "block";
 
     </script>
 </body>

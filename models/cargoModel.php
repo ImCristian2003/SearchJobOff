@@ -33,16 +33,17 @@
 
         //Funciones para consultar a la base de datos
         public function conseguirCargos(){
-
+            //Consulta para sacar todos los registros
             $sql = "SELECT * FROM cargo ORDER BY nombre";
             $cargo = $this->db->query($sql);
 
             $validar = false;
-
+            //Si la consulta ejecutó
             if($cargo){
+                //Almacenar los datos en la variable a retornar
                 $validar = $cargo;
             }
-
+            //retorno del resultado
             return $validar;
 
         }

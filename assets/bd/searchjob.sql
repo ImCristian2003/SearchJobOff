@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-09-2022 a las 04:56:43
+-- Tiempo de generación: 29-09-2022 a las 05:03:52
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -415,7 +415,7 @@ CREATE TABLE `empleo` (
 
 INSERT INTO `empleo` (`codigo`, `nombre`, `municipio`, `direccion`, `cargo`, `vacantes`, `jornada`, `experiencia`, `sector`, `funcion`, `empresa`, `descripcion`, `salario`, `tipo_contrato`, `logo`) VALUES
 (26, 'Desarrollado Back End', 5400, 'Carrera 32 #45-67', 1010, 10, 'Diurna - Noctur', 'Experiencia minima de 6 meses', 108, 'Desarrollador Back End', '897465', 'Se solicita un desarrollador back end que programe con java, spring y js', 3000000, 6, 'be01aafba01c6c095d23afaa50b63d8a.jpg'),
-(27, 'Jardinero', 5148, 'Carrera 32 #45-87', 1011, 1, 'Por Establecer', 'Sin Experiencia', 108, 'Cortar hierba, que mas va ser', '897465', 'Se solicita un jardinero que moche hierbaaaa', 1000000, 2, '7a42dab27e1844c7eeb05b91c8cde25b.jpg'),
+(27, 'Jardinero', 5148, 'Carrera 32 #45-87', 1011, 0, 'Por Establecer', 'Sin Experiencia', 108, 'Cortar hierba, que mas va ser', '897465', 'Se solicita un jardinero que moche hierbaaaa', 1000000, 2, '7a42dab27e1844c7eeb05b91c8cde25b.jpg'),
 (28, 'Diseñador', 5002, 'Avenida 2 Edificio Dos Santos', 1009, 5, 'Diurna', 'Minima de 6 meses', 108, 'Diseñador que tenga experiencia con Adobe XD', '9736547', 'Se solicita un diseñador u animador 3D', 3000000, 4, 'logo.png');
 
 -- --------------------------------------------------------
@@ -485,9 +485,10 @@ CREATE TABLE `postulacion` (
 --
 
 INSERT INTO `postulacion` (`codigo`, `usuario`, `empleo`, `estado`, `fecha`) VALUES
-(23, '1001', 26, 'Pendiente', '2022-09-25 00:00:00'),
-(25, '1001', 27, 'Pendiente', '2022-09-26 00:00:00'),
-(26, '1008', 28, 'Pendiente', '2022-09-26 00:00:00');
+(26, '1008', 28, 'Pendiente', '2022-09-26 00:00:00'),
+(30, '1001', 27, 'aprobado', '2022-09-27 00:00:00'),
+(31, '1001', 28, 'Pendiente', '2022-09-28 00:00:00'),
+(32, '2001', 27, 'aprobado', '2022-09-28 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -563,11 +564,12 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `telefono`, `direccion`, `correo`, `contrasena`, `perfil`, `hoja_vida`, `imagen`) VALUES
-('0345', 'Tienda Pelusa', NULL, '3457283627', 'Calle 67 #45-98', 'tienda@pelusa.com', '$2y$04$SwBT44KRtMwjnM0D80hSqujMYzt.ry.4/yDytpg.9SzKRUc77Q742', 2, NULL, NULL),
-('1001', 'Cristian', 'Cardona', '3897653749', 'Carrera 12 #12-34', 'cristian@gmail.com', '$2y$04$NSE0x5nVVQ.rC2XzVOAiKe.dMO9AstOPeJTw3EdQlZAKje7mr7a8y', 1, 'MARIANA MOLINA CARDONA.pdf', '3606d11ba67e1241c998764869e43fde.jpg'),
-('1008', 'Andres', 'Suarez', '3986754637', 'Avenida 3 con carrera 32', 'suarez10@gmail.com', '$2y$04$DK2SgUpbciRYW3jdoKj75OJNYGjCdop.WHLew4/ebMIEVyg8aAkmW', 1, 'SIMON CARDONA JURADO.pdf', '2c8676e6035c00a6bdcbafd6e7351ac4.jpg'),
-('897465', 'Tienda La Garbinga', NULL, '3456780983', 'Avenida de mis huevos morenos', 'garbin@ga.com', '$2y$04$V2LU.zghi4rm9r5EgqqmUO3qVmuBVzq/INmrrAsM4NQ4ZP9fp2W86', 2, NULL, NULL),
-('9736547', 'Tienda Los Venecos', NULL, '3546828467', 'Avenida 2 con carrera 33', 'losvene@gmail.com', '$2y$04$e63uB/MgAXLveL.Y1NF4Be4LfnN.TOHtijQ.Ii1K7tAYxkgHoTLEC', 2, NULL, NULL);
+('0345', 'Tienda Pelusa', NULL, '3457283627', 'Calle 67 #45-98', 'tienda@pelusa.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 2, NULL, NULL),
+('1001', 'Cristian', 'Cardona', '3897653749', 'Carrera 12 #12-34', 'cristian@gmail.com', '$2y$04$3bWKBXfh3YdT5gFfWf1xCe0w850fLzBjCmYZ0rxgLj0zrb3b9lfYa', 1, 'MARIANA MOLINA CARDONA.pdf', '3606d11ba67e1241c998764869e43fde.jpg'),
+('1008', 'Andres', 'Suarez', '3986754637', 'Avenida 3 con carrera 32', 'suarez10@gmail.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 1, 'SIMON CARDONA JURADO.pdf', '2c8676e6035c00a6bdcbafd6e7351ac4.jpg'),
+('2001', 'Eduardo', 'Piesdeoro', '3847382947', 'Carrera 32 #45-56', 'eduardin@gmail.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 1, 'Pasabordo Cristian Camilo.pdf', NULL),
+('897465', 'Tienda La Garbinga', NULL, '3456780983', 'Carrera 45 #Castro', 'garbin@ga.com', '$2y$04$uB8yGYUTcmPkHVSW0nY30OXgoL8lONi6uSAgNyPgIrXeHn3PklgHO', 2, NULL, 'red satelital.jpg'),
+('9736547', 'Tienda Los Venecos', NULL, '3546828467', 'Avenida 2 con carrera 33', 'losvene@gmail.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 2, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -675,7 +677,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de la tabla `postulacion`
 --
 ALTER TABLE `postulacion`
-  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `sector`

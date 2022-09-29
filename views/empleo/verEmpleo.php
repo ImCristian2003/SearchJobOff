@@ -69,7 +69,7 @@
     <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && !isset($_GET['aut'])): ?>
         <form action="../usuario/usuarioPostular.php" method="post">
             <input type="hidden" value="<?=$empleos->codigo?>" name="codigo">
-            <input type="hidden" value="<?=$empleos->nombre?>" name="nombre">
+            <input type="hidden" value="<?=$empleos->nombre?>" name="empleo">
             <input type="submit" value="Postularme">
         </form>
     <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && isset($_GET['aut'])): ?>

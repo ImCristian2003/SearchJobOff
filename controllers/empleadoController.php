@@ -214,6 +214,7 @@
                     if($mod){
                         $_SESSION['modificado'] = "Complete";
                         if(isset($_SESSION['empleado'])){
+                            //Se borra la sesión actual para actualizar los datos de la sesión
                             unset($_SESSION['empleado']);
                             header("Location: login.php");
                         }
@@ -228,6 +229,7 @@
                     //imprimir todos los errores
                     $_SESSION['errores'] = $errores;
                 }else{
+                    //Esto es porque sí
                     $val = false;
                 }
 
@@ -238,8 +240,10 @@
             }
             //Redireccionar al registro
             if(!isset($_GET['modificar'])){
+                //En caso de que no exista el modificar
                 header("Location: views/usuario/registroEmpleado.php");
             }else{
+                //En caso de que si exista el modificar
                 header("Location: views/usuario/datosUsuario.php");
             }
 
@@ -247,11 +251,14 @@
 
         public function logout(){
 
+            //Condicion para saber si existe la sesión
             if(isset($_SESSION['empleado'])){
+                //Borrar la sesión
                 unset($_SESSION['empleado']);
 
             }
 
+            //Redirección al index
             header("Location: index.php");
 
         }
