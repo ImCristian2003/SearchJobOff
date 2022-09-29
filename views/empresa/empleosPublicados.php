@@ -15,6 +15,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleos Publicados</title>
+    <!-- Scrip que confirma la eliminación del empleo-->
+        <script type="text/javascript">
+            function ConfirmDelete()
+            {
+                var respuesta = confirm("¿Está seguro que desea eliminar este empleo?");
+
+                if (respuesta == true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        </script>
 </head>
 <body>
     
@@ -84,7 +98,7 @@
                                     <input type="submit" value="Modificar">
                                 </form>
                             </td>
-                            <td><a href="../../execute.php?controller=empleoExecute&action=eliminarEmpleo&id=<?=$empleo->codigo?>">Eliminar</a></td>
+                            <td><a href="../../execute.php?controller=empleoExecute&action=eliminarEmpleo&id=<?=$empleo->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php elseif($emp->num_rows == 0): ?>

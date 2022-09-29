@@ -15,6 +15,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Postulaciones</title>
+        <!-- Scrip que confirma la eliminación del empleo-->
+        <script type="text/javascript">
+            function ConfirmDelete()
+            {
+                var respuesta = confirm("¿Está seguro que desea eliminar este empleo?");
+
+                if (respuesta == true){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
+        </script>
 </head>
 <body>
     
@@ -64,7 +78,7 @@
                     <td><?=$postulaciones->estado ?></td>
                     <td><?=$postulaciones->fecha ?></td>
                     <td>
-                    <a href="../../execute.php?controller=postulacion&action=eliminarPostulacion&usuario=<?=$_SESSION['empleado']->id ?>&empleo=<?=$postulaciones->codigo ?>">Eliminar</a>
+                    <a href="../../execute.php?controller=postulacion&action=eliminarPostulacion&usuario=<?=$_SESSION['empleado']->id ?>&empleo=<?=$postulaciones->codigo ?>" onclick="return ConfirmDelete()">Eliminar</a>
                     </td>
                 </tr>
                     <?php endwhile; ?>
