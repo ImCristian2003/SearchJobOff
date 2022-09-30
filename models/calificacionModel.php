@@ -134,5 +134,21 @@
             return $validar;
 
         }
+        //Eliminar las calificaciones de un usuario
+        public function eliminarUsuario(){
+            //Consulta que elimina la calificacion según el usuario
+            $sql = "DELETE FROM calificacion WHERE usuario = {$this->getUsuario()}";
+            $eliminar_calificacion_usuario = $this->db->query($sql);
+
+            $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
+            if($eliminar_calificacion_usuario){
+                $eliminado = true;
+            }
+            //Retorno de la variable
+            return $eliminado;
+
+        }
 
     }

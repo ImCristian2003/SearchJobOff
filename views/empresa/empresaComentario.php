@@ -126,7 +126,7 @@
 
                 <input type="submit" value="Publicar">
 
-            </form>}
+            </form>
             <!-----funciones para borrar las sesiones-------->
             <?php borrarSesion('error'); borrarSesion('errores'); ?>
 

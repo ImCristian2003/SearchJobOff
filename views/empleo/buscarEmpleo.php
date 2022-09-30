@@ -102,13 +102,14 @@
             display:flex;
             align-items:center;
             flex-direction:column;
-            justify:center;
+            justify-content:center;
         }
 
         .empleos .details-empleo{
             background: var(--blanco);
             border-radius:5px;
             margin: 1rem;
+            height: 20rem;
             width:80%;
 
             display:flex;

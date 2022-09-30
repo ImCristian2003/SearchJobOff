@@ -193,4 +193,24 @@
 
         }
 
+        //Función para conseguir todos los registros de la tabla usuario (empleado)
+        public function conseguirEmpleados(){
+            //Consulta para seleccionar el registro correspondiente
+            $sql = "SELECT us.*, pe.codigo as 'codigo_perfil', pe.nombre as 'nombre_perfil' FROM usuario as us
+            INNER JOIN perfil as pe
+            ON us.perfil = pe.codigo
+            WHERE us.perfil = 1 OR us.perfil = 2";
+            $detalle = $this->db->query($sql);
+            //Variable a retornar
+            $mostrar = false;
+            //Si la consulta ejecuta bien
+            if($detalle){
+                //almacenar todos los datos en la variable a retornar
+                $mostrar = $detalle;
+            }
+            //Retornar el resultado
+            return $mostrar;
+
+        }
+
     }

@@ -160,6 +160,39 @@
             return $eliminado;
 
         }
+        //Eliminar la postulacion de un usuario
+        public function eliminarUsuario(){
+            //Consulta que elimina la postulación según el usuario
+            $sql = "DELETE FROM postulacion WHERE usuario = {$this->getUsuario()}";
+            $eliminar_postulacion_usuario = $this->db->query($sql);
+
+            $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
+            if($eliminar_postulacion_usuario){
+                $eliminado = true;
+            }
+            //Retorno de la variable
+            return $eliminado;
+
+        }
+
+        //Eliminar la postulacion de un usuario
+        public function eliminarEmpleo(){
+            //Consulta que elimina la postulación según el usuario
+            $sql = "DELETE FROM postulacion WHERE empleo = {$this->getEmpleo()}";
+            $eliminar_postulacion_empleo = $this->db->query($sql);
+
+            $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
+            if($eliminar_postulacion_empleo){
+                $eliminado = true;
+            }
+            //Retorno de la variable
+            return $eliminado;
+
+        }
         //Cambiar el estado de una postulación
         public function cambiarEstado(){
             //Consulta que carga el nuevo estado de la postulación

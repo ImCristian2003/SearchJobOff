@@ -156,7 +156,7 @@
             return $result;
 
         }
-
+        //Cambiar la contraseña de un usuario
         public function cambiarContrasena(){
 
             //Variable que se retorna
@@ -191,6 +191,25 @@
 
                 }
 
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
+        //Cambiar la contraseña de un usuario
+        public function eliminarUsuario(){
+
+            //Consulta para eliminar la consulta
+            $sql = "DELETE FROM usuario WHERE id ='{$this->getId()}'";
+            echo $sql;
+            die();
+            $cambiar = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione 
+            if($cambiar){
+                $result = true;
             }
 
             //Retornar el resultado del proceso
