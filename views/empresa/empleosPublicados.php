@@ -41,12 +41,13 @@
 
         .container-postulados{
             width: 100%;
+            height: 15rem;
         }
 
         .container-postulados .details {
             margin: 2rem auto;
             text-align: center;
-            width: 95%;
+            width: 98%;
         }
 
         .container-postulados .details table{
@@ -57,7 +58,7 @@
 
         .container-postulados .details table tr td, th{
             border: 1px solid #000;
-            border-collapse: collapse;
+            border-collapse: none;
             caption-side: bottom;
             padding: 0.5rem;
             text-align: left;
@@ -95,6 +96,23 @@
             padding: 0.6rem 1.5rem;
             text-decoration:none;
         }
+        .details table{
+            border-left:none;
+        }
+        .details table td{
+            border:
+        }
+        .details th{
+            align-items:center;
+            justify-content:center;
+            padding:1rem 0rem;
+            text-align:center;
+            border:0;
+        }
+        .details tr td{
+            border:none;
+        }
+
 
     </style>
 </head>
@@ -132,7 +150,7 @@
         
             <?php   endif; ?>
             <!-----Tabla que muestra todos los datos-------->
-            <table border="1">
+            <table cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Nombre</th>
                     <th>Municipio</th>
@@ -149,7 +167,7 @@
                     <th>Moficar</th>
                     <th>Eliminar</th>
                 </tr>
-                <!-----Validar que hallan registros-------->
+                <!-----Validar que hayan registros-------->
                 <?php if(!is_null($emp) && $emp->num_rows >= 1): ?>
                     <!-----ciclo que muestra todos los datos-------->
                     <?php while($empleo = $emp->fetch_object()): ?>
