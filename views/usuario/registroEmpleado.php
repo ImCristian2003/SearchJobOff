@@ -110,7 +110,7 @@
         <div class="details">
     
             <h1>Registro como Empleado</h1>
-
+            <!-----Mostrar error en un campo en caso de que exista una sesión de fallo o exito-------->
             <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
                         
                         <strong>Registro completado correctamente</strong>
@@ -120,39 +120,47 @@
                         <strong>Registro fallido</strong>
 
             <?php   endif; ?>
-
+            <!-----Formulario que guarda el registros de una empresa-------->
             <form action="../../execute.php?controller=empleado&action=guardarEmpleado" method="post" enctype="multipart/form-data">
 
                 <label for="id">Identificación <span class="obligatorio"> * </span></label>
                 <input type="text" name="id" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'id') : ""; ?>
                 
                 <label for="nombre">Nombre <span class="obligatorio"> * </span></label>
                 <input type="text" name="nombre" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'nombre') : ""; ?>
 
                 <label for="apellido">Apellidos</label>
                 <input type="text" name="apellido" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'apellido') : ""; ?>
 
                 <label for="telefono">Telefono <span class="obligatorio"> * </span></label>
                 <input type="text" name="telefono" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'telefono') : ""; ?>
 
                 <label for="direccion">Direccion <span class="obligatorio"> * </span></label>
                 <input type="text" name="direccion" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'direccion') : ""; ?>
 
                 <label for="correo">Correo <span class="obligatorio"> * </span></label>
                 <input type="email" name="correo" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'correo') : ""; ?>
 
                 <label for="contrasena">Contraseña <span class="obligatorio"> * </span></label>
                 <input type="password" name="contrasena" required>
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'contrasena') : ""; ?>
 
                 <label for="perfil">Perfil <span class="obligatorio"> * </span> </label>
                 <input type="text" name="perfil" required disabled value="1">
+                <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'perfil') : ""; ?>
 
                 <label for="hoja_vida">Hoja de Vida</label>
@@ -161,6 +169,7 @@
                 <input type="submit" value="Enviar">
 
             </form>
+            <!-----Función para borrar las sesiones existentes-------->
             <?php borrarSesion('registro'); borrarSesion('registro_fail'); borrarSesion('errores'); ?>
         </div>
     </div>

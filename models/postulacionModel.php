@@ -1,7 +1,7 @@
 <?php
 
     class PostulacionModel{
-
+        //Campos que se usan en la clase
         private $codigo;
         private $usuario;
         private $empleo;
@@ -74,7 +74,7 @@
         //Funciones para consultar a la base de datos
         public function guardarPostulacion(){
 
-            $sql = "INSERT INTO postulacion VALUES(null,'{$this->getUsuario()}',{$this->getEmpleo()},'Pendiente',CURDATE())";
+            $sql = "INSERT INTO postulacion VALUES(null,'{$this->getUsuario()}',{$this->getEmpleo()},'Pendiente',NOW())";
             $guardar = $this->db->query($sql);
 
             $save = false;
@@ -85,9 +85,9 @@
             return $save;
 
         }
-
+        //Función para obtener los postulados a un empleo
         public function obtenerPostulados(){
-
+            //Consulta que devuelve los postulados
             $sql = "SELECT us.nombre as 'usuario', us.id , em.codigo as 'codigo_empleo', em.nombre as 'empleo',
             em.funcion, em.vacantes, em.descripcion, em.empresa,  po.codigo as 'codigo_postulacion',po.estado, po.fecha 
             FROM postulacion as po
@@ -99,17 +99,19 @@
             $postulado = $this->db->query($sql);
     
             $mostrar = false;
-
+            //En caso de funcionar la consulta, se almacenan los datos en la variable
+            //a retornar
             if($postulado){
                 $mostrar = $postulado;
             }
-
+            //Retorno de la variable
             return $mostrar;
 
         }
 
+        //Obtener las postulaciones de un usuario
         public function obtenerPostulaciones(){
-
+            //Consulta que devuelve las postulaciones de un usuario
             $sql = "SELECT us.nombre as 'usuario', us.id as 'usuario_id' ,
             em.*, po.codigo as 'codigo_postulacion', po.estado, po.fecha FROM postulacion as po 
             INNER JOIN usuario as us ON po.usuario = us.id INNER JOIN empleo as em 
@@ -117,83 +119,94 @@
             $postulacion = $this->db->query($sql);
     
             $mostrar = false;
-
+            //En caso de funcionar la consulta, se almacenan los datos en la variable
+            //a retornar
             if($postulacion){
                 $mostrar = $postulacion;
             }
-
+            //Retorno de la variable
             return $mostrar;
 
         }
-
+        //Eliminar una postulación
         public function eliminarPostulacion(){
-
+            //Consulta que elimina la postulacion según el empleo
             $sql = "DELETE FROM postulacion WHERE empleo = {$this->getEmpleo()}";
             $eliminar = $this->db->query($sql);
 
             $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
             if($eliminar){
                 $eliminado = true;
             }
-
+            //Retorno de la variable
             return $eliminado;
 
         }
-
+        //Eliminar la postulacion de un usuario
         public function eliminarPostulacionUsuario(){
-
+            //Consulta que elimina la postulación según el usuario
             $sql = "DELETE FROM postulacion WHERE usuario = {$this->getUsuario()} AND empleo = {$this->getEmpleo()}";
             $eliminar_postulacion_usuario = $this->db->query($sql);
 
             $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
             if($eliminar_postulacion_usuario){
                 $eliminado = true;
             }
-
+            //Retorno de la variable
             return $eliminado;
 
         }
-
+        //Cambiar el estado de una postulación
         public function cambiarEstado(){
-
+            //Consulta que carga el nuevo estado de la postulación
             $sql = "UPDATE postulacion SET estado = '{$this->getEstado()}' 
             WHERE codigo = {$this->getCodigo()}";
             $cambiar = $this->db->query($sql);
 
             $cambiado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
             if($cambiar){
                 $cambiado = true;
             }
-
+            //Retorno de la variable
             return $cambiado;
 
         }
-
+        //Eliminar postulación cuando un usuario sea rechazado
         public function eliminarPostulacionEstado(){
-
+            //Consulta que elimina la postulación según la clave primaría
             $sql = "DELETE FROM postulacion WHERE codigo = {$this->getCodigo()}";
             $eliminar = $this->db->query($sql);
 
             $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
             if($eliminar){
                 $eliminado = true;
             }
-
+            //Retorno de la variable
             return $eliminado;
 
         }
-
+        //Validar existencia de una postulación
         public function validarUnaPostulacion(){
-            
+            //Consulta que saca los datos según el usuario
             $sql = "SELECT * FROM postulacion WHERE usuario = '{$this->getUsuario()}' 
             AND empleo = {$this->getEmpleo()}";
             $empleo = $this->db->query($sql);
 
             $validado = false;
+            //En caso de funcionar la consulta, se almacenan los datos en la variable
+            //a retornar
             if($empleo){
                 $validado = $empleo;
             }
-
+            //Retorno de la variable
             return $validado;
 
         }

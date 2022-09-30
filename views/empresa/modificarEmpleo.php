@@ -20,18 +20,19 @@
 <body>
 
     <h1>Modicar Empleo</h1>
-
+    <!-----Instancia para conseguir los detalles de un empleo puntual-------->
     <?php
     
         $empleo = new empleoController();
         $empleos = $empleo->detalleEmpleo();
 
     ?>
-    
+    <!-----Formulario para modificar el empleo-------->
     <form action="../../execute.php?controller=empleoExecute&action=guardarEmpleo&modificar=1&codigo=<?=$empleos->codigo?>" method="post" enctype="multipart/form-data">
 
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" value="<?=$empleos->nombre?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'nombre') : ""; ?>
         <br>
         <label for="municipio">Municipio</label>
@@ -57,6 +58,7 @@
         <br>
         <label for="direccion">Dirección</label>
         <input type="text" name="direccion" value="<?=$empleos->direccion?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'direccion') : ""; ?>
         <br>
         <label for="cargo">Cargo</label>
@@ -82,14 +84,17 @@
         <br>
         <label for="vacantes">Vacantes</label>
         <input type="number" name="vacantes" value="<?=$empleos->vacantes?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'vacantes') : ""; ?>
         <br>
         <label for="jornada">Jornada</label>
         <input type="text" name="jornada" value="<?=$empleos->jornada?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'jornada') : ""; ?>
         <br>
         <label for="experiencia">Experiencia</label>
         <textarea name="experiencia" rows="10"><?=$empleos->experiencia?></textarea>
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'experiencia') : ""; ?>
         <br>
         <label for="sector">Sector</label>
@@ -115,18 +120,22 @@
         <br>
         <label for="funcion">Función</label>
         <input type="text" name="funcion" value="<?=$empleos->funcion?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'funcion') : ""; ?>
         <br>
         <label for="empresa">Empresa</label>
         <input type="number" name="empresa" value="<?=$_SESSION['empresa']->id?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'empresa') : ""; ?>
         <br>
         <label for="descripcion">Descripcion</label>
         <textarea name="descripcion" rows="10"><?=$empleos->descripcion?></textarea>
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'descripcion') : ""; ?>
         <br>
         <label for="salario">Salario</label>
         <input type="number" name="salario" value="<?=$empleos->salario?>">
+        <!-----Mostrar error en un campo en caso de que exista-------->
         <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'salario') : ""; ?>
         <br>
         <label for="tipo_contrato">Tipo de Contrato</label>
@@ -157,6 +166,7 @@
         <input type="submit" value="Modificar">
 
     </form>
+    <!-----Borrar una sesión existente-------->
     <?php borrarSesion('errores'); ?>
 </body>
 </html>

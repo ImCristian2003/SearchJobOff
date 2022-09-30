@@ -28,6 +28,7 @@
                     <option value="rechazado">Rechazado</option>
                     <option value="aprobado">Aprobado</option>
                 </select>
+                <!-----Campos paa validar el cambio de estado de una postulación-------->
                 <input type="hidden" name="codigo" value="<?=$_POST['id']?>">
                 <input type="hidden" name="empleo" value="<?=$_POST['empleo']?>">
                 <input type="hidden" name="vacantes" value="<?=$_POST['vacantes']?>">

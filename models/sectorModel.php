@@ -32,17 +32,19 @@
         }
 
         //Funciones para consultar a la base de datos
+        //Sacar registros de la tabla sector
         public function conseguirSector(){
-
+            //Consulta que saca todos los registros
             $sql = "SELECT * FROM sector ORDER BY nombre";
             $sector = $this->db->query($sql);
 
             $validar = false;
-
+            //en caso de funcionar se almacenan todos los datos en la variable
+            //a retornar
             if($sector){
                 $validar = $sector;
             }
-
+            //Retorno de la variable
             return $validar;
 
         }

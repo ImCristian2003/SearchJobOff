@@ -11,12 +11,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/icons/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <title>Detalle Empleo</title>
     <style>
+
         img{
             height: auto;
             width: 300px;
         }
+        
     </style>
 </head>
 <body>
@@ -54,26 +61,30 @@
         echo $empleos->nombre_tipocontrato;
         echo "<br>";
     ?>
-
+    <!-----Condición para validar si el empleo tiene logo subido o no-------->
     <?php if($empleos->logo == "none"): ?>
         <img src="../../uploads/empleos_logo/empresa.png" alt="perfil_usuario">
     <?php else: ?>
         <img src="../../uploads/empleos_logo/<?=$empleos->logo?>" alt="perfil_usuario">
     <?php endif; ?>
     
+    <!-----Condición para validar las vacantes de un empleo-------->
     <?php if($empleos->vacantes == 0): ?>
         <p>
             Lo sentimos, pero parece que esta oferta de empleo ya no cuenta con
             vacantes disponibles
         </p>
+    <!-----Condición para validar que halla un usuario empleado logeado y se postule-------->
     <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && !isset($_GET['aut'])): ?>
         <form action="../usuario/usuarioPostular.php" method="post">
             <input type="hidden" value="<?=$empleos->codigo?>" name="codigo">
             <input type="hidden" value="<?=$empleos->nombre?>" name="empleo">
             <input type="submit" value="Postularme">
         </form>
+    <!-----Condición para validar cuando un usuario ya se halla postulado a un empleo-------->
     <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && isset($_GET['aut'])): ?>
         <a href="../usuario/usuarioPostulaciones.php">Volver</a>
+    <!-----Condición cuando no está logeado-------->
     <?php else:?>
         <p>Ups! Parece que no estás registrado</p>
     <?php endif; ?>

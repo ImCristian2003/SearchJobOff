@@ -25,6 +25,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Roboto', sans-serif;
         }
         :root{
             --primario: rgb(105, 183, 185);
@@ -43,9 +44,12 @@
         .caja-izquierda{
             background-color: #69b7b9;
             height: 100vh;
-            width: 25%;
+            width: 30%;
         }
         .caja-izquierda .caja-izquierda-uno{
+            height: 50%;
+            padding: 10px;
+
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -55,41 +59,40 @@
         .caja-izquierda .caja-izquierda-uno h1{
             color: var(--blanco);
             font-family: var(--FuentePpal);
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: bold;
+            margin: 1rem 2rem;
         }
         .caja-izquierda .caja-izquierda-uno .imagen{
             border-radius:50%;
-            height: 20%;
             width: 50%;
         }
         .caja-izquierda div.caja-izquierda-uno h2{
             color: var(--blanco);
             font-family:Verdana, Geneva, Tahoma, sans-serif ;
-            margin-top: 3rem;
+            margin: 1em 2em;
         }
         .caja .caja-izquierda .caja-izquierda-dos{
-            height: 5rem;
-            margin-top: 5rem;
-
+            height: 50%;
 
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-direction: column;
+            text-align: center;
         }
         .caja .caja-izquierda .caja-izquierda-dos a {
             color: var(--blanco);
             text-decoration: none;
-
+            font-size: 1.6rem;
         }
         .caja .caja-izquierda .caja-izquierda-dos .caja-izquierda-dos-a{
             display: flex;
             flex-direction: column;
-
             font-family:Arial, Helvetica, sans-serif;
-            font-size: 2rem;
-            
+            font-size: 1.7rem;
+            height: 50%;
+            padding: 2rem;
         }
         .caja .caja-izquierda .caja-izquierda-dos .caja-izquierda-dos-a a{
             margin: .4rem;
@@ -99,16 +102,17 @@
             flex-direction: column;
             align-items: center;
 
-            margin-top:5rem;
+            margin-top:1rem;
+            height: 50%;
         }
         .caja .caja-izquierda .caja-izquierda-dos .caja-izquierda-dos-aa a{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 2rem;
-            margin-top:.4rem;
+            font-size: 1.7rem;
+            margin-top:.3rem;
         }
 
         .caja .caja-derecha{
-            width: 75%;
+            width: 70%;
 
             display: flex;
             justify-content: center;
@@ -118,11 +122,11 @@
 
         .caja .caja-derecha .caja-derecha-details h1{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 4.5rem;
+            font-size: 3rem;
         }
         .caja .caja-derecha .caja-derecha-details p{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin: 2rem;
         }
     </style>
@@ -132,8 +136,9 @@
         <div class="caja-izquierda">
             <div class="caja-izquierda-uno">
                 <h1>SearchJob</h1>
+                <!-----Validar si el usuario tiene subida alguna imagen de perfíl-------->
                 <?php
-
+                    
                     if(is_null($_SESSION['empleado']->imagen)){
                         $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
                     }else{

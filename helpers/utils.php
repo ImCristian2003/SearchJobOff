@@ -13,7 +13,7 @@
         //Validar existencia del campo y sesión correspondientes
         if(isset($sesion[$campo])){
             //Mensaje
-            echo "<div class='alert alert-danger' style='background-color:#FF0000; color:#fff; border-radius:8px; padding:4px;'>".$sesion[$campo]."</div>";
+            echo "<div class='alert alert-danger' style='background-color:#FF0000; color:#fff; border-radius:8px; padding:0.6rem; margin:0.5rem;'>".$sesion[$campo]."</div>";
 
         }
 

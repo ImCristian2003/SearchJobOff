@@ -27,16 +27,16 @@
     
     <div class="container-detalles">
         <div class="details">
-
+            <!-----Instancia para mostrar los detalles de un usuario-------->
             <?php 
                 
                 $detalle = new PostulacionDosController();
                 $det = $detalle->detallesUsuario();
         
             ?>
-            
+            <!-----Veirificar si el usuario tiene una imagen subida o no-------->
             <?php
-
+                
                 if(is_null($det->imagen)){
                     $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
                 }else{
@@ -45,12 +45,14 @@
 
             ?>
             <img src="<?=$url_imagen?>" alt="">
+            <!-----Mostrar los datos-------->
             <p><?=$det->id?></p>
             <p><?=$det->nombre?></p>
             <p><?=$det->apellido?></p>
             <p><?=$det->telefono?></p>
             <p><?=$det->direccion?></p>
             <p><?=$det->correo?></p>
+            <!-----Mostrar la hoja de vida del usuario correspondiente-------->
             <p><a href="../../uploads/hojas_de_vida/<?=$det->hoja_vida?>" target="_blank">Ver Hoja de Vida</a></p>
             <form action="postulados.php" method="post">
                 <input type="hidden" value="<?=$_SESSION['empresa']->id ?>" name="empresa">

@@ -179,11 +179,12 @@
 
                 //Verificar que la contraseña coincida
                 if($verify){
-
+                    //Si la contraseña coincide se hace un update con la nueva contraseña
+                    //encryptada
                     $sql_cambiar = "UPDATE usuario SET contrasena = '{$this->getNueva()}'
                     WHERE id=$id";
                     $nueva = $this->db->query($sql_cambiar);
-
+                    //Si todo sale bien, se almacena true en la variable a retornar
                     if($nueva){
                         $result = true;
                     }
