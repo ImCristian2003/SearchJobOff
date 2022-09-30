@@ -1,6 +1,9 @@
 <?php
 
     require_once "models/usuarioModel.php";
+    require_once "models/postulacionModel.php";
+    require_once "models/calificacionModel.php";
+    require_once "models/empleoModel.php";
 
     class usuarioController{
         //Función para logearse
@@ -33,7 +36,11 @@
                         }
                         //Redirección y sesión en caso de tener un perfíl de administrador
                         if($log->perfil == "3"){
-                            $_SESSION['admin'] = true;
+                            $_SESSION['admin'] = $log;
+                            header("Location: views/admin/indexAdmin.php");
+                        }else{
+                            $_SESSION['fail'] = "Inicio de Sesión Fallido";
+                            header("Location: login.php");
                         }
 
                     }else{
@@ -121,6 +128,108 @@
                 }else{
                     header("Location: views/empresa/datosEmpresa.php");
                 }
+            }
+
+        }
+        //Función para eliminar un usuario
+        public function eliminarUsuario(){
+            //Validar qye exista el admin y un id
+            if(isset($_SESSION['admin']) && isset($_GET['id'])){
+                //Capturar el id del usuario
+                $id = $_GET['id'];
+                //Eliminar todos los registros en los que aparezca el usuario (tabla postulacion)
+                $postulacion = new PostulacionModel();
+                $postulacion->setUsuario($id);
+                $postulaciones = $postulacion->eliminarUsuario();
+                //En caso de que se elimine correctamente
+                if($postulaciones){
+
+                    //Eliminar todos los registros en los que aparezca el usuario (tabla calificacion)
+                    $calificacion = new calificacionModel();
+                    $calificacion->setUsuario($id);
+                    $calificaciones = $calificacion->eliminarUsuario();
+                    //En caso de que se elimine correctamente
+                    if($calificaciones){
+                        //validar el perfil del usuario
+                        if($_GET['perfil'] == "2"){
+
+                            //Eliminar todos los registros en los que aparezca el usuario (tabla postulaciones)
+                            $empleo = new EmpleoModel();
+                            $empleo->setEmpresa($id);
+                            $empleos = $empleo->obtenerEmpleosBorrar();
+                            
+                            while($emp = $empleos->fetch_object()){
+
+                                $codigo = $emp->codigo;
+
+                                $postulacion1 = new PostulacionModel();
+                                $postulacion1->setEmpleo($codigo);
+                                $postulaciones1 = $postulacion1->eliminarEmpleo();
+
+                            }
+
+                            if(isset($postulaciones1)){
+
+                                $empleo = new EmpleoModel();
+                                $empleo->setEmpresa($id);
+                                $empleos = $empleo->obtenerEmpleosBorrar();
+
+                                //Eliminar todos los registros en los que aparezca el usuario (tabla empleo)
+                                $usuario = new UsuarioModel();
+
+                                $usuario->setId($id);
+                                $usuarios = $usuario->eliminarUsuario();
+                                var_dump($usuarios);
+                                die();
+
+                                //En caso de que se elimine correctamente
+                                //En caso de que funcione
+                                if($usuarios){
+                                    //Sesión para indicar que todo funcionó
+                                    $_SESSION['complete'] = "Complete";
+                                    //Redirección
+                                    header("Location: views/admin/verEmpleados.php");
+                                }else{
+                                    //Sesión para indicar que algo no funcionó
+                                    $_SESSION['fail'] = "Fail";
+                                    //Redirección
+                                    header("Location: views/admin/verEmpleados.php");
+                                }
+
+                            }else{
+                                //Sesión para indicar que algo no funcionó
+                                $_SESSION['fail'] = "Fail";
+                                //Redirección
+                                header("Location: views/admin/verEmpleados.php");
+                            }
+
+                        }else{
+                            //Sesión para indicar que algo no funcionó
+                            $_SESSION['fail'] = "Fail";
+                            //Redirección
+                            header("Location: views/admin/verEmpleados.php");
+                        }
+                        
+
+                    }else{
+                        //Sesión para indicar que algo no funcionó
+                        $_SESSION['fail'] = "Fail";
+                        //Redirección
+                        header("Location: views/admin/verEmpleados.php");
+                    }
+
+                }else{
+                    //Sesión para indicar que algo no funcionó
+                    $_SESSION['fail'] = "Fail";
+                    //Redirección
+                    header("Location: views/admin/verEmpleados.php");
+                }
+
+            }else{
+                //Sesión para indicar que algo no funcionó
+                $_SESSION['fail'] = "Fail";
+                //Redirección
+                header("Location: views/admin/verEmpleados.php");
             }
 
         }

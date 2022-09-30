@@ -326,5 +326,52 @@
             return $vacantes;
 
         }
+        //Eliminar los empleos según el usuario
+        public function eliminarUsuario(){
+            //Consulta que elimina la calificacion según el usuario
+            $sql = "DELETE FROM empleo WHERE empresa = '{$this->getEmpresa()}'";
+            $eliminar_empleo_usuario = $this->db->query($sql);
+
+            $eliminado = false;
+            //En caso de funcionar la consulta, se almacena true en la variable
+            //a retornar
+            if($eliminar_empleo_usuario){
+                $eliminado = true;
+            }
+            //Retorno de la variable
+            return $eliminado;
+
+        }
+        //Obtener empleos por busqueda
+        public function obtenerEmpleosBorrar(){
+            //Trozo de consulta inicial
+            $sql = "SELECT codigo FROM empleo WHERE empresa = '{$this->getEmpresa()}'";
+            //En caso de que digite el nombre pero no filtre un municipio
+            if(!empty($this->nombre) && $this->municipio == 0){
+                $sql .= " WHERE nombre LIKE '%{$this->nombre}%' ";
+            }
+            //En caso de que no digite el nombre pero si filtre un municipio
+            if(empty($this->nombre) && $this->municipio != 0){
+                $sql .= " WHERE municipio = {$this->municipio} ";
+            }
+            //En caso de que digite el nombre y filtre un municipio
+            if(!empty($this->nombre) && $this->municipio != 0){
+                $sql .= " WHERE nombre LIKE '%{$this->nombre}%' AND municipio = {$this->municipio} ";
+            }
+            //Trozo final para priorizar los ultimos subidos
+            $sql .= " ORDER BY codigo DESC ";
+
+            $empleo = $this->db->query($sql);
+            //Variable a retornar
+            $val = false;
+            //En caso de que funcione la consulta
+            if($empleo){
+                //Almacenamiento de datos
+                $val = $empleo;
+            }
+            //Retorno del resultado
+            return $val;
+
+        }
 
     }
