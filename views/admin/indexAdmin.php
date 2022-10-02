@@ -155,11 +155,12 @@
                 <div class="caja-izquierda-dos-a"> 
                     <a href="adminRegistrar.php">Registrar Admin <span class="icon-folder"></span></a> 
                     <a href="verEmpleados.php">Ver Empleados <span class="icon-clipboard"></span></a>
-                    <a href="../calificacion/indexCalificacion.php">Comentarios <span class="icon-bubble"></span></a>
+                    <a href="../calificacion/indexCalificacion.php">Ver Comentarios <span class="icon-bubble"></span></a>
+                    <a href="administrarTablas.php">Administrar Tablas <span class="icon-bubble"></span></a>
                 </div>
                 <div class="caja-izquierda-dos-aa">
-                    <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
-                    <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
+                    <a href="datosAdmin.php">Datos Personales <span class="icon-address-book"></span></a>   
+                    <a href="../../execute.php?controller=adminExecute&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
                 </div>    
             </div>
         </div>

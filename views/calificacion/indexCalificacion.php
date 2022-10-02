@@ -94,6 +94,20 @@
             color: yellow;
         }
 
+        .eliminar {
+            background: var(--primario);
+            color: #fff;
+            display: block;
+            font-weight:bold;
+            font-size:1.2rem;
+            letter-spacing: 1px;
+            margin: 1.5rem 1rem;
+            padding: 1rem 1.5rem;
+            text-align:center;
+            text-decoration: none;
+            width: 20%;
+        }
+
     </style>
 </head>
 <body>
@@ -111,6 +125,8 @@
                     <a href="../empresa/indexEmpresa.php">Volver</a>
                     <a href="../empresa/empresaCalificaciones.php">Mis Calificaciones</a>
                     <a href="../empresa/empresaComentario.php">Hacer un comentario</a>
+                <?php elseif(isset($_SESSION['admin'])): ?>
+                    <a href="../admin/indexAdmin.php">Volver</a>
                 <?php else: ?>
                     <a href="../../index.php">Volver</a>
                 <?php endif; ?>
@@ -143,6 +159,9 @@
                                     echo date_format($date,"Y/m/d H:i:s");
                                 ?>
                             </span>
+                            <?php if(isset($_SESSION['admin'])):?>
+                                <a href="../../execute.php?controller=calificacionExecute&action=eliminarComentario&codigo=<?=$calif->codigo?>" class="eliminar">Eliminar Comentario</a>
+                            <?php endif; ?>
                         </div>
                         <hr style="margin: 2rem 1rem;">
                     <?php endwhile; ?>

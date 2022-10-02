@@ -104,8 +104,10 @@
                         //tipo de usuario logeado
                         if(isset($_SESSION['empleado'])){
                             header("Location: views/usuario/usuarioCalificaciones.php");
-                        }else{
+                        }else if(isset($_SESSION['empresa'])){
                             header("Location: views/empresa/empresaCalificaciones.php");
+                        }else{
+                            header("Location: views/calificacion/indexCalificacion.php");
                         }
                     }else{
                         //Sesión para indicar la correcta eliminación de un comentario
@@ -114,8 +116,10 @@
                         //tipo de usuario logeado
                         if(isset($_SESSION['empleado'])){
                             header("Location: views/usuario/usuarioCalificaciones.php");
-                        }else{
+                        }else if(isset($_SESSION['empresa'])){
                             header("Location: views/empresa/empresaCalificaciones.php");
+                        }else{
+                            header("Location: views/calificacion/indexCalificacion.php");
                         }
                     }
 
@@ -126,8 +130,10 @@
                         //tipo de usuario logeado
                     if(isset($_SESSION['empleado'])){
                         header("Location: views/usuario/usuarioCalificaciones.php");
-                    }else{
+                    }else if(isset($_SESSION['empresa'])){
                         header("Location: views/empresa/empresaCalificaciones.php");
+                    }else{
+                        header("Location: views/calificacion/indexCalificacion.php");
                     }
                 }
 
@@ -138,8 +144,10 @@
                 //tipo de usuario logeado
                 if(isset($_SESSION['empleado'])){
                     header("Location: views/usuario/usuarioCalificaciones.php");
-                }else{
+                }else if(isset($_SESSION['empresa'])){
                     header("Location: views/empresa/empresaCalificaciones.php");
+                }else{
+                    header("Location: views/calificacion/indexCalificacion.php");
                 }
             }
 

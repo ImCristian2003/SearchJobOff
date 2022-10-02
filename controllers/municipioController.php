@@ -1,7 +1,7 @@
 <?php
 
     //Se usa el modelo de municipio
-    require_once "models/municipioModel.php";
+    require_once "../../models/municipioModel.php";
 
     class municipioController{
 

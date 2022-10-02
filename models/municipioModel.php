@@ -45,7 +45,11 @@
         public function conseguirMunicipios(){
 
             //Consulta para sacar todos los registros de un municipio
-            $sql = "SELECT * FROM municipio ORDER BY nombre";
+            $sql = "SELECT mu.*, de.nombre as 'nombre_dep', de.codigo as 'codigo_dep' 
+            FROM municipio as mu
+            INNER JOIN departamento as de 
+            ON mu.departamento = de.codigo
+            ORDER BY nombre";
             $municipio = $this->db->query($sql);
             //Variable a retornar
             $validar = false;
@@ -56,6 +60,21 @@
             }
             //Retornar la variable
             return $validar;
+
+        }
+        //Eliminar un municipio
+        public function eliminarMunicipio(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM municipio WHERE codigo = {$this->getCodigo()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
 
         }
 

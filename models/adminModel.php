@@ -119,5 +119,40 @@
             return $result;
 
         }
+        //Función para modificar los datos de un administrador
+        public function modificarAdmin(){
+
+            //Variables para capturar los archivos
+            $imagen = $this->imagen;
+
+            //Consulta para modificar los datos de la base de datos
+            $sql = "UPDATE usuario 
+            SET nombre = '{$this->getNombre()}',
+            apellido = '{$this->getApellidos()}',
+            telefono = '{$this->getTelefono()}',
+            direccion = '{$this->getDireccion()}',
+            correo = '{$this->getCorreo()}'";
+
+            //Condición en caso de que la imagen de perfil no halla sido enviada
+            if($imagen == "sin_perfil"){
+                $img = true;
+            }else{//En caso de que la envíe, se le concatena a la consulta un 
+                //pedazo de codigo para guardar ese campo
+                $sql .= ", imagen = '{$this->getImagen()}' ";
+            }
+            //Trozo de consulta para la condición de la misma
+            $sql .= " WHERE id='{$this->getId()}'";
+
+            $modificar = $this->db->query($sql);
+
+            $modificado = false;
+            //Si la consulta ejecuta asignar true a la variable a retornar
+            if($modificar){
+                $modificado = true;
+            }
+
+            return $modificado;
+
+        }
         
     }

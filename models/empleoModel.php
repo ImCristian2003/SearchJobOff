@@ -287,6 +287,21 @@
             return $eliminado;
 
         }
+        //Eliminar un empleo - Municipio
+        public function eliminarEmpleoMunicipio(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM empleo WHERE municipio = {$this->getMuncipio()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
+
+        }
         //Modificar los datos de un empleo
         public function modificarEmpleo(){
             //Consulta que modifica los datos correspondientes de un empleo en concreto
@@ -361,6 +376,22 @@
             //Trozo final para priorizar los ultimos subidos
             $sql .= " ORDER BY codigo DESC ";
 
+            $empleo = $this->db->query($sql);
+            //Variable a retornar
+            $val = false;
+            //En caso de que funcione la consulta
+            if($empleo){
+                //Almacenamiento de datos
+                $val = $empleo;
+            }
+            //Retorno del resultado
+            return $val;
+
+        }
+        //Obtener empleos por busqueda
+        public function obtenerEmpleosBorrarFK(){
+            //Trozo de consulta inicial
+            $sql = "SELECT codigo FROM empleo WHERE municipio = '{$this->getMunicipio()}'";
             $empleo = $this->db->query($sql);
             //Variable a retornar
             $val = false;

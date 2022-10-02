@@ -197,13 +197,11 @@
             return $result;
 
         }
-        //Cambiar la contraseña de un usuario
+        //Eliminar el registro de un usuario
         public function eliminarUsuario(){
 
-            //Consulta para eliminar la consulta
+            //Consulta para eliminar el usuario
             $sql = "DELETE FROM usuario WHERE id ='{$this->getId()}'";
-            echo $sql;
-            die();
             $cambiar = $this->db->query($sql);
 
             $result = false;

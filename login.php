@@ -12,10 +12,10 @@
 
     if(isset($_SESSION['empleado'])){
         header("Location: views/usuario/indexUsuario.php");
-    }
-
-    if(isset($_SESSION['empresa'])){
+    }else if(isset($_SESSION['empresa'])){
         header("Location: views/empresa/indexEmpresa.php");
+    }else if(isset($_SESSION['admin'])){
+        header("Location: views/admin/indexAdmin.php");
     }
 
 ?>

@@ -122,7 +122,7 @@
                 }
 
                 //Validación de que no hallan errores
-                if(count($errores) == 0){
+                if(count($errores) == 0 && !isset($_GET['modificar'])){
 
                     //Instancia de la clase modelo del empleado
                     $usuario = new AdminModel();
@@ -163,7 +163,7 @@
                 if(isset($_GET['modificar']) && count($errores) == 1){
 
                     //Instancia de la clase modelo del empleado
-                    $modificar = new EmpleadoModel();
+                    $modificar = new AdminModel();
                     //Sets para cargar todos los datos correspondientes
                     $modificar->setId($id);
                     $modificar->setNombre($nombre);
@@ -173,15 +173,15 @@
                     $modificar->setCorreo($correo);
                     $modificar->setImagen($imagenname);
                     //Metodo para cargar los datos
-                    $mod = $modificar->modificarEmpleado();
+                    $mod = $modificar->modificarAdmin();
 
                     //En caso de el metodo mod retorne un true, se crea una sesión para
                     //indicar que todo funcionó de forma correcta
                     if($mod){
                         $_SESSION['modificado'] = "Complete";
-                        if(isset($_SESSION['empleado'])){
+                        if(isset($_SESSION['admin'])){
                             //Se borra la sesión actual para actualizar los datos de la sesión
-                            unset($_SESSION['empleado']);
+                            unset($_SESSION['admin']);
                             header("Location: login.php");
                         }
                     }else{
@@ -210,8 +210,22 @@
                 header("Location: views/admin/adminRegistrar.php");
             }else{
                 //En caso de que si exista el modificar
-                header("Location: views/admin/datosUAdmin.php");
+                header("Location: views/admin/datosAdmin.php");
             }
+
+        }
+        //Cerrar sesión
+        public function logout(){
+
+            //Condicion para saber si existe la sesión
+            if(isset($_SESSION['admin'])){
+                //Borrar la sesión
+                unset($_SESSION['admin']);
+
+            }
+
+            //Redirección al index
+            header("Location: index.php");
 
         }
 

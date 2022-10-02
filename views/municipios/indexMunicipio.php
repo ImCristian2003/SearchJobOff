@@ -5,7 +5,7 @@
     require_once "../../autoload.php";
     if(!isset($_SESSION['admin'])){
         header('Location: ../../index.php');
-    }
+    } 
 
 ?> 
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Empleos Publicados</title>
+    <title>Municipios</title>
     <style>
 
         :root{
@@ -53,6 +53,7 @@
             border-bottom: 1px solid #000;
             border-top: 1px solid #000;
             margin: 2rem auto;
+            width:  80%;
         }
 
         .container-postulados .details table tr td, th{
@@ -60,7 +61,7 @@
             border-collapse: collapse;
             caption-side: bottom;
             padding: 0.5rem;
-            text-align: left;
+            text-align: center;
             vertical-align: top;
         }
 
@@ -102,72 +103,54 @@
     
     <div class="container-postulados">
         <div class="details">
-            <!-----Instancia para mostrar los empleos publicados por una empresa-------->
+            <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
-
-                $empleado = new AdminController();
-                $emp = $empleado->conseguirEmpleados();
-        
+                
+                $municipio = new MunicipioController();
+                $mun = $municipio->mostrarMunicipios();
+                
             ?>
-            <h2>Usuario Registrados</h2>
-            <!-----Validar si la sesión es de un fallo o exito (Cuando se elimina un empleo)-------->
+            <h2>Municipios/Veredas Registrados</h2>
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
-                <b>Usuario Eliminado con exito</b>
+                <b>Municipio Eliminado con exito</b>
             <?php elseif(isset($_SESSION['fail']) && $_SESSION['fail'] == "Fail"): ?>
-                <b>Ocurrió un error al borrar el usuario</b>
+                <b>Ocurrió un error al querer borrar el muncipio</b>
             <?php endif; ?>
             <p>
-                En está sesión puedes encontrar todos los empleados registrados a nuestro sitio web
+                En esta sesión puedes encontrar todos los municipios y/o Veredas registrados
+                en nuestra base de datos.
             </p>
-            <!-----Condición para validar si fallo el modificar un empleo o fue un exito-------->
-            <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
-                        
-                        <strong>Empleo modificado de forma exitosa</strong>
-                
-            <?php   elseif((isset($_SESSION['registro_fail']) && $_SESSION['registro_fail'] == 'Fail') || isset($_SESSION['errores'])):  ?>
-        
-                        <strong>Intento de modificar fallido, asegurate de haber
-                            puesto todos los campos con el formato correcto</strong>
-        
-            <?php   endif; ?>
-            <!-----Tabla que muestra todos los datos-------->
             <table border="1">
                 <tr>
-                    <th>Id</th>
+                    <th>Codigo</th>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Telefono</th>
-                    <th>Dirección</th>
-                    <th>Correo</th>
-                    <th>Perfil</th>
+                    <th>Departamento</th>
                     <th>Eliminar</th>
                 </tr>
-                <!-----Validar que hallan registros-------->
-                <?php if(!is_null($emp) && $emp->num_rows >= 1): ?>
-                    <!-----ciclo que muestra todos los datos-------->
-                    <?php while($empleado = $emp->fetch_object()): ?>
-                        <tr>
-                            <td><?=$empleado->id ?></td>
-                            <td><?=$empleado->nombre ?></td>
-                            <td><?=$empleado->apellido ?></td>
-                            <td><?=$empleado->telefono ?></td>
-                            <td><?=$empleado->direccion ?></td>
-                            <td><?=$empleado->correo ?></td>
-                            <td><?=$empleado->nombre_perfil ?></td>
-                            <!-----Link que elimina un empleo-------->
-                            <td><a href="../../execute.php?controller=usuario&action=eliminarUsuario&id=<?=$empleado->id?>&perfil=<?=$empleado->codigo_perfil?>" onclick="return ConfirmDelete()">Eliminar</a></td>
-                        </tr>
-                    <?php endwhile; ?>
-                <!-----Condición para validar cuando no hay registros-------->
-                <?php elseif($emp->num_rows == 0): ?>
+                <!-----condición para validar que exista una sesión-------->
+                <?php if(isset($_SESSION['admin'])): ?>
+                    <!-----condición para validar que exista un registro-------->
+                    <?php if($mun->num_rows >= 1 && isset($_POST)): ?>
+                        <!-----ciclo para mostrar los campos-------->
+                        <?php while($municipios = $mun->fetch_object()): ?>
+                    <tr>
+                        <td><?=$municipios->codigo ?></td>
+                        <td><?=$municipios->nombre ?></td>
+                        <td><?=$municipios->nombre_dep ?></td>
+                        <td><a href="../../execute.php?controller=municipioExecute&action=eliminarMunicipio&id=<?=$municipios->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
+                    </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>Aún no hay usuarios postulados</p>
+                    <?php endif; ?>
+                <?php else: ?>
                     <p>Aún no hay usuarios postulados</p>
                 <?php endif; ?>
             </table>
-            <!-----Borrar todas las sesiones-------->
-            <?php borrarSesion('errores'); borrarSesion('complete'); borrarSesion('fail');  borrarSesion('registro'); borrarSesion('registro_fail');?>
-            <a href="indexAdmin.php" class="volver">Volver</a>
+            <a href="../admin/administrarTablas.php" class="volver">Volver</a>
         </div>
     </div>
+
     <!-- Script que confirma la eliminación del empleo-->
     <script type="text/javascript">
         function ConfirmDelete()
@@ -182,5 +165,6 @@
             }
         }
     </script>
+
 </body>
 </html>
