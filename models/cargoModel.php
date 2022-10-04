@@ -15,7 +15,7 @@
 
         //Get y set para codigo
         public function getCodigo(){
-            $this->codigo;
+            return $this->codigo;
         }
 
         public function setCodigo($codigo){
@@ -24,7 +24,7 @@
 
         //Get y set para nombre
         public function getNombre(){
-            $this->nombre;
+            return $this->nombre;
         }
 
         public function setNombre($nombre){
@@ -32,6 +32,23 @@
         }
 
         //Funciones para consultar a la base de datos
+
+        //Guardar un cargo
+        public function guardarCargo(){
+
+            $sql = "INSERT INTO cargo VALUES(null,'{$this->getNombre()}')";
+            $guardar = $this->db->query($sql);
+            //Variable a retornar
+            $guardado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($guardar){
+                $guardado = true;
+            }
+            //Retornar la variable
+            return $guardado;
+
+        }
+
         public function conseguirCargos(){
             //Consulta para sacar todos los registros
             $sql = "SELECT * FROM cargo ORDER BY nombre";
@@ -45,6 +62,21 @@
             }
             //retorno del resultado
             return $validar;
+
+        }
+        //Eliminar un cargo
+        public function eliminarCargo(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM cargo WHERE codigo = {$this->getCodigo()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
 
         }
 

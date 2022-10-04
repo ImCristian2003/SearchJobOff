@@ -6,7 +6,7 @@
     class municipioController{
 
         //Función para mostrar los registros de la tabla municipio
-        public function mostrarMunicipios(){
+        public function conseguirMunicipios(){
 
             $municipio = new MunicipioModel();
             //Sacar todos los datos

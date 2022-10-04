@@ -1,42 +1,22 @@
 <?php
 
-    //Se usa el modelo de municipio
-    require_once "models/municipioModel.php";
+    //Se usa el modelo de cargo
+    require_once "models/cargoModel.php";
     //Se usa el modelo de empleo
     require_once "models/empleoModel.php";
     //Se usa el modelo de postulacion
     require_once "models/postulacionModel.php";
 
-    class municipioExecuteController{
+    class cargoExecuteController{
 
-        //Función para mostrar los registros de la tabla municipio
-        public function mostrarMunicipios(){
-
-            $municipio = new MunicipioModel();
-            //Sacar todos los datos
-            $municipios = $municipio->mostrarMunicipios();
-            //Retorno de dichos datos
-            return $municipios;
-
-        }
         //Guardar un municipio
-        public function guardarMunicipio(){
+        public function guardarCargo(){
             //Verificar que exista el metodo post y la sesión del admin
             if(isset($_POST) && isset($_SESSION['admin'])){
 
-                $municipio = (int)$_POST['codigo'];
                 $nombre = $_POST['nombre'];
-                $departamento = (int)$_POST['departamento'];
 
                 $errores = array();
-
-                //Validación para municipio
-                if(!empty($municipio) && is_numeric($municipio) && preg_match("/[0-9]/",$municipio)){
-                    $municipio_validado = true;
-                }else{
-                    $municipio_validado = false;
-                    $errores['municipio'] = "Solo se permiten números";
-                }
 
                 //Validación para nombre
                 if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/",$nombre)){
@@ -46,48 +26,37 @@
                     $errores['nombre'] = "No se permiten numeros";
                 }
 
-                //Validación para departamento
-                if(!empty($departamento) && is_numeric($departamento) && preg_match("/[0-9]/",$departamento)){
-                    $departamento_validado = true;
-                }else{
-                    $departamento_validado = false;
-                    $errores['departamento'] = "Solo se permiten números";
-                }
-
-                var_dump($errores);
-
+                //En caso de que no hayan errores
                 if(count($errores) == 0){
 
-                    $guardar = new MunicipioModel();
-                    $guardar->setCodigo($municipio);
+                    $guardar = new CargoModel();
                     $guardar->setNombre($nombre);
-                    $guardar->setDepartamento($departamento);
-                    $guardado = $guardar->guardarMunicipio();
+                    $guardado = $guardar->guardarCargo();
 
                     if($guardado){
                         $_SESSION['complete'] = "Complete";
-                        header("Location: views/municipios/registrarMunicipio.php");
+                        header("Location: views/cargos/registrarCargo.php");
                     }else{
                         $_SESSION['fail'] = "Fail";
-                        header("Location: views/municipios/registrarMunicipio.php");
+                        header("Location: views/cargos/registrarCargo.php");
                     }
 
                 }else{
                     //En caso de que hallan errores, se crea una sesión para
                     //imprimir todos los errores
                     $_SESSION['errores'] = $errores;
-                    header("Location: views/municipios/registrarMunicipio.php");
+                    header("Location: views/cargos/registrarCargo.php");
                 }
 
             }else{
                 $_SESSION['fail'] = "Fail";
-                header("Location: views/municipios/registrarMunicipio.php");
+                header("Location: views/cargos/registrarCargo.php");
             }
 
         }
 
         //Función para mostrar los registros de la tabla municipio
-        public function eliminarMunicipio(){
+        public function eliminarCargo(){
             //Comprobar que exista el admin y el codigo correspondiente del registro
             if(isset($_SESSION['admin']) && isset($_GET['id'])){
                 //Almacenar el codigo en una variable
@@ -95,8 +64,8 @@
 
                 //Eliminar todos los registros en los que aparezca el usuario (tabla postulaciones)
                 $empleo = new EmpleoModel();
-                $empleo->setMunicipio($codigo);
-                $empleos = $empleo->obtenerEmpleosBorrarFK();
+                $empleo->setCargo($codigo);
+                $empleos = $empleo->obtenerEmpleosBorrarFKCargo();
                 // var_dump($empleos);
                 // die();
                 //conidicion para saber si hay algún empleo que haya publicado
@@ -122,33 +91,37 @@
                 if(isset($postulaciones1)){
 
                     $empleo1 = new EmpleoModel();
-                    $empleo1->setMunicipio($codigo);
-                    $empleos1 = $empleo1->eliminarEmpleoMunicipio();
+                    $empleo1->setCargo($codigo);
+                    $empleos1 = $empleo1->eliminarEmpleoCargo();
+                    // var_dump($empleos1);
+                    // die();
 
-                    if($empleos){
+                    if($empleos1){
 
-                        $eliminar = new MunicipioModel();
+                        $eliminar = new CargoModel();
                         $eliminar->setCodigo($codigo);
-                        $eliminado = $eliminar->eliminarMunicipio();
+                        $eliminado = $eliminar->eliminarCargo();
+                        // var_dump($eliminado);
+                        // die();
 
                         if($eliminado){
                             $_SESSION['complete'] = "Complete";
-                            header("Location: views/municipios/indexMunicipio.php");
+                            header("Location: views/cargos/indexCargo.php");
                         }else{
                             $_SESSION['fail'] = "Fail";
-                            header("Location: views/municipios/indexMunicipio.php");
+                            header("Location: views/cargos/indexCargo.php");
                         }
 
                     }else{
                         $_SESSION['fail'] = "Fail";
-                        header("Location: views/municipios/indexMunicipio.php");
+                        header("Location: views/cargos/indexCargo.php");
                     }
 
                 }
 
             }else{
                 $_SESSION['fail'] = "Fail";
-                header("Location: views/municipios/indexMunicipio.php");
+                header("Location: views/cargos/indexCargo.php");
             }
 
         }

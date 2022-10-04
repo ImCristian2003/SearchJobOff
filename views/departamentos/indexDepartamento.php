@@ -98,6 +98,15 @@
             text-decoration:none;
         }
 
+        .aviso{
+            background: rgba(235, 40, 40, 1);
+            border-radius: 4px;
+            color: #fff;
+            display: block;
+            margin: 1rem;
+            padding: 0.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -107,8 +116,8 @@
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
                 
-                $municipio = new MunicipioController();
-                $mun = $municipio->conseguirMunicipios();
+                $departamento = new DepartamentoController();
+                $dep = $departamento->mostrarDepartamento();
                 
             ?>
             <h2>Municipios/Veredas Registrados</h2>
@@ -121,24 +130,25 @@
                 En esta sesión puedes encontrar todos los municipios y/o Veredas registrados
                 en nuestra base de datos.
             </p>
+            <span class="aviso">
+                <span class="icon-notification"></span> 
+                Por el momento no puedes añadir ni quitar departamentos por cuestiones de seguridad,
+                para más información comunicate con los desarrolladores de la web <b>SearchJob</b>
+            </span>
             <table border="1">
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
-                    <th>Departamento</th>
-                    <th>Eliminar</th>
                 </tr>
                 <!-----condición para validar que exista una sesión-------->
                 <?php if(isset($_SESSION['admin'])): ?>
                     <!-----condición para validar que exista un registro-------->
-                    <?php if($mun->num_rows >= 1 && isset($_POST)): ?>
+                    <?php if($dep->num_rows >= 1 && isset($_POST)): ?>
                         <!-----ciclo para mostrar los campos-------->
-                        <?php while($municipios = $mun->fetch_object()): ?>
+                        <?php while($departamento = $dep->fetch_object()): ?>
                     <tr>
-                        <td><?=$municipios->codigo ?></td>
-                        <td><?=$municipios->nombre ?></td>
-                        <td><?=$municipios->nombre_dep ?></td>
-                        <td><a href="../../execute.php?controller=municipioExecute&action=eliminarMunicipio&id=<?=$municipios->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
+                        <td><?=$departamento->codigo ?></td>
+                        <td><?=$departamento->nombre ?></td>
                     </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -149,7 +159,7 @@
                 <?php endif; ?>
             </table>
             <a href="../admin/administrarTablas.php" class="volver">Volver</a>
-            <a href="registrarMunicipio.php" class="volver">Registrar Municipio</a>
+            <!-- <a href="registrarDepartamento.php" class="volver">Registrar Departamento</a> -->
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>
     </div>

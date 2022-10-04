@@ -109,7 +109,7 @@
             background: var(--blanco);
             border-radius:5px;
             margin: 1rem;
-            height: 20rem;
+            height: 15rem;
             width:80%;
 
             display:flex;

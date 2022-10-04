@@ -41,7 +41,7 @@
 
         .container-datos{
             background: var(--primario);
-            height: 100vh;
+            height: auto;
             width: 100%;
 
             display:flex;

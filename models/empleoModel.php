@@ -290,7 +290,52 @@
         //Eliminar un empleo - Municipio
         public function eliminarEmpleoMunicipio(){
             //Consulta que elimina el registro de un empleo correspondiente
-            $sql = "DELETE FROM empleo WHERE municipio = {$this->getMuncipio()}";
+            $sql = "DELETE FROM empleo WHERE municipio = {$this->getMunicipio()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
+
+        }
+        //Eliminar un empleo - Cargo
+        public function eliminarEmpleoCargo(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM empleo WHERE cargo = {$this->getCargo()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
+
+        }
+        //Eliminar un empleo - Contrato
+        public function eliminarEmpleoContrato(){
+            //Consulta que elimina el registro de un contrato correspondiente
+            $sql = "DELETE FROM empleo WHERE tipo_contrato = {$this->getTipoContrato()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
+
+        }
+        //Eliminar un empleo - Sector
+        public function eliminarEmpleoSector(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM empleo WHERE sector = {$this->getSector()}";
             $eliminar = $this->db->query($sql);
             //Variable a retornar
             $eliminado = false;
@@ -392,6 +437,54 @@
         public function obtenerEmpleosBorrarFK(){
             //Trozo de consulta inicial
             $sql = "SELECT codigo FROM empleo WHERE municipio = '{$this->getMunicipio()}'";
+            $empleo = $this->db->query($sql);
+            //Variable a retornar
+            $val = false;
+            //En caso de que funcione la consulta
+            if($empleo){
+                //Almacenamiento de datos
+                $val = $empleo;
+            }
+            //Retorno del resultado
+            return $val;
+
+        }
+        //Obtener empleos por busqueda
+        public function obtenerEmpleosBorrarFKCargo(){
+            //Trozo de consulta inicial
+            $sql = "SELECT codigo FROM empleo WHERE cargo = '{$this->getCargo()}'";
+            $empleo = $this->db->query($sql);
+            //Variable a retornar
+            $val = false;
+            //En caso de que funcione la consulta
+            if($empleo){
+                //Almacenamiento de datos
+                $val = $empleo;
+            }
+            //Retorno del resultado
+            return $val;
+
+        }
+        //Obtener empleos por busqueda
+        public function obtenerEmpleosBorrarFKSector(){
+            //Trozo de consulta inicial
+            $sql = "SELECT codigo FROM empleo WHERE sector = '{$this->getSector()}'";
+            $empleo = $this->db->query($sql);
+            //Variable a retornar
+            $val = false;
+            //En caso de que funcione la consulta
+            if($empleo){
+                //Almacenamiento de datos
+                $val = $empleo;
+            }
+            //Retorno del resultado
+            return $val;
+
+        }
+        //Obtener empleos por busqueda
+        public function obtenerEmpleosBorrarFKContrato(){
+            //Trozo de consulta inicial
+            $sql = "SELECT codigo FROM empleo WHERE tipo_contrato = '{$this->getTipoContrato()}'";
             $empleo = $this->db->query($sql);
             //Variable a retornar
             $val = false;

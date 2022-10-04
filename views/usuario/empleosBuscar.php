@@ -60,7 +60,7 @@
 
         .container .perfil img{
             border-radius:50%;
-            width:30%;
+            width:20%;
         }
 
         .container .descripcion {
@@ -104,11 +104,23 @@
         
         }
 
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: #fff;
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container">
+        <a href="indexUsuario.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="perfil">
             <!-----Validar si el usuario tiene subida alguna imagen de perfíl-------->
             <?php

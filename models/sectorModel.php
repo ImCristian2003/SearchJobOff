@@ -15,7 +15,7 @@
 
         //Get y set para codigo
         public function getCodigo(){
-            $this->codigo;
+            return $this->codigo;
         }
 
         public function setCodigo($codigo){
@@ -24,7 +24,7 @@
 
         //Get y set para nombre
         public function getNombre(){
-            $this->nombre;
+            return $this->nombre;
         }
 
         public function setNombre($nombre){
@@ -33,7 +33,7 @@
 
         //Funciones para consultar a la base de datos
         //Sacar registros de la tabla sector
-        public function conseguirSector(){
+        public function conseguirSectores(){
             //Consulta que saca todos los registros
             $sql = "SELECT * FROM sector ORDER BY nombre";
             $sector = $this->db->query($sql);
@@ -46,6 +46,36 @@
             }
             //Retorno de la variable
             return $validar;
+
+        }
+        //Eliminar un sector
+        public function eliminarSector(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM sector WHERE codigo = {$this->getCodigo()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
+
+        }
+        //Guardar un sector
+        public function guardarSector(){
+
+            $sql = "INSERT INTO sector VALUES(null,'{$this->getNombre()}')";
+            $guardar = $this->db->query($sql);
+            //Variable a retornar
+            $guardado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($guardar){
+                $guardado = true;
+            }
+            //Retornar la variable
+            return $guardado;
 
         }
 

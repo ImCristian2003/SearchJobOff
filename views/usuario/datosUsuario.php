@@ -103,11 +103,23 @@
             width: 150px;
         }
 
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-datos">
+        <a href="indexUsuario.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <h1>Tus Datos Personales</h1>
             <!-----Condiciónes para validar si existe una sesion de fallo o exito-------->

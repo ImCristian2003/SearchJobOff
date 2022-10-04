@@ -16,7 +16,7 @@
 
         //Get y set para codigo
         public function getCodigo(){
-            $this->codigo;
+            return $this->codigo;
         }
 
         public function setCodigo($codigo){
@@ -25,7 +25,7 @@
 
         //Get y set para nombre
         public function getNombre(){
-            $this->nombre;
+            return $this->nombre;
         }
 
         public function setNombre($nombre){
@@ -34,12 +34,46 @@
 
         //Get y set para departamento
         public function getDepartamento(){
-            $this->departamento;
+            return $this->departamento;
         }
 
         public function setDepartamento($departamento){
             $this->departamento = $departamento;
         } 
+
+        //Funciones para consultar a la base de datos
+        public function mostrarMunicipios(){
+
+            //Consulta para sacar todos los registros de un municipio
+            $sql = "SELECT * FROM municipio ORDER BY nombre";
+            $municipio = $this->db->query($sql);
+            //Variable a retornar
+            $validar = false;
+            //En caso de que la consulta se ejecute bien, almacenar los datos en la variable
+            //a retornar
+            if($municipio){
+                $validar = $municipio;
+            }
+            //Retornar la variable
+            return $validar;
+
+        }
+
+        //Guardar un municipio
+        public function guardarMunicipio(){
+
+            $sql = "INSERT INTO municipio VALUES({$this->getCodigo()},'{$this->getNombre()}',{$this->getDepartamento()})";
+            $guardar = $this->db->query($sql);
+            //Variable a retornar
+            $guardado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($guardar){
+                $guardado = true;
+            }
+            //Retornar la variable
+            return $guardado;
+
+        }
 
         //Funciones para consultar a la base de datos
         public function conseguirMunicipios(){

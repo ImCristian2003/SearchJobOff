@@ -107,38 +107,36 @@
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
                 
-                $municipio = new MunicipioController();
-                $mun = $municipio->conseguirMunicipios();
+                $cargo = new CargoController();
+                $car = $cargo->conseguirCargos();
                 
             ?>
-            <h2>Municipios/Veredas Registrados</h2>
+            <h2>Cargos Registrados</h2>
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
-                <b>Municipio Eliminado con exito</b>
+                <b>Cargo Eliminado con exito</b>
             <?php elseif(isset($_SESSION['fail']) && $_SESSION['fail'] == "Fail"): ?>
-                <b>Ocurrió un error al querer borrar el muncipio</b>
+                <b>Ocurrió un error al querer borrar el cargo</b>
             <?php endif; ?>
             <p>
-                En esta sesión puedes encontrar todos los municipios y/o Veredas registrados
+                En esta sesión puedes encontrar todos los cargos registrados
                 en nuestra base de datos.
             </p>
             <table border="1">
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
-                    <th>Departamento</th>
                     <th>Eliminar</th>
                 </tr>
                 <!-----condición para validar que exista una sesión-------->
                 <?php if(isset($_SESSION['admin'])): ?>
                     <!-----condición para validar que exista un registro-------->
-                    <?php if($mun->num_rows >= 1 && isset($_POST)): ?>
+                    <?php if($car->num_rows >= 1 && isset($_POST)): ?>
                         <!-----ciclo para mostrar los campos-------->
-                        <?php while($municipios = $mun->fetch_object()): ?>
+                        <?php while($cargos = $car->fetch_object()): ?>
                     <tr>
-                        <td><?=$municipios->codigo ?></td>
-                        <td><?=$municipios->nombre ?></td>
-                        <td><?=$municipios->nombre_dep ?></td>
-                        <td><a href="../../execute.php?controller=municipioExecute&action=eliminarMunicipio&id=<?=$municipios->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
+                        <td><?=$cargos->codigo ?></td>
+                        <td><?=$cargos->nombre ?></td>
+                        <td><a href="../../execute.php?controller=cargoExecute&action=eliminarCargo&id=<?=$cargos->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
                     </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -149,7 +147,7 @@
                 <?php endif; ?>
             </table>
             <a href="../admin/administrarTablas.php" class="volver">Volver</a>
-            <a href="registrarMunicipio.php" class="volver">Registrar Municipio</a>
+            <a href="registrarCargo.php" class="volver">Registrar Cargo</a>
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>
     </div>

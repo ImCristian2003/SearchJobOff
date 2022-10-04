@@ -10,6 +10,10 @@
     //Librería de funciones
     require_once 'helpers/utils.php';
 
+        //Instancia para sacar los municipios        
+        $municipio = new municipioExecuteController();
+        $mun = $municipio->mostrarMunicipios();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -43,12 +47,7 @@
                     <input type="text" placeholder="Busqueda manual" name="nombre">
                     <select name="id">
                         <option value="0">Todos</option>
-                        <?php 
-                            
-                            $municipio = new municipioController();
-                            $mun = $municipio->mostrarMunicipios();
-
-                        ?>
+                        <?php var_dump($mun) ?>
                         <?php while($municipio = $mun->fetch_object()): ?>
                             
                             <option value="<?=$municipio->codigo ?>">

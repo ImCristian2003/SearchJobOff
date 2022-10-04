@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Municipios</title>
+    <title>Tipos de Contratos</title>
     <style>
 
         :root{
@@ -107,49 +107,47 @@
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
                 
-                $municipio = new MunicipioController();
-                $mun = $municipio->conseguirMunicipios();
+                $contrato = new TipoContratoController();
+                $con = $contrato->conseguirContratos();
                 
             ?>
-            <h2>Municipios/Veredas Registrados</h2>
+            <h2>Tipos de Contratos Registrados</h2>
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
-                <b>Municipio Eliminado con exito</b>
+                <b>Contrato Eliminado con exito</b>
             <?php elseif(isset($_SESSION['fail']) && $_SESSION['fail'] == "Fail"): ?>
-                <b>Ocurrió un error al querer borrar el muncipio</b>
+                <b>Ocurrió un error al querer borrar el contrato</b>
             <?php endif; ?>
             <p>
-                En esta sesión puedes encontrar todos los municipios y/o Veredas registrados
+                En esta sesión puedes encontrar todos los tipos de contratos registrados
                 en nuestra base de datos.
             </p>
             <table border="1">
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
-                    <th>Departamento</th>
                     <th>Eliminar</th>
                 </tr>
                 <!-----condición para validar que exista una sesión-------->
                 <?php if(isset($_SESSION['admin'])): ?>
                     <!-----condición para validar que exista un registro-------->
-                    <?php if($mun->num_rows >= 1 && isset($_POST)): ?>
+                    <?php if($con->num_rows >= 1 && isset($_POST)): ?>
                         <!-----ciclo para mostrar los campos-------->
-                        <?php while($municipios = $mun->fetch_object()): ?>
+                        <?php while($contrato = $con->fetch_object()): ?>
                     <tr>
-                        <td><?=$municipios->codigo ?></td>
-                        <td><?=$municipios->nombre ?></td>
-                        <td><?=$municipios->nombre_dep ?></td>
-                        <td><a href="../../execute.php?controller=municipioExecute&action=eliminarMunicipio&id=<?=$municipios->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
+                        <td><?=$contrato->codigo ?></td>
+                        <td><?=$contrato->nombre ?></td>
+                        <td><a href="../../execute.php?controller=tipoContratoExecute&action=eliminarContrato&id=<?=$contrato->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
                     </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <p>Aún no hay usuarios postulados</p>
+                        <p>Aún no hay contratos registrados</p>
                     <?php endif; ?>
                 <?php else: ?>
-                    <p>Aún no hay usuarios postulados</p>
+                    <p>Aún no hay contratos registrados</p>
                 <?php endif; ?>
             </table>
             <a href="../admin/administrarTablas.php" class="volver">Volver</a>
-            <a href="registrarMunicipio.php" class="volver">Registrar Municipio</a>
+            <a href="registrarContrato.php" class="volver">Registrar Tipo de Contrato</a>
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>
     </div>

@@ -15,7 +15,7 @@
 
         //Get y set para codigo
         public function getCodigo(){
-            $this->codigo;
+            return $this->codigo;
         }
 
         public function setCodigo($codigo){
@@ -24,7 +24,7 @@
 
         //Get y set para nombre
         public function getNombre(){
-            $this->nombre;
+            return $this->nombre;
         }
 
         public function setNombre($nombre){
@@ -46,6 +46,36 @@
             }
             //Retorno de la variable
             return $validar;
+
+        }
+        //Guardar un tipo de contrato
+        public function guardarContrato(){
+
+            $sql = "INSERT INTO tipo_contrato VALUES(null,'{$this->getNombre()}')";
+            $guardar = $this->db->query($sql);
+            //Variable a retornar
+            $guardado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($guardar){
+                $guardado = true;
+            }
+            //Retornar la variable
+            return $guardado;
+
+        }
+        //Eliminar un contrato
+        public function eliminarContrato(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "DELETE FROM tipo_contrato WHERE codigo = {$this->getCodigo()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminado = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminado = true;
+            }
+            //Retornar la variable
+            return $eliminado;
 
         }
 
