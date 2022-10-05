@@ -42,6 +42,76 @@
             --FuentePpal: 'Dancing Script', cursive;
         }
 
+        .container-postulacion{
+            background: var(--primario);
+            height: 100vh;
+            width: 100%;
+
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-postulacion .details{
+            background: #fff;
+            border-radius: 0.8rem;
+            margin: 1.5rem;
+            padding: 2rem;
+            width: 60%;
+        }
+
+        .container-postulacion .details h2{
+            text-align: center;
+        }
+
+        .container-postulacion .details label{
+            width: 100%;
+        }
+
+        .container-postulacion .details form input{
+            display: block;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            padding: 0.4rem;
+            width: 100%;
+        }
+
+        .container-postulacion .details form input[type="submit"]{
+            background: var(--primario);
+            border:none;
+            border-radius:5px;
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 1rem auto;
+            margin-top: 2rem;
+            padding: 0.4rem;
+            width: 70%;
+        }
+        /*Aviso del span */
+        .container-postulacion .details form .aviso{
+            background: rgba(235, 40, 40, 1);
+            border-radius: 4px;
+            color: #fff;
+            display: block;
+            margin: 1rem;
+            padding: 0.5rem;
+        }
+
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
         .postulado{
             height: 100vh;
             width: 100%;
@@ -78,11 +148,12 @@
     del empleado-------->
     <?php if($postulacion->num_rows == 0): ?>
         <div class="container-postulacion">
+            <a href="empleosBuscar.php" class="icono-volver"><span class="icon-undo2"></span></a>
             <div class="details">
                 <!-----Condición que verifica que el usuario tenga cargada su hoja de vida-------->
                 <?php if($_SESSION['empleado']->hoja_vida != "sin_hoja_vida"): ?>
 
-                <h1>Postulación</h1>
+                <h2>Postulación</h2>
                 <!-----formulario que guarda la postulación-------->
                 <form action="../../execute.php?controller=postulacion&action=guardarPostulacion" method="post">
                     <!-----campos necesario para guardar la postulación-------->

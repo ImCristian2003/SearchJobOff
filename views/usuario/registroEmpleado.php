@@ -7,12 +7,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/icons/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <title>Registro Empleado</title>
     <style>
-        *{ /* Quitar márgenes y bordes por defecto.*/ 
+
+        body{ /* Quitar márgenes y bordes por defecto.*/ 
             box-sizing:border-box;
             padding:0;
             margin:0;
+        }
+
+        :root{
+            --primario: rgb(105, 183, 185);
+            --secundario: #f5f2f2;
+            --gris: #B8B8B8;
+            --blanco: #FFFFFF;
+            --negro: #000000;
+
+            --FuentePpal: 'Dancing Script', cursive;
         }
 
         html{ /* Codigo para que 1rem=10px*/  
@@ -24,10 +40,8 @@
             color:red;
         }
         .container-empleado{
-            background-image:url(../../assets/img/wave.png);
-            background-repeat:no-repeat;
-            background-size:cover;
-            height:100vh;
+            background: var(--primario);
+            height:auto;
             width:100%;
             position:relative;
 
@@ -37,16 +51,24 @@
             text-align:center;
         }
         .details{
-            padding: 50px;
-            width: 40%;
+            background: var(--blanco);
+            border-radius: 1.5rem;
+            height: auto;
+            margin: 3rem;
+            padding: 6rem;
+            width: 50%;
         }
         .details h1{
+            background: var(--primario);
+            border-radius:3rem 0rem 3rem 3rem;
             color:#fff;
             margin:2rem;
-            font-size:6rem;
+            font-size:5rem;
+            margin: 0;
+            padding: 2.5rem;
             position:absolute;
-            right:3rem;
-            top:3rem;
+            right:0rem;
+            top:0rem;
         }
         .details form{ 
             font-size:2rem;
@@ -63,26 +85,26 @@
             border: none;
             border-bottom: 2px solid #000;
             border-radius: 4px;
-            margin:5px 0;
+            margin:1rem;
             padding:5px 8px;
         }
         form input[type='password']{
             border: none;
             border-bottom: 2px solid #000;
             border-radius: 4px;
-            margin:5px 0;
+            margin:1rem;
             padding:5px 8px;
         }
         form input[type='submit']{
             border:none;
             border-radius:8px;
-            background-color:#B8B8B8;
+            background-color:var(--primario);
             color:#fff;
             cursor:pointer;
             font-weight:bold;
-            font-size:1.6rem;
-            height:3.2rem;
-            margin: 5rem 15rem;
+            font-size:2rem;
+            margin: 5rem auto;
+            padding: 1rem 3rem;
         }
         form input[type='email']{
             border: none;
@@ -99,25 +121,57 @@
             font-weight:700;
             font-size:1.8rem;
         }
-
-
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            font-size: 2rem;
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+        .aviso-bien{
+            background: green;
+            border-radius: 1rem;
+            color: #fff;
+            font-size: 1.5rem;
+            left: 40%;
+            letter-spacing: 1px;
+            padding: 1.5rem 2.5rem;
+            position: absolute;
+            top:10%;
+        }
+        .aviso-fallo{
+            background: red;
+            border-radius: 1rem;
+            color: #fff;
+            font-size: 1.5rem;
+            left: 40%;
+            letter-spacing: 1px;
+            padding: 1.5rem 2.5rem;
+            position: absolute;
+            top:10%;
+        }
     
     </style>
 </head>
 <body>
     
     <div class="container-empleado">
+        <a href="../../registro.html" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
     
             <h1>Registro como Empleado</h1>
             <!-----Mostrar error en un campo en caso de que exista una sesión de fallo o exito-------->
             <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
                         
-                        <strong>Registro completado correctamente</strong>
+                        <strong class="aviso-bien">Registro completado correctamente</strong>
                 
             <?php   elseif(isset($_SESSION['registro_fail']) && $_SESSION['registro_fail'] == 'Fail'):  ?>
 
-                        <strong>Registro fallido</strong>
+                        <strong class="aviso-fallo">Registro fallido</strong>
 
             <?php   endif; ?>
             <!-----Formulario que guarda el registros de una empresa-------->
@@ -166,7 +220,7 @@
                 <label for="hoja_vida">Hoja de Vida</label>
                 <input type="file" name="hoja_vida">
 
-                <input type="submit" value="Enviar">
+                <input type="submit" value="Registrarme Ahora">
 
             </form>
             <!-----Función para borrar las sesiones existentes-------->

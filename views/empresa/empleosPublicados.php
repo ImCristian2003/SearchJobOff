@@ -53,6 +53,7 @@
         .container-postulados .details table{
             border-bottom: 1px solid #000;
             border-top: 1px solid #000;
+            border: 1px solid #000;
             margin: 2rem auto;
         }
 
@@ -73,15 +74,27 @@
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
             padding:1rem 0rem;
             text-align:center;
         }
 
         .container-postulados .details table tr td a{
+            background: red;
+            border-radius:50%;
+            color: #fff;
+            letter-spacing:1px;
+            padding: 0.6rem;
+            text-decoration:none;
+        }
+
+        .modificar {
             background: var(--primario);
+            border: none;
             border-radius:5px;
             color: #fff;
+            cursor: pointer;
             letter-spacing:1px;
             padding: 0.6rem;
             text-decoration:none;
@@ -112,13 +125,33 @@
         .details tr td{
             border:none;
         }
-
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+        .container-postulados .details .pdf{
+            background: red;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+            text-decoration:none;
+        }
 
     </style>
 </head>
 <body>
     
     <div class="container-postulados">
+        <a href="indexEmpresa.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <!-----Instancia para mostrar los empleos publicados por una empresa-------->
             <?php 
@@ -150,7 +183,7 @@
         
             <?php   endif; ?>
             <!-----Tabla que muestra todos los datos-------->
-            <table cellspacing="0" cellpadding="0">
+            <table cellspacing="0" cellpadding="0" >
                 <tr>
                     <th>Nombre</th>
                     <th>Municipio</th>
@@ -188,11 +221,11 @@
                                 <!-----formulario para modificar los datos de un empleo-------->
                                 <form action="modificarEmpleo.php" method="post">
                                     <input type="hidden" value="<?=$empleo->codigo?>" name="id">
-                                    <input type="submit" value="Modificar">
+                                    <input type="submit" value="Modificar" class="modificar">
                                 </form>
                             </td>
                             <!-----Link que elimina un empleo-------->
-                            <td><a href="../../execute.php?controller=empleoExecute&action=eliminarEmpleo&id=<?=$empleo->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
+                            <td><a href="../../execute.php?controller=empleoExecute&action=eliminarEmpleo&id=<?=$empleo->codigo?>" onclick="return ConfirmDelete()"><span class="icon-cross"></span></a></td>
                         </tr>
                     <?php endwhile; ?>
                 <!-----Condición para validar cuando no hay registros-------->
@@ -200,9 +233,12 @@
                     <p>Aún no hay usuarios postulados</p>
                 <?php endif; ?>
             </table>
+            <!---Verificar que hayan registros para generar el PDF-->
+            <?php if($emp->num_rows >= 1 && isset($_POST)): ?>
+                <a href="generarPdfEmpleos.php" class="pdf" target="_blank">Generar Reporte</a>
+            <?php endif; ?>
             <!-----Borrar todas las sesiones-------->
             <?php borrarSesion('errores'); borrarSesion('complete'); borrarSesion('fail');  borrarSesion('registro'); borrarSesion('registro_fail');?>
-            <a href="indexEmpresa.php" class="volver">Volver</a>
         </div>
     </div>
     <!-- Script que confirma la eliminación del empleo-->

@@ -60,19 +60,21 @@
             border: 1px solid #000;
             border-collapse: collapse;
             caption-side: bottom;
-            padding: 0.5rem;
+            padding: 1rem;
             text-align: center;
             vertical-align: top;
         }
 
         .container-postulados .details table tr th{
             background: var(--primario);
+            border: none;
             color: #fff;
             letter-spacing:1px;
         }
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
             padding:1rem 0rem;
             text-align:center;
@@ -107,11 +109,23 @@
             padding: 0.5rem;
         }
 
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-postulados">
+        <a href="../admin/administrarTablas.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
@@ -120,14 +134,14 @@
                 $dep = $departamento->mostrarDepartamento();
                 
             ?>
-            <h2>Municipios/Veredas Registrados</h2>
+            <h2>Departamentos Registrados</h2>
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
                 <b>Municipio Eliminado con exito</b>
             <?php elseif(isset($_SESSION['fail']) && $_SESSION['fail'] == "Fail"): ?>
                 <b>Ocurrió un error al querer borrar el muncipio</b>
             <?php endif; ?>
             <p>
-                En esta sesión puedes encontrar todos los municipios y/o Veredas registrados
+                En esta sesión puedes encontrar todos los departamentos registrados
                 en nuestra base de datos.
             </p>
             <span class="aviso">
@@ -135,7 +149,7 @@
                 Por el momento no puedes añadir ni quitar departamentos por cuestiones de seguridad,
                 para más información comunicate con los desarrolladores de la web <b>SearchJob</b>
             </span>
-            <table border="1">
+            <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
@@ -158,7 +172,6 @@
                     <p>Aún no hay usuarios postulados</p>
                 <?php endif; ?>
             </table>
-            <a href="../admin/administrarTablas.php" class="volver">Volver</a>
             <!-- <a href="registrarDepartamento.php" class="volver">Registrar Departamento</a> -->
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>

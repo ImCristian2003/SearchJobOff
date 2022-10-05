@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="css/normalize.css">
     <title>Postúlate al empleo</title>
     <style>
-
         body{
             box-sizing: border-box;
             margin: 0;
@@ -76,9 +75,8 @@
             height: 50%;
 
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            flex-direction: column;
             text-align: center;
         }
         .caja .caja-izquierda .caja-izquierda-dos a {
@@ -89,13 +87,14 @@
         .caja .caja-izquierda .caja-izquierda-dos .caja-izquierda-dos-a{
             display: flex;
             flex-direction: column;
-            font-family:Arial, Helvetica, sans-serif;
-            font-size: 1.7rem;
             height: 50%;
-            padding: 2rem;
+            padding: 1rem;
         }
         .caja .caja-izquierda .caja-izquierda-dos .caja-izquierda-dos-a a{
-            margin: .4rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 0.4rem;
         }
         .caja .caja-izquierda .caja-izquierda-dos .caja-izquierda-dos-aa {
             display: flex;
@@ -112,21 +111,53 @@
         }
 
         .caja .caja-derecha{
+            height: 100vh;
             width: 70%;
 
             display: flex;
             justify-content: center;
+            flex-direction:column;
             text-align: center;
             align-items: center;
         }
 
-        .caja .caja-derecha .caja-derecha-details h1{
+        .caja .caja-derecha .details{
+            background: var(--primario);
+            height: 10%;
+            width: 100%;
+
+            display: flex;
+            justify-content: flex-end;
+            text-align: center;
+            align-items: center;
+        }
+
+        .caja .caja-derecha .details a {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 1rem 2rem;
+            text-decoration:none;
+        }
+
+        .caja .caja-derecha .details1{
+            height: 90%;
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            flex-direction:column;
+            text-align: center;
+            align-items: center;
+        }
+
+        .caja .caja-derecha .details1 h1{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 3rem;
         }
-        .caja .caja-derecha .caja-derecha-details p{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1.5rem;
+        .caja .caja-derecha .details1 p{
+            font-size: 1.2rem;
             margin: 2rem;
         }
     </style>
@@ -156,15 +187,15 @@
                     <a href="usuarioPostulaciones.php">Mis Postulaciones <span class="icon-folder"></span></a> 
                     <a href="empleosBuscar.php">Empleos Disponibles <span class="icon-clipboard"></span></a>
                     <a href="../calificacion/indexCalificacion.php">Comentarios <span class="icon-bubble"></span></a>
-                </div>
-                <div class="caja-izquierda-dos-aa">
-                    <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
-                    <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
-                </div>    
+                </div>  
             </div>
         </div>
         <div class="caja-derecha">
-            <div class="caja-derecha-details">
+            <div class="details">
+                <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
+                <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
+            </div>  
+            <div class="details1">
                 <h1>Bienvenido <?=$_SESSION['empleado']->nombre ?></h1>
                 <p>En esta sesión podrás encontrar varias funcionalidades que te harán los procesos mucho mas cortos y cómodos, navega y esperamos
                     que sea de tu gusto</p>

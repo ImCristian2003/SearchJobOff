@@ -114,11 +114,23 @@
             width: 150px;
         }
 
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="container-empleo">
+        <a href="indexEmpresa.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
 
             <h2>Añade un Nuevo Empleo</h2>
@@ -268,7 +280,7 @@
                 <input type="file" name="logo">
                 <!-----Mostrar error en un campo en caso de que exista-------->
                 <span class="aviso"><span class="icon-notification"></span> Recuerda añadir el logo de tu empresa</span>
-                <input type="submit" value="Enviar">
+                <input type="submit" value="Publicar Empleo">
 
             </form>
             <!-----Borrar todas las sesiones existentes-------->

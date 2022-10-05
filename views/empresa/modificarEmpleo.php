@@ -15,158 +15,280 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/icons/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <title>Modificar Empleo</title>
+    <style>
+
+        :root{
+            --primario: rgb(105, 183, 185);
+            --secundario: #f5f2f2;
+            --gris: #B8B8B8;
+            --blanco: #FFFFFF;
+            --negro: #000000;
+
+            --FuentePpal: 'Dancing Script', cursive;
+        }
+
+        body{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container-empleo{
+            background: var(--primario);
+            width: 100%;
+
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-empleo .details{
+            background: #fff;
+            border-radius: 0.8rem;
+            margin: 1.5rem;
+            padding: 2rem;
+            width: 60%;
+        }
+
+        .container-empleo .details h2{
+            text-align: center;
+        }
+
+        .container-empleo .details label{
+            width: 100%;
+        }
+
+        .container-empleo .details form input{
+            display: block;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            padding: 0.4rem;
+            width: 100%;
+        }
+
+        .container-empleo .details form textarea{
+            display: block;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            padding: 0.4rem;
+            width: 100%;
+        }
+
+        .container-empleo .details form select{
+            display: block;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            padding: 0.4rem;
+            width: 100%;
+        }
+
+        .container-empleo .details form input[type="submit"]{
+            background: var(--primario);
+            border:none;
+            border-radius:5px;
+            color: #fff;
+            cursor: pointer;
+            display: block;
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin: 0 auto;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            padding: 0.4rem;
+            width: 70%;
+        }
+
+        
+        /*Aviso del span */
+        .container-empleo .details form .aviso{
+            background: rgba(235, 40, 40, 1);
+            border-radius: 4px;
+            color: #fff;
+            display: block;
+            margin: 1rem;
+            padding: 0.5rem;
+        }
+
+        img{
+            height: auto;
+            width: 150px;
+        }
+
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
+    </style>
 </head>
 <body>
 
-    <h1>Modicar Empleo</h1>
-    <!-----Instancia para conseguir los detalles de un empleo puntual-------->
-    <?php
-    
-        $empleo = new empleoController();
-        $empleos = $empleo->detalleEmpleo();
+    <div class="container-empleo">
+        <a href="empleosPublicados.php" class="icono-volver"><span class="icon-undo2"></span></a>
+        <div class="details">
+        <h2>Modicar Empleo</h2>
+        <!-----Instancia para conseguir los detalles de un empleo puntual-------->
+        <?php
+        
+            $empleo = new empleoController();
+            $empleos = $empleo->detalleEmpleo();
 
-    ?>
-    <!-----Formulario para modificar el empleo-------->
-    <form action="../../execute.php?controller=empleoExecute&action=guardarEmpleo&modificar=1&codigo=<?=$empleos->codigo?>" method="post" enctype="multipart/form-data">
+        ?>
+        <!-----Formulario para modificar el empleo-------->
+        <form action="../../execute.php?controller=empleoExecute&action=guardarEmpleo&modificar=1&codigo=<?=$empleos->codigo?>" method="post" enctype="multipart/form-data">
 
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" value="<?=$empleos->nombre?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'nombre') : ""; ?>
-        <br>
-        <label for="municipio">Municipio</label>
-        <select name="municipio" id="">
-            <?php 
-                
-                $municipio = new empleoController();
-                $mun = $municipio->mostrarMunicipios();
-
-            ?>
-            <?php while($municipio = $mun->fetch_object()): ?>
-                
-                <option value="<?=$municipio->codigo ?>"  <?=isset($empleos) && is_object($empleos) && $municipio->codigo == $empleos->municipio ? 'selected' : ''; ?>>
-                    <?=$municipio->nombre ?>
-                </option>
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" value="<?=$empleos->nombre?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'nombre') : ""; ?>
             
-            <?php
+            <label for="municipio">Municipio</label>
+            <select name="municipio" id="">
+                <?php 
+                    
+                    $municipio = new empleoController();
+                    $mun = $municipio->mostrarMunicipios();
 
-            endwhile;
-
-            ?>
-        </select>
-        <br>
-        <label for="direccion">Dirección</label>
-        <input type="text" name="direccion" value="<?=$empleos->direccion?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'direccion') : ""; ?>
-        <br>
-        <label for="cargo">Cargo</label>
-        <select name="cargo" id="">
-            <?php 
+                ?>
+                <?php while($municipio = $mun->fetch_object()): ?>
+                    
+                    <option value="<?=$municipio->codigo ?>"  <?=isset($empleos) && is_object($empleos) && $municipio->codigo == $empleos->municipio ? 'selected' : ''; ?>>
+                        <?=$municipio->nombre ?>
+                    </option>
                 
-                $cargo = new empleoController();
-                $carg = $cargo->mostrarCargos();
+                <?php
 
-            ?>
-            <?php while($cargo = $carg->fetch_object()): ?>
-                
-                <option value="<?=$cargo->codigo ?>" <?=isset($empleos) && is_object($empleos) && $cargo->codigo == $empleos->cargo ? 'selected' : ''; ?>>
-                    <?=$cargo->nombre ?>
-                </option>
+                endwhile;
+
+                ?>
+            </select>
             
-            <?php
-
-            endwhile;
-
-            ?>
-        </select>
-        <br>
-        <label for="vacantes">Vacantes</label>
-        <input type="number" name="vacantes" value="<?=$empleos->vacantes?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'vacantes') : ""; ?>
-        <br>
-        <label for="jornada">Jornada</label>
-        <input type="text" name="jornada" value="<?=$empleos->jornada?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'jornada') : ""; ?>
-        <br>
-        <label for="experiencia">Experiencia</label>
-        <textarea name="experiencia" rows="10"><?=$empleos->experiencia?></textarea>
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'experiencia') : ""; ?>
-        <br>
-        <label for="sector">Sector</label>
-        <select name="sector" id="">
-            <?php 
-                
-                $sector = new empleoController();
-                $sect = $sector->mostrarSector();
-
-            ?>
-            <?php while($sector = $sect->fetch_object()): ?>
-                
-                <option value="<?=$sector->codigo ?>" <?=isset($empleos) && is_object($empleos) && $sector->codigo == $empleos->sector ? 'selected' : ''; ?>>
-                    <?=$sector->nombre ?>
-                </option>
+            <label for="direccion">Dirección</label>
+            <input type="text" name="direccion" value="<?=$empleos->direccion?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'direccion') : ""; ?>
             
-            <?php
+            <label for="cargo">Cargo</label>
+            <select name="cargo" id="">
+                <?php 
+                    
+                    $cargo = new empleoController();
+                    $carg = $cargo->mostrarCargos();
 
-            endwhile;
-
-            ?>
-        </select>
-        <br>
-        <label for="funcion">Función</label>
-        <input type="text" name="funcion" value="<?=$empleos->funcion?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'funcion') : ""; ?>
-        <br>
-        <label for="empresa">Empresa</label>
-        <input type="number" name="empresa" value="<?=$_SESSION['empresa']->id?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'empresa') : ""; ?>
-        <br>
-        <label for="descripcion">Descripcion</label>
-        <textarea name="descripcion" rows="10"><?=$empleos->descripcion?></textarea>
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'descripcion') : ""; ?>
-        <br>
-        <label for="salario">Salario</label>
-        <input type="number" name="salario" value="<?=$empleos->salario?>">
-        <!-----Mostrar error en un campo en caso de que exista-------->
-        <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'salario') : ""; ?>
-        <br>
-        <label for="tipo_contrato">Tipo de Contrato</label>
-        <select name="tipo_contrato" id="">
-            <?php 
+                ?>
+                <?php while($cargo = $carg->fetch_object()): ?>
+                    
+                    <option value="<?=$cargo->codigo ?>" <?=isset($empleos) && is_object($empleos) && $cargo->codigo == $empleos->cargo ? 'selected' : ''; ?>>
+                        <?=$cargo->nombre ?>
+                    </option>
                 
-                $tipo = new empleoController();
-                $contrato = $tipo->mostrarTipoContrato();
+                <?php
 
-            ?>
-            <?php while($tipo = $contrato->fetch_object()): ?>
-                
-                <option value="<?=$tipo->codigo ?>" <?=isset($empleos) && is_object($empleos) && $tipo->codigo == $empleos->tipo_contrato ? 'selected' : ''; ?>>
-                    <?=$tipo->nombre ?>
-                </option>
+                endwhile;
+
+                ?>
+            </select>
             
-            <?php
+            <label for="vacantes">Vacantes</label>
+            <input type="number" name="vacantes" value="<?=$empleos->vacantes?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'vacantes') : ""; ?>
+            
+            <label for="jornada">Jornada</label>
+            <input type="text" name="jornada" value="<?=$empleos->jornada?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'jornada') : ""; ?>
+            
+            <label for="experiencia">Experiencia</label>
+            <textarea name="experiencia" rows="10"><?=$empleos->experiencia?></textarea>
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'experiencia') : ""; ?>
+            
+            <label for="sector">Sector</label>
+            <select name="sector" id="">
+                <?php 
+                    
+                    $sector = new empleoController();
+                    $sect = $sector->mostrarSector();
 
-            endwhile;
+                ?>
+                <?php while($sector = $sect->fetch_object()): ?>
+                    
+                    <option value="<?=$sector->codigo ?>" <?=isset($empleos) && is_object($empleos) && $sector->codigo == $empleos->sector ? 'selected' : ''; ?>>
+                        <?=$sector->nombre ?>
+                    </option>
+                
+                <?php
 
-            ?>
-        </select>
-        <br>
-        <label for="logo">Logo de la empresa</label>
-        <input type="file" name="logo">
-        <input type="hidden" name="logo_nombre" value="<?=$empleos->logo?>">
-        <br>
-        <input type="submit" value="Modificar">
+                endwhile;
 
-    </form>
-    <!-----Borrar una sesión existente-------->
-    <?php borrarSesion('errores'); ?>
+                ?>
+            </select>
+            
+            <label for="funcion">Función</label>
+            <input type="text" name="funcion" value="<?=$empleos->funcion?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'funcion') : ""; ?>
+            
+            <label for="empresa">Empresa</label>
+            <input type="number" name="empresa" value="<?=$_SESSION['empresa']->id?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'empresa') : ""; ?>
+            
+            <label for="descripcion">Descripcion</label>
+            <textarea name="descripcion" rows="10"><?=$empleos->descripcion?></textarea>
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'descripcion') : ""; ?>
+
+            <label for="salario">Salario</label>
+            <input type="number" name="salario" value="<?=$empleos->salario?>">
+            <!-----Mostrar error en un campo en caso de que exista-------->
+            <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'salario') : ""; ?>
+            <label for="tipo_contrato">Tipo de Contrato</label>
+            <select name="tipo_contrato" id="">
+                <?php 
+                    
+                    $tipo = new empleoController();
+                    $contrato = $tipo->mostrarTipoContrato();
+
+                ?>
+                <?php while($tipo = $contrato->fetch_object()): ?>
+                    
+                    <option value="<?=$tipo->codigo ?>" <?=isset($empleos) && is_object($empleos) && $tipo->codigo == $empleos->tipo_contrato ? 'selected' : ''; ?>>
+                        <?=$tipo->nombre ?>
+                    </option>
+                
+                <?php
+
+                endwhile;
+
+                ?>
+            </select>
+            <label for="logo">Logo de la empresa</label>
+            <input type="file" name="logo">
+            <input type="hidden" name="logo_nombre" value="<?=$empleos->logo?>">
+            <input type="submit" value="Modificar">
+
+        </form>
+        <!-----Borrar una sesión existente-------->
+        <?php borrarSesion('errores'); ?>
+        </div>
+    </div>
+
 </body>
 </html>

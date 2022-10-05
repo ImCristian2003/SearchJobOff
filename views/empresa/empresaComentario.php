@@ -86,11 +86,23 @@
             width:80%;
         }
 
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-comentario">
+        <a href="indexEmpresa.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             
             <h2>Publica tu propio comentario</h2>

@@ -60,19 +60,21 @@
             border: 1px solid #000;
             border-collapse: collapse;
             caption-side: bottom;
-            padding: 0.5rem;
+            padding: 1rem;
             text-align: center;
             vertical-align: top;
         }
 
         .container-postulados .details table tr th{
             background: var(--primario);
+            border: none;
             color: #fff;
             letter-spacing:1px;
         }
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
             padding:1rem 0rem;
             text-align:center;
@@ -98,11 +100,34 @@
             text-decoration:none;
         }
 
+        .pdf{
+            background: red;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+            text-decoration:none;
+        }
+
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-postulados">
+        <a href="../admin/administrarTablas.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
@@ -121,7 +146,7 @@
                 En esta sesión puedes encontrar todos los municipios y/o Veredas registrados
                 en nuestra base de datos.
             </p>
-            <table border="1">
+            <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
@@ -148,8 +173,11 @@
                     <p>Aún no hay usuarios postulados</p>
                 <?php endif; ?>
             </table>
-            <a href="../admin/administrarTablas.php" class="volver">Volver</a>
             <a href="registrarMunicipio.php" class="volver">Registrar Municipio</a>
+            <!--Validar que hayan campos para generar el PDF-->
+            <?php if($mun->num_rows >= 1 && isset($_POST)): ?>
+                <a href="generarPdfMunicipio.php" class="pdf" target="_blank">Generar PDF</a>
+            <?php endif; ?>
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>
     </div>

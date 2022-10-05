@@ -178,10 +178,13 @@
                     //indicar que todo funcionó de forma correcta
                     if($save){
                         $_SESSION['registro'] = "Complete";
+                        header("Location: login.php");
+                        
                     }else{
                     //En caso de el metodo save retorne un false, se crea una sesión para
                     //indicar que algo falló
                         $_SESSION['registro_fail'] = "Fail";
+                        header("Location: views/usuario/registroEmpleado.php");
                     }
 
                 }else if(count($errores) != 0 && !isset($_GET['modificar'])){

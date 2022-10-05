@@ -104,11 +104,23 @@
             text-decoration: none;
         }
 
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
     </style>
 </head>
     <body>
         
         <div class="administrar-tablas">
+            <a href="indexAdmin.php" class="icono-volver"><span class="icon-undo2"></span></a>
             <div class="details">
                 <div class="bienvenida">
 

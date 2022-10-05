@@ -104,11 +104,23 @@
             width: 150px;
         }
 
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-datos">
+        <a href="indexEmpresa.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <h1>Tus Datos Personales</h1>
             <!-----Condiciónes para validar si existe una sesion de fallo o exito-------->
@@ -148,7 +160,7 @@
                 <!-----Condición para validar que exista el error del campo correo-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'correo') : ""; ?>
 
-                <label for="imagen">Imagen</label>
+                <label for="imagen">Imagen de Perfíl</label>
                 <input type="file" name="imagen">
                 <!-----Condición para mostrar la imagen dependiendo si está subida o no-------->
                 <?php if(!is_null($_SESSION['empresa']->imagen)): ?>

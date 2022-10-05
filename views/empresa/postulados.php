@@ -66,14 +66,18 @@
 
         .container-postulados .details table tr th{
             background: var(--primario);
+            border: none;
             color: #fff;
             letter-spacing:1px;
+            padding:1rem 1rem;
+            text-align: center;
         }
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
-            padding:1rem 0rem;
+            padding:1rem 1rem;
             text-align:center;
         }
 
@@ -96,11 +100,47 @@
             text-decoration:none;
         }
 
+        input[type="submit"]{
+            background: var(--primario);
+            border: none;
+            border-radius:5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight:bold;
+            letter-spacing:2px;
+            padding: 0.6rem 1.5rem;
+            text-decoration:none;
+        }
+
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
+        .container-postulados .details .pdf{
+            background: red;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+            text-decoration:none;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-postulados">
+        <a href="indexEmpresa.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
@@ -115,11 +155,11 @@
                 a alguna oferta laboral publicada por <b><?=$_SESSION['empresa']->nombre?></b>,
                 si haces click sobre el dato del usuario, podrás visualizar algunos
                 de sus datos personales para poder entrar en contacto con el, además de poder
-                descargar su hoja de vida y cambiar el estado de la postulación a:<b> Recibido,
+                descargar su hoja de vida y cambiar el estado de la postulación a:<b>
                 Contratado ó Rechazado. (Lo puedes cambiar solo dando click sobre el propio
-                estado)</b>
+                estado).</b>
             </p>
-            <table border="1">
+            <table cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Usuario</th>
                     <th>Nombre del Empleo</th>
@@ -140,7 +180,7 @@
                             <!-----formulario para ver la información de un usuario postulado-------->
                             <form action="detallesUsuario.php" method="post">
                                 <input type="hidden" name="id" value="<?=$postulacion->id ?>">
-                                <input type="submit" value="<?=$postulacion->usuario ?> - <?=$postulacion->id ?>">
+                                <input type="submit" value="<?=$postulacion->usuario ?>">
                             </form>
                         </td>
                         <td><?=$postulacion->empleo ?></td>
@@ -166,7 +206,9 @@
                     <p>Aún no hay usuarios postulados</p>
                 <?php endif; ?>
             </table>
-            <a href="indexEmpresa.php" class="volver">Volver</a>
+            <?php if($post->num_rows >= 1 && isset($_POST)): ?>
+                <a href="generarPdfPostulados.php" class="pdf" target="_blank">Generar Reporte</a>
+            <?php endif; ?>
         </div>
     </div>
 

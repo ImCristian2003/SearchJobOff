@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Municipios</title>
+    <title>Perfiles</title>
     <style>
 
         :root{
@@ -60,21 +60,23 @@
             border: 1px solid #000;
             border-collapse: collapse;
             caption-side: bottom;
-            padding: 0.5rem;
+            padding: 1rem;
             text-align: center;
             vertical-align: top;
         }
 
         .container-postulados .details table tr th{
             background: var(--primario);
+            border: none;
             color: #fff;
             letter-spacing:1px;
         }
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
-            padding:1rem 0rem;
+            padding:1rem 1rem;
             text-align:center;
         }
 
@@ -107,11 +109,34 @@
             padding: 0.5rem;
         }
 
+        .pdf{
+            background: red;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+            text-decoration:none;
+        }
+
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-postulados">
+        <a href="../admin/administrarTablas.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <!-----Instancia para mostrar los postulados a un empleo------->
             <?php 
@@ -130,7 +155,7 @@
                 Por el momento no puedes añadir ni quitar perfiles por cuestiones de seguridad,
                 para más información comunicate con los desarrolladores de la web <b>SearchJob</b>
             </span>
-            <table border="1">
+            <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Codigo</th>
                     <th>Nombre</th>
@@ -153,7 +178,10 @@
                     <p>Aún no hay perfiles registrados</p>
                 <?php endif; ?>
             </table>
-            <a href="../admin/administrarTablas.php" class="volver">Volver</a>
+            <!--Validar que hayan campos para generar el PDF-->
+            <?php if($per->num_rows >= 1 && isset($_POST)): ?>
+                <a href="generarPdfPerfiles.php" class="pdf" target="_blank">Generar PDF</a>
+            <?php endif; ?>
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>
     </div>

@@ -219,7 +219,9 @@
 <body>
     <div class="container">
         <div class="caja-principal">
-            <?php if(isset($_SESSION['empleado'])): ?>
+            <?php if(isset($_SESSION['empleado']) && isset($_GET['ret'])): ?>
+                <a href="../usuario/usuarioPostulaciones.php"><span class="icon-undo2"></span></a>
+            <?php elseif(isset($_SESSION['empleado']) && !isset($_GET['ret'])): ?>
                 <a href="../usuario/empleosBuscar.php"><span class="icon-undo2"></span></a>
             <?php else: ?>
                 <a href="../../index.php"><span class="icon-undo2"></span></a>
@@ -240,7 +242,7 @@
         <div class="caja-secundaria">
             <div class="empleo">
                 <!---IMPRIMIR LA IMAGEN DEL EMPLEO-->
-            <?php if($empleos->logo == "none"): ?>
+            <?php if($empleos->logo == "none" || $empleos->logo == "sin_logo"): ?>
                 <img src="../../uploads/empleos_logo/empresa.png" alt="perfil_usuario">
             <?php else: ?>
                 <img src="../../uploads/empleos_logo/<?=$empleos->logo?>" alt="perfil_usuario">
@@ -261,14 +263,14 @@
                         Lo sentimos, pero esta oferta de empleo ya no cuenta con
                         vacantes disponibles
                     </p>
-                <!-----Condición para validar que halla un usuario empleado logeado y se postule-------->
+                <!-----Condición para validar que halhayala un usuario empleado logeado y se postule-------->
                 <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && !isset($_GET['aut'])): ?>
                     <form action="../usuario/usuarioPostular.php" method="post">
                         <input type="hidden" value="<?=$empleos->codigo?>" name="codigo">
                         <input type="hidden" value="<?=$empleos->nombre?>" name="empleo">
                         <input type="submit" value="Postularme">
                     </form>
-                <!-----Condición para validar cuando un usuario ya se halla postulado a un empleo-------->
+                <!-----Condición para validar cuando un usuario ya se haya postulado a un empleo-------->
                 <?php elseif(isset($_SESSION['empleado']) && isset($_GET['id']) && isset($_GET['aut'])): ?>
                     <a href="../usuario/usuarioPostulaciones.php" class="volver">Volver</a>
                 <!-----Condición cuando no está logeado-------->

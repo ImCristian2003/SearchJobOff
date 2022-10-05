@@ -53,27 +53,30 @@
             border-bottom: 1px solid #000;
             border-top: 1px solid #000;
             margin: 2rem auto;
+            width: 90%;
         }
 
         .container-postulados .details table tr td, th{
             border: 1px solid #000;
             border-collapse: collapse;
             caption-side: bottom;
-            padding: 0.5rem;
-            text-align: left;
+            padding: 1rem;
+            text-align: center;
             vertical-align: top;
         }
 
         .container-postulados .details table tr th{
             background: var(--primario);
+            border: none;
             color: #fff;
             letter-spacing:1px;
         }
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
-            padding:1rem 0rem;
+            padding:1rem 1.5rem;
             text-align:center;
         }
 
@@ -86,12 +89,24 @@
             text-decoration:none;
         }
 
-        .container-postulados .details .volver{
+        .icono-volver {
             background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1.5rem;
+            text-decoration: none;
+            top: 1.5rem;
+        }
+
+        .pdf{
+            background: red;
             border-radius:5px;
             color: #fff;
             font-weight:bold;
             letter-spacing:2px;
+            margin: 1rem;
             padding: 0.6rem 1.5rem;
             text-decoration:none;
         }
@@ -101,6 +116,7 @@
 <body>
     
     <div class="container-postulados">
+        <a href="indexAdmin.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <!-----Instancia para mostrar los empleos publicados por una empresa-------->
             <?php 
@@ -131,7 +147,7 @@
         
             <?php   endif; ?>
             <!-----Tabla que muestra todos los datos-------->
-            <table border="1">
+            <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
@@ -163,9 +179,11 @@
                     <p>Aún no hay usuarios postulados</p>
                 <?php endif; ?>
             </table>
+            <?php if($emp->num_rows >= 1 && isset($_POST)): ?>
+                <a href="generarPdfEmpleados.php" class="pdf" target="_blank">Generar PDF</a>
+            <?php endif; ?>
             <!-----Borrar todas las sesiones-------->
             <?php borrarSesion('errores'); borrarSesion('complete'); borrarSesion('fail');  borrarSesion('registro'); borrarSesion('registro_fail');?>
-            <a href="indexAdmin.php" class="volver">Volver</a>
         </div>
     </div>
     <!-- Script que confirma la eliminación del empleo-->

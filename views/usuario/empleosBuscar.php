@@ -60,7 +60,7 @@
 
         .container .perfil img{
             border-radius:50%;
-            width:20%;
+            width:13rem;
         }
 
         .container .descripcion {

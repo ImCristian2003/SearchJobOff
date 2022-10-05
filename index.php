@@ -220,12 +220,12 @@
         <section class="footer2">
             <div class="footer2-det1">
                 <h2>Contactanos</h2>
-                <form action="">
-                    <input type="text" placeholder="Nombre (s)">
-                    <input type="text" placeholder="Apellidos">
-                    <input type="email" placeholder="Correo electronico">
-                    <textarea name="" id="" cols="30" rows="10" placeholder="Tu mensaje"></textarea>
-                    <input type="submit" value="Enviar">
+                <form action="" method="post">
+                    <input type="text" placeholder="Nombre (s)" name="nombre">
+                    <input type="text" placeholder="Apellidos" name="apellidos">
+                    <input type="email" placeholder="Correo electronico" name="correo">
+                    <textarea name="mensaje" id="" cols="30" rows="10" placeholder="Tu mensaje"></textarea>
+                    <input type="submit" value="Enviar Mensaje">
                 </form>
             </div>
             <div class="footer2-det2">

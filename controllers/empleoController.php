@@ -111,7 +111,7 @@
         public function mostrarSector(){//Función para los sectores
 
             $sector = new SectorModel();
-            $sectores = $sector->conseguirSector();
+            $sectores = $sector->conseguirSectores();
 
             return $sectores;
             

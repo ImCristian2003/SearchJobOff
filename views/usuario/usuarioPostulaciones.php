@@ -66,18 +66,22 @@
 
         .container-postulados .details table tr th{
             background: var(--primario);
+            border: none;
             color: #fff;
             letter-spacing:1px;
+            padding: 1rem;
+            text-align: center;
         }
 
         .container-postulados .details table tr td{ 
             align-items:center;
+            border: none;
             justify-content:center;
-            padding:1rem 0rem;
+            padding:1rem 1rem;
             text-align:center;
         }
 
-        .container-postulados .details table tr td a{
+        .container-postulados .details table tr td a.eliminar{
             background: var(--primario);
             border-radius:5px;
             color: #fff;
@@ -86,14 +90,55 @@
             text-decoration:none;
         }
 
-        .container-postulados .details .volver{
+        .postular {
             background: var(--primario);
             border-radius:5px;
             color: #fff;
             font-weight:bold;
             letter-spacing:2px;
+            margin: 2rem;
             padding: 0.6rem 1.5rem;
             text-decoration:none;
+        }
+
+        .empleo {
+            border-radius:5px;
+            color: #000;
+            letter-spacing:1px;
+            font-weight: bold;
+            padding: 0.6rem;
+            text-decoration:none;
+        }
+
+        .container-postulados .details .pdf{
+            background: red;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+            text-decoration:none;
+        }
+
+        .aviso{
+            background: rgba(235, 40, 40, 1);
+            border-radius: 4px;
+            color: #fff;
+            display: block;
+            margin: 1rem;
+            padding: 0.5rem;
+        }
+
+        .icono-volver {
+            background: var(--primario);
+            border-radius: 50%;
+            color: var(--blanco);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
         }
 
     </style>
@@ -101,6 +146,7 @@
 <body>
     
     <div class="container-postulados">
+        <a href="indexUsuario.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
             <?php 
                 //Instancia que trae todas las postulaciones de un usuario
@@ -125,7 +171,12 @@
                 poder ver toda la información del empleo al que te postulaste solo dando click
                 sobre su nombre. Puedes también eliminar tu postulación al mismo por X o Y motivo.
             </p>
-            <table border="1" border-collapse='collapse' border-spacing=''>
+            <span class="aviso">
+                <span class="icon-notification"></span> 
+                Si en algún momento notas que desapareció alguna postulación que tu hayas 
+                realizado, es debido a que fuiste rechazado
+            </span>
+            <table  cellspacing="0" cellpadding="0" >
                 <tr>
                     <th>Nombre Empleo</th>
                     <th>Función</th>
@@ -141,7 +192,7 @@
                     <?php while($postulaciones = $post->fetch_object()): ?>
                 <tr>
                     <td>
-                        <a href="../empleo/verEmpleo.php?id=<?=$postulaciones->codigo?>&aut=tgfgdh"><?=$postulaciones->nombre ?></a>
+                        <a href="../empleo/verEmpleo.php?id=<?=$postulaciones->codigo?>&aut=tgfgdh&ret=1" class="empleo"><?=$postulaciones->nombre ?></a>
                     </td>
                     <td><?=$postulaciones->funcion ?></td>
                     <td><?=$postulaciones->vacantes ?></td>
@@ -151,17 +202,20 @@
                     <td><?=$postulaciones->fecha ?></td>
                     <td>
                     <!-----Link para eliminar una postulación-------->
-                    <a href="../../execute.php?controller=postulacion&action=eliminarPostulacion&usuario=<?=$_SESSION['empleado']->id ?>&empleo=<?=$postulaciones->codigo ?>" onclick="return ConfirmDelete()">Eliminar</a>
+                    <a href="../../execute.php?controller=postulacion&action=eliminarPostulacion&usuario=<?=$_SESSION['empleado']->id ?>&empleo=<?=$postulaciones->codigo ?>" onclick="return ConfirmDelete()" class="eliminar">Eliminar</a>
                     </td>
                 </tr>
                     <?php endwhile; ?>
                 <!-----En caso de que el usuario no tenga ninguna postulación-------->
                 <?php else: ?>
                     <p>Aún no te has postulado a ningún empleo!</p>
-                    <a href="empleosBuscar.php">Hazlo Ahora!</a>
+                    <a href="empleosBuscar.php" class="postular">Hazlo Ahora!</a>
                 <?php endif; ?>
             </table>
-            <a href="indexUsuario.php" class="volver">Volver</a>
+            <!---Verificar que hayan registros para generar el PDF-->
+            <?php if($post->num_rows >= 1 && isset($_POST)): ?>
+                <a href="generarPdfPostulaciones.php" class="pdf" target="_blank">Generar Reporte</a>
+            <?php endif; ?>
             <!-----funciones para borrar las sesiones existentes-------->
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>

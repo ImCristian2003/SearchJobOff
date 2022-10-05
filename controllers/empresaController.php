@@ -30,7 +30,7 @@
                 }
 
                 //VALIDACIÓN PARA EL NOMBRE
-                if(!empty($nombre) && !is_numeric($nombre) && !preg_match("/[0-9]/",$nombre)){
+                if(!empty($nombre)){
                     $nombre_validado = true;
                 }else{
                     $nombre_validado = false;
@@ -187,7 +187,6 @@
                     header("Location: views/empresa/datosEmpresa.php");
                 }else{
                     $val = false;
-                    header("Location: views/empresa/datosEmpresa.php");
                 }
 
             }else{

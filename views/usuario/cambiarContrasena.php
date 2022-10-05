@@ -98,11 +98,23 @@
             padding: 0.5rem;
         }
 
+        .icono-volver {
+            background: var(--blanco);
+            border-radius: 50%;
+            color: var(--primario);
+            padding: 1rem;
+            position: absolute;
+            left: 1rem;
+            text-decoration: none;
+            top: 1rem;
+        }
+
     </style>
 </head>
 <body>
     
     <div class="container-cambiar">
+        <a href="datosUsuario.php" class="icono-volver"><span class="icon-undo2"></span></a>
         <div class="details">
 
             <h2>Cambia tu contraseña</h2>
