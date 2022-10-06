@@ -215,4 +215,38 @@
 
         }
 
+        //Bloquear un usuario
+        public function bloquearUsuario(){
+
+            //Consulta para bloquear el usuario
+            $sql = "UPDATE usuario SET estado = '0' WHERE id ='{$this->getId()}'";
+            $cambiar = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione 
+            if($cambiar){
+                $result = true;
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
+        //Desbloquear un usuario
+        public function desbloquearUsuario(){
+
+            //Consulta para desbloquear el usuario
+            $sql = "UPDATE usuario SET estado = '1' WHERE id ='{$this->getId()}'";
+            $cambiar = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione 
+            if($cambiar){
+                $result = true;
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
     }

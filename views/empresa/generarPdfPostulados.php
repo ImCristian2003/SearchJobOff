@@ -57,7 +57,6 @@
             .container-postulados .details table{
                 border-bottom: 1px solid #000;
                 border-top: 1px solid #000;
-                margin: 2rem auto;
                 width:  80%;
             }
     
@@ -114,6 +113,7 @@
                     <tr>
                         <th>Identificación Usuario</th>
                         <th>Usuario</th>
+                        <th>Telefono Usuario</th>
                         <th>Nombre del Empleo</th>
                         <th>Estado de la postulación</th>
                         <th>Fecha Postulación</th>
@@ -123,6 +123,7 @@
                         $html .= '<tr>';
                             $html .= "<td>".$campos->id."</td>";
                             $html .= "<td>".$campos->usuario."</td>";
+                            $html .= "<td>".$campos->telefono."</td>";
                             $html .= "<td>".$campos->empleo."</td>";
                             $html .= "<td>".$campos->estado."</td>";
                             $html .= "<td>".$campos->fecha."</td>";

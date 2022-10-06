@@ -11,6 +11,7 @@
         private $contrasena;
         private $perfil;
         private $imagen;
+        private $estado;
         //Variable que hace uso de la conexión a la base de datos
         private $db;
 
@@ -92,12 +93,21 @@
             $this->imagen = $imagen;
         }
 
+        //Get y set para estado
+        public function getEstado(){
+            return $this->estado;
+        }
+
+        public function setEstado($estado){
+            $this->estado = $estado;
+        }
+
         //Funciones para hacer consultas a la base de datos
         //Funciones para guardar una empresa
         public function guardarEmpresa(){
             
             //Consulta que guarda el registro de una empresa
-            $sql = "INSERT INTO usuario VALUES('{$this->getNit()}','{$this->getNombre()}',null,'{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},null,null)";
+            $sql = "INSERT INTO usuario VALUES('{$this->getNit()}','{$this->getNombre()}',null,'{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},null,null,'1')";
             $save = $this->db->query($sql);
 
             //Variable a retornar

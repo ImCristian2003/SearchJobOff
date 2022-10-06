@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Empleos Publicados</title>
+    <title>Empleados Bloqueados</title>
     <style>
 
         :root{
@@ -131,10 +131,10 @@
             <?php 
 
                 $empleado = new AdminController();
-                $emp = $empleado->conseguirEmpleados();
+                $emp = $empleado->conseguirEmpleadosBlock();
         
             ?>
-            <h2>Usuario Registrados</h2>
+            <h2>Usuario Bloqueados</h2>
             <!-----Validar si la sesión es de un fallo o exito (Cuando se elimina un empleo)-------->
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
                 <b>Usuario Eliminado con exito</b>
@@ -142,12 +142,18 @@
                 <b>Ocurrió un error al borrar el usuario</b>
             <?php endif; ?>
             <p>
-                En está sesión puedes encontrar todos los empleados registrados a nuestro sitio web
+                En está sesión puedes encontrar todos los usuarios que de momento tienen 
+                su cuenta inactiva
             </p>
             <!-----Condición para validar si fallo el modificar un empleo o fue un exito-------->
-            <?php   if(isset($_SESSION['bloquear']) && $_SESSION['bloquear'] == 'Fallido'): ?>
+            <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
                         
                         <strong>Empleo modificado de forma exitosa</strong>
+                
+            <?php   elseif((isset($_SESSION['registro_fail']) && $_SESSION['registro_fail'] == 'Fail') || isset($_SESSION['errores'])):  ?>
+        
+                        <strong>Intento de modificar fallido, asegurate de haber
+                            puesto todos los campos con el formato correcto</strong>
         
             <?php   endif; ?>
             <!-----Tabla que muestra todos los datos-------->
@@ -160,6 +166,7 @@
                     <th>Dirección</th>
                     <th>Correo</th>
                     <th>Perfil</th>
+                    <th>Eliminar</th>
                     <th>Bloquear</th>
                 </tr>
                 <!-----Validar que hallan registros-------->
@@ -174,8 +181,10 @@
                             <td><?=$empleado->direccion ?></td>
                             <td><?=$empleado->correo ?></td>
                             <td><?=$empleado->nombre_perfil ?></td>
+                            <!-----Link que elimina un empleo-------->
+                            <td><a href="../../execute.php?controller=usuario&action=eliminarUsuario&id=<?=$empleado->id?>&perfil=<?=$empleado->codigo_perfil?>" onclick="return ConfirmDelete()" class="del">Eliminar</a></td>
                             <!-----Link que bloquea un usuario-------->
-                            <td><a href="../../execute.php?controller=usuario&action=bloquearUsuario&id=<?=$empleado->id?>&perfil=<?=$empleado->codigo_perfil?>" onclick="return ConfirmBlock()" class="blo">Bloquear</a></td>
+                            <td><a href="../../execute.php?controller=usuario&action=desbloquearUsuario&id=<?=$empleado->id?>&perfil=<?=$empleado->codigo_perfil?>" onclick="return ConfirmBlock()" class="blo">Desbloquear</a></td>
                         </tr>
                     <?php endwhile; ?>
                 <!-----Condición para validar cuando no hay registros-------->
@@ -205,7 +214,6 @@
                 return false;
             }
         }
-
         function ConfirmBlock()
         {
             var respuesta = confirm("¿Estás seguro que deseas bloquear a este usuario?");

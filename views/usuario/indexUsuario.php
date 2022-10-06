@@ -163,45 +163,78 @@
     </style>
 </head>
 <body>
-    <div class="caja">
-        <div class="caja-izquierda">
-            <div class="caja-izquierda-uno">
-                <h1>SearchJob</h1>
-                <!-----Validar si el usuario tiene subida alguna imagen de perfíl-------->
-                <?php
-                    
-                    if(is_null($_SESSION['empleado']->imagen)){
-                        $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
-                    }else{
-                        $url_imagen = "../../uploads/usuarios_perfil/".$_SESSION['empleado']->imagen;
-                    }
+    <?php if($_SESSION['empleado']->estado == '1'): ?>
+        <div class="caja">
+            <div class="caja-izquierda">
+                <div class="caja-izquierda-uno">
+                    <h1>SearchJob</h1>
+                    <!-----Validar si el usuario tiene subida alguna imagen de perfíl-------->
+                    <?php
+                        
+                        if(is_null($_SESSION['empleado']->imagen)){
+                            $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
+                        }else{
+                            $url_imagen = "../../uploads/usuarios_perfil/".$_SESSION['empleado']->imagen;
+                        }
 
-                ?>
+                    ?>
 
-                <img src="<?=$url_imagen?>" alt="" class="imagen">
-    
-                <h2><?=$_SESSION['empleado']->nombre ?> <?=$_SESSION['empleado']->apellido ?></h2>
+                    <img src="<?=$url_imagen?>" alt="" class="imagen">
+        
+                    <h2><?=$_SESSION['empleado']->nombre ?> <?=$_SESSION['empleado']->apellido ?></h2>
+                </div>
+                <div class="caja-izquierda-dos">
+                    <div class="caja-izquierda-dos-a"> 
+                        <a href="usuarioPostulaciones.php">Mis Postulaciones <span class="icon-folder"></span></a> 
+                        <a href="empleosBuscar.php">Empleos Disponibles <span class="icon-clipboard"></span></a>
+                        <a href="../calificacion/indexCalificacion.php">Comentarios <span class="icon-bubble"></span></a>
+                    </div>  
+                </div>
             </div>
-            <div class="caja-izquierda-dos">
-                <div class="caja-izquierda-dos-a"> 
-                    <a href="usuarioPostulaciones.php">Mis Postulaciones <span class="icon-folder"></span></a> 
-                    <a href="empleosBuscar.php">Empleos Disponibles <span class="icon-clipboard"></span></a>
-                    <a href="../calificacion/indexCalificacion.php">Comentarios <span class="icon-bubble"></span></a>
+            <div class="caja-derecha">
+                <div class="details">
+                    <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
+                    <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
                 </div>  
+                <div class="details1">
+                    <h1>Bienvenido <?=$_SESSION['empleado']->nombre ?></h1>
+                    <p>En esta sesión podrás encontrar varias funcionalidades que te harán los procesos mucho mas cortos y cómodos, navega y esperamos
+                        que sea de tu gusto</p>
+                </div>
             </div>
         </div>
-        <div class="caja-derecha">
-            <div class="details">
-                <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
-                <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
-            </div>  
-            <div class="details1">
-                <h1>Bienvenido <?=$_SESSION['empleado']->nombre ?></h1>
-                <p>En esta sesión podrás encontrar varias funcionalidades que te harán los procesos mucho mas cortos y cómodos, navega y esperamos
-                    que sea de tu gusto</p>
+    <?php else: ?>
+        <div class="caja">
+            <div class="caja-izquierda">
+                <div class="caja-izquierda-uno">
+                    <h1>SearchJob</h1>
+                    <!-----Validar si el usuario tiene subida alguna imagen de perfíl-------->
+                    <?php
+                        
+                        if(is_null($_SESSION['empleado']->imagen)){
+                            $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
+                        }else{
+                            $url_imagen = "../../uploads/usuarios_perfil/".$_SESSION['empleado']->imagen;
+                        }
+
+                    ?>
+
+                    <img src="<?=$url_imagen?>" alt="" class="imagen">
+        
+                    <h2><?=$_SESSION['empleado']->nombre ?> <?=$_SESSION['empleado']->apellido ?></h2>
+                </div>
+            </div>
+            <div class="caja-derecha">
+                <div class="details">
+                    <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
+                </div>  
+                <div class="details1">
+                    <h1>Bienvenid@ <?=$_SESSION['empleado']->nombre ?></h1>
+                    <p>Lo sentimos, pero alparecer tu cuenta fue bloqueada por un administrador</p>
+                </div>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
     
 </body>
 </html>

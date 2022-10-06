@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Administrar Tablas</title>
+    <title>Administrar Usuarios</title>
     <style>
 
         body{
@@ -126,21 +126,16 @@
 
                     <h1>Bienvenido Admin</h1>
                     <p>
-                        En esta sesión puedes administrar todas las tablas de la base
-                        de datos SearchJob, puedes tanto agregar como eliminar registros de 
-                        las mismas.
+                        En esta sesión puedes administrar todo lo que tenga que ver con el usuario,
+                        desde bloquear las cuentas de los mismos hasta enviarles notificaciones
+                        con reportes.
                     </p>
 
                 </div>
                 <div class="tablas">
 
-                    <a href="../municipios/indexMunicipio.php">Municipios - Veredas <span class="icon-address-book"></span></a>
-                    <a href="../departamentos/indexDepartamento.php">Departamentos <span class="icon-address-book"></span></a>
-                    <a href="../cargos/indexCargo.php">Cargos <span class="icon-address-book"></span></a>
-                    <a href="../perfiles/indexPerfil.php">Perfiles <span class="icon-address-book"></span></a>
-                    <a href="../sectores/indexSector.php">Sectores <span class="icon-address-book"></span></a>
-                    <a href="../contratos/indexContrato.php">Tipos de Contrato <span class="icon-address-book"></span></a>
-                    <a href="../notificaciones/administrarNotificaciones.php">Notificaciones <span class="icon-address-book"></span></a>
+                    <a href="verEmpleados.php">Usuarios Activos <span class="icon-address-book"></span></a>
+                    <a href="verEmpleadosBlock.php">Usuarios Bloqueados <span class="icon-address-book"></span></a>
 
                 </div>
             </div>

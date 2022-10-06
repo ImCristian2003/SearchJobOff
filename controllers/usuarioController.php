@@ -281,5 +281,74 @@
             }
 
         }
+        //Función para cambiar el estado de un usuario a BLOQUEADO
+        public function bloquearUsuario(){
+
+            if(isset($_SESSION['admin']) && isset($_GET['id'])){
+                //Capturar el id del usuario
+                $id = $_GET['id'];
+                //Verificar que no esté vacío el id
+                if(!empty($id)){
+                    //Instancia y función para bloquear al usuario
+                    $bloquear = new UsuarioModel();
+                    $bloquear->setId($id);
+                    $bloqueado = $bloquear->bloquearUsuario();
+                    //Si se bloqueó de forma correcta
+                    if($bloqueado){
+                        header("Location: views/admin/verEmpleadosblock.php");
+                    }else{
+                        //Si no se bloqueó de forma correcta
+                        $_SESSION['bloquear'] = "Fallido";
+                        header("Location: views/admin/verEmpleados.php");
+                    }
+
+                }else{
+                    //Si no se bloqueó de forma correcta
+                    $_SESSION['bloquear'] = "Fallido";
+                    header("Location: views/admin/verEmpleados.php");
+                }
+
+            }else{
+                //Si no se bloqueó de forma correcta
+                $_SESSION['bloquear'] = "Fallido";
+                header("Location: views/admin/verEmpleados.php");
+            }
+
+        }
+
+        //Función para cambiar el estado de un usuario a DESBLOQUEADO
+        public function desbloquearUsuario(){
+
+            if(isset($_SESSION['admin']) && isset($_GET['id'])){
+                //Capturar el id del usuario
+                $id = $_GET['id'];
+                //Verificar que no esté vacío el id
+                if(!empty($id)){
+                    //Instancia y función para desbloquear al usuario
+                    $bloquear = new UsuarioModel();
+                    $bloquear->setId($id);
+                    $bloqueado = $bloquear->desbloquearUsuario();
+                    //Si se desbloqueó de forma correcta
+                    if($bloqueado){
+                        header("Location: views/admin/verEmpleados.php");
+                    }else{
+                        //Si no se bloqueó de forma correcta
+                        $_SESSION['bloquear'] = "Fallido";
+                        header("Location: views/admin/verEmpleadosBlock.php");
+                    }
+
+                }else{
+                    //Si no se bloqueó de forma correcta
+                    $_SESSION['bloquear'] = "Fallido";
+                    header("Location: views/admin/verEmpleadosBlock.php");
+                }
+
+            }else{
+                //Si no se bloqueó de forma correcta
+                $_SESSION['bloquear'] = "Fallido";
+                header("Location: views/admin/verEmpleadosBlock.php");
+            }
+
+        }
 
     }

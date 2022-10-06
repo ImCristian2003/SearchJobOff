@@ -13,6 +13,7 @@
         private $perfil;
         private $hoja_vida;
         private $imagen;
+        private $estado;
         //Variable que hace uso de la conexión a la base de datos
         private $db;
 
@@ -111,12 +112,21 @@
         public function setImagen($imagen){
             $this->imagen = $imagen;
         }
+
+        //Get y set para estado
+        public function getEstado(){
+            return $this->estado;
+        }
+
+        public function setEstado($estado){
+            $this->estado = $estado;
+        }
         
         //Funciones para consultar a la base de datos
         public function guardarEmpleado(){
             
             //Consulta para insertar los datos a la tabla usuario
-            $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},'{$this->getHojaVida()}',null)";
+            $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},'{$this->getHojaVida()}',null,'1')";
             $save = $this->db->query($sql);
 
             //Variable que se retorna
@@ -199,7 +209,26 @@
             $sql = "SELECT us.*, pe.codigo as 'codigo_perfil', pe.nombre as 'nombre_perfil' FROM usuario as us
             INNER JOIN perfil as pe
             ON us.perfil = pe.codigo
-            WHERE us.perfil = 1 OR us.perfil = 2";
+            WHERE (us.perfil = 1 OR us.perfil = 2) AND us.estado = '1'";
+            $detalle = $this->db->query($sql);
+            //Variable a retornar
+            $mostrar = false;
+            //Si la consulta ejecuta bien
+            if($detalle){
+                //almacenar todos los datos en la variable a retornar
+                $mostrar = $detalle;
+            }
+            //Retornar el resultado
+            return $mostrar;
+
+        }
+
+        public function conseguirEmpleadosBlock(){
+            //Consulta para seleccionar el registro correspondiente
+            $sql = "SELECT us.*, pe.codigo as 'codigo_perfil', pe.nombre as 'nombre_perfil' FROM usuario as us
+            INNER JOIN perfil as pe
+            ON us.perfil = pe.codigo
+            WHERE (us.perfil = 1 OR us.perfil = 2) AND us.estado = '0'";
             $detalle = $this->db->query($sql);
             //Variable a retornar
             $mostrar = false;

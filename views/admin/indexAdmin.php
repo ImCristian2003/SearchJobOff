@@ -186,7 +186,7 @@
             <div class="caja-izquierda-dos">
                 <div class="caja-izquierda-dos-a"> 
                     <a href="adminRegistrar.php">Registrar Admin <span class="icon-folder"></span></a> 
-                    <a href="verEmpleados.php">Ver Empleados <span class="icon-clipboard"></span></a>
+                    <a href="administrarUsuarios.php">Administrar Usuarios <span class="icon-clipboard"></span></a>
                     <a href="../calificacion/indexCalificacion.php">Ver Comentarios <span class="icon-bubble"></span></a>
                     <a href="administrarTablas.php">Administrar Tablas <span class="icon-table"></span></a>
                     <a href="gestionarBD.php">Gestionar Base de Datos <span class="icon-database"></span></a>
@@ -195,6 +195,7 @@
         </div>
         <div class="caja-derecha">
             <div class="details">
+                <a href="../notificaciones/notificacionesAdmin.php">Notificaciones <span class="icon-bell"></span></a>
                 <a href="datosAdmin.php">Datos Personales <span class="icon-address-book"></span></a>   
                 <a href="../../execute.php?controller=adminExecute&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
             </div>    

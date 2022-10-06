@@ -88,7 +88,7 @@
         //Función para obtener los postulados a un empleo
         public function obtenerPostulados(){
             //Consulta que devuelve los postulados
-            $sql = "SELECT us.nombre as 'usuario', us.id , em.codigo as 'codigo_empleo', em.nombre as 'empleo',
+            $sql = "SELECT us.nombre as 'usuario', us.correo, us.telefono, us.id , em.codigo as 'codigo_empleo', em.nombre as 'empleo',
             em.funcion, em.vacantes, em.descripcion, em.empresa,  po.codigo as 'codigo_postulacion',po.estado, po.fecha 
             FROM postulacion as po
             INNER JOIN usuario as us

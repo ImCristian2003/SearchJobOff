@@ -18,4 +18,17 @@
 
         }
 
+        public function conseguirEmpleadosBlock(){
+
+            if(isset($_SESSION['admin'])){
+
+                $empleado = new EmpleadoModel();
+                $empleados = $empleado->conseguirEmpleadosBlock();
+
+                return $empleados;
+
+            }
+
+        }
+
     }

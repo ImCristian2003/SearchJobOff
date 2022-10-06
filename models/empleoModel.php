@@ -165,21 +165,27 @@
         //Obtener empleos por busqueda
         public function obtenerEmpleos(){
             //Trozo de consulta inicial
-            $sql = "SELECT * FROM empleo ";
+            $sql = "SELECT em.*, us.id, us.estado FROM empleo as em
+            INNER JOIN usuario as us
+            ON em.empresa = us.id ";
             //En caso de que digite el nombre pero no filtre un municipio
             if(!empty($this->nombre) && $this->municipio == 0){
-                $sql .= " WHERE nombre LIKE '%{$this->nombre}%' ";
+                $sql .= " WHERE em.nombre LIKE '%{$this->nombre}%' AND us.estado = '1'";
             }
             //En caso de que no digite el nombre pero si filtre un municipio
             if(empty($this->nombre) && $this->municipio != 0){
-                $sql .= " WHERE municipio = {$this->municipio} ";
+                $sql .= " WHERE em.municipio = {$this->municipio} AND us.estado = '1'";
             }
             //En caso de que digite el nombre y filtre un municipio
             if(!empty($this->nombre) && $this->municipio != 0){
-                $sql .= " WHERE nombre LIKE '%{$this->nombre}%' AND municipio = {$this->municipio} ";
+                $sql .= " WHERE (em.nombre LIKE '%{$this->nombre}%' AND em.municipio = {$this->municipio}) AND us.estado = '1' ";
+            }
+            //En caso de que digite el nombre y filtre un municipio
+            if(empty($this->nombre) && $this->municipio == 0){
+                $sql .= " WHERE us.estado = '1' ";
             }
             //Trozo final para priorizar los ultimos subidos
-            $sql .= " ORDER BY codigo DESC ";
+            $sql .= " ORDER BY em.codigo DESC ";
 
             $empleo = $this->db->query($sql);
             //Variable a retornar
