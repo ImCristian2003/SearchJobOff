@@ -249,4 +249,21 @@
             return $result;
 
         }
+        //Cantidad de usuarios registrados
+        public function contarUsuarios(){
+
+            //Comprobar si existe el usuario
+            $sql = "SELECT COUNT(id) as 'usuarios' FROM usuario";
+            $login = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($login){
+                $result = $login->fetch_object();
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
     }

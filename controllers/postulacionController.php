@@ -13,6 +13,7 @@
                 //Verificar que los datos existan   
                 $usuario = isset($_POST['usuario']) ? (int)$_POST['usuario'] : false;
                 $empleo = isset($_POST['empleo']) ? $_POST['empleo'] : false;
+                $nombre_empleo = isset($_POST['empleo_nombre']) ? $_POST['empleo_nombre'] : false;
 
                 //Array para mostrar los errores
                 $errores = array();
@@ -44,7 +45,7 @@
                     
                     //Redireccion en caso de que se postule bien
                     if($postulacion){
-                        header("Location: views/usuario/usuarioPostulaciones.php");
+                        header("Location: mail.php?empleo=".$nombre_empleo);
                     }
 
                 }else{

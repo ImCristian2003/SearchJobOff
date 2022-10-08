@@ -189,7 +189,7 @@
                     <?php endwhile; ?>
                 <!-----Condición para validar cuando no hay registros-------->
                 <?php elseif($emp->num_rows == 0): ?>
-                    <p>Aún no hay usuarios postulados</p>
+                    <p>Aún no hay usuarios bloqueados</p>
                 <?php endif; ?>
             </table>
             <?php if($emp->num_rows >= 1 && isset($_POST)): ?>

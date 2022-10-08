@@ -19,7 +19,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mouse+Memoirs&family=Roboto&family=Source+Code+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/icons/style.css">
     <link rel="stylesheet" href="css/normalize.css">
-    <title>Cargos</title>
+    <title>Notificaciones</title>
     <style>
 
         :root{
@@ -136,20 +136,24 @@
                 $not = $notificaciones->conseguirNotificaciones();
                 
             ?>
-            <h2>Cargos Registrados</h2>
+            <h2>Notificaciones Registradas</h2>
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
-                <b>Cargo Eliminado con exito</b>
+                <b>Notificación Eliminada con exito</b>
             <?php elseif(isset($_SESSION['fail']) && $_SESSION['fail'] == "Fail"): ?>
-                <b>Ocurrió un error al querer borrar el cargo</b>
+                <b>Ocurrió un error al querer borrar la notificación</b>
             <?php endif; ?>
             <p>
-                En esta sesión puedes encontrar todos los cargos registrados
-                en nuestra base de datos.
+                En esta sesión puedes encontrar todos las notificaciones registradas
+                en la base de datos.
             </p>
             <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                     <th>Codigo</th>
-                    <th>Nombre</th>
+                    <th>Usuario - Identificación</th>
+                    <th>Asunto</th>
+                    <th>Cuerpo</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
                     <th>Eliminar</th>
                 </tr>
                 <!-----condición para validar que exista una sesión-------->
@@ -160,7 +164,12 @@
                         <?php while($notificaciones = $not->fetch_object()): ?>
                     <tr>
                         <td><?=$notificaciones->codigo ?></td>
+                        <td><?=$notificaciones->nombre_usuario ?> - <?=$notificaciones->id ?></td>
+                        <td><?=$notificaciones->asunto ?></td>
                         <td><?=$notificaciones->cuerpo ?></td>
+                        <td><?=$notificaciones->fecha ?></td>
+                        <td><?=$notificaciones->estado ?></td>
+                        <td><a href="../../execute.php?controller=notificacionExecute&action=eliminarNotificacion&id=<?=$notificaciones->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
                     </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -170,10 +179,10 @@
                     <p>Aún no hay notificaciones registradas</p>
                 <?php endif; ?>
             </table>
-            <a href="registrarCargo.php" class="volver">Registrar Cargo</a>
+            <!-- <a href="registrarCargo.php" class="volver">Registrar Cargo</a> -->
             <!--Validar que hayan campos para generar el PDF-->
             <?php if($not != false >= 1 && isset($_POST)): ?>
-                <a href="generarPdfCargo.php" class="pdf" target="_blank">Generar PDF</a>
+                <a href="generarPdfNotificaciones.php" class="pdf" target="_blank">Generar PDF</a>
             <?php endif; ?>
             <?php borrarSesion('complete'); borrarSesion('fail'); ?>
         </div>

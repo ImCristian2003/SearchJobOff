@@ -68,6 +68,11 @@
             width: 100%;
         }
 
+        .container-postulacion .details form{
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
         .container-postulacion .details form input{
             display: block;
             margin-bottom: 1rem;
@@ -157,11 +162,10 @@
                 <!-----formulario que guarda la postulación-------->
                 <form action="../../execute.php?controller=postulacion&action=guardarPostulacion" method="post">
                     <!-----campos necesario para guardar la postulación-------->
-                    <label for="">Usuario</label>
-                    <input type="text" name="usuario" value="<?=$_SESSION['empleado']->id?>">
-                    <label for="">Empleo</label>
-                    <input type="text" name="empleo" value="<?=$_POST['codigo']?>">
-                    
+                    <input type="hidden" name="usuario" value="<?=$_SESSION['empleado']->id?>">
+                    <input type="hidden" name="empleo" value="<?=$_POST['codigo']?>">
+                    <input type="hidden" name="empleo_nombre" value="<?=$_POST['empleo']?>">
+                    <span>Estás por postularte al empleo <b><?=$_POST['empleo']?></b></span>
                     <input type="submit" value="Postularme">
 
                 </form>

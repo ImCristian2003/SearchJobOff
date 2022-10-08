@@ -111,5 +111,22 @@
             return $eliminado;
 
         }
+        //Cantidad de municipios registrados
+        public function contarMunicipios(){
+
+            //Comprobar si existe el usuario
+            $sql = "SELECT COUNT(codigo) as 'municipios' FROM municipio";
+            $login = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($login){
+                $result = $login->fetch_object();
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
 
     }

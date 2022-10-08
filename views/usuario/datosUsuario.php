@@ -171,10 +171,10 @@
                 <label for="imagen">Imagen de Perfíl</label>
                 <input type="file" name="imagen">
                 <!-----Condición para validar si el usuario tiene cargada una imagen de perfil o no-------->
-                <?php if(!is_null($_SESSION['empleado']->imagen)): ?>
-                    <img src="../../uploads/usuarios_perfil/<?=$_SESSION['empleado']->imagen?>" alt="perfil_usuario">
-                <?php else: ?>
+                <?php if(is_null($_SESSION['empleado']->imagen) || empty($_SESSION['empleado']->imagen)): ?>   
                     <img src="../../uploads/usuarios_perfil/usuario.png" alt="perfil_usuario">
+                <?php else: ?>
+                    <img src="../../uploads/usuarios_perfil/<?=$_SESSION['empleado']->imagen?>" alt="perfil_usuario">
                 <?php endif; ?>
 
                 <input type="submit" value="Actualizar Datos">

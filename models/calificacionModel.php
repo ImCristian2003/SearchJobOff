@@ -65,9 +65,10 @@
         //Conseguir todas las calificaciones
         public function conseguirCalificaciones(){
             //Consulta para sacar todos los registros
-            $sql = "SELECT ca.*, us.nombre as 'nombre_usuario', us.apellido FROM calificacion as ca
+            $sql = "SELECT ca.*, us.nombre as 'nombre_usuario', us.estado, us.apellido FROM calificacion as ca
             INNER JOIN usuario as us
             ON ca.usuario = us.id
+            WHERE us.estado = '1'
             ORDER BY ca.codigo DESC";
             $calificacion = $this->db->query($sql);
 
@@ -148,6 +149,23 @@
             }
             //Retorno de la variable
             return $eliminado;
+
+        }
+        //Cantidad de municipios registrados
+        public function contarCalificaciones(){
+
+            //Sacar la cantidad de calificaciones
+            $sql = "SELECT COUNT(codigo) as 'calificaciones' FROM calificacion";
+            $login = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($login){
+                $result = $login->fetch_object();
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
 
         }
 

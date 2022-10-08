@@ -220,7 +220,7 @@
         <section class="footer2">
             <div class="footer2-det1">
                 <h2>Contactanos</h2>
-                <form action="" method="post">
+                <form action="mail.php" method="post">
                     <input type="text" placeholder="Nombre (s)" name="nombre">
                     <input type="text" placeholder="Apellidos" name="apellidos">
                     <input type="email" placeholder="Correo electronico" name="correo">

@@ -85,7 +85,7 @@
         //Conseguir todas las notificaciones
         public function conseguirNotificaciones(){
             //Consulta para sacar todos los registros
-            $sql = "SELECT no.*, us.nombre as 'nombre_usuario', us.apellido 
+            $sql = "SELECT no.*, us.id , us.nombre as 'nombre_usuario', us.apellido 
             FROM notificacion as no 
             INNER JOIN usuario as us 
             ON no.usuario = us.id

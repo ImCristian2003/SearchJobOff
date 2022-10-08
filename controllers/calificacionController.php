@@ -39,5 +39,18 @@
             }
 
         }
+        //Cantidad de calificaciones registrados
+        public function contarCalificaciones(){
+
+            if(isset($_SESSION['admin'])){
+
+                $contar = new CalificacionModel();
+                $contado = $contar->contarCalificaciones();
+
+                return $contado;
+
+            }
+
+        }
 
     }

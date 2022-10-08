@@ -16,4 +16,18 @@
 
         }
 
+        //Cantidad de municipios registrados
+        public function contarMunicipios(){
+
+            if(isset($_SESSION['admin'])){
+
+                $contar = new MunicipioModel();
+                $contado = $contar->contarMunicipios();
+
+                return $contado;
+
+            }
+
+        }
+
     }

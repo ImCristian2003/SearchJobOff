@@ -171,7 +171,7 @@
                     <!-----Validar si el usuario tiene subida alguna imagen de perfíl-------->
                     <?php
                         
-                        if(is_null($_SESSION['empleado']->imagen)){
+                        if(is_null($_SESSION['empleado']->imagen) || empty($_SESSION['empleado']->imagen)){
                             $url_imagen = "../../uploads/usuarios_perfil/usuario.png";
                         }else{
                             $url_imagen = "../../uploads/usuarios_perfil/".$_SESSION['empleado']->imagen;
