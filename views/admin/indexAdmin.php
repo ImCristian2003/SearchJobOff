@@ -344,7 +344,7 @@
 
             </div>
             <div class="reportes">
-                <a href="" class="reportes_boton"><span class="icon-flag"></span> Reportes</a>
+                <a href="indexReportes.php" class="reportes_boton"><span class="icon-flag"></span> Reportes</a>
             </div>
         </div>
     </div>

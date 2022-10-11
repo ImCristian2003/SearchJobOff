@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-09-2022 a las 05:03:52
+-- Tiempo de generación: 11-10-2022 a las 23:09:33
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -317,8 +317,17 @@ CREATE TABLE `calificacion` (
   `codigo` int(3) NOT NULL,
   `usuario` varchar(11) NOT NULL,
   `calificacion` int(5) NOT NULL,
-  `descripcion` varchar(600) NOT NULL
+  `descripcion` varchar(600) NOT NULL,
+  `fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `calificacion`
+--
+
+INSERT INTO `calificacion` (`codigo`, `usuario`, `calificacion`, `descripcion`, `fecha`) VALUES
+(12, '877', 3, 'Viva Petro', '2022-10-05 08:48:06'),
+(14, '1003', 5, 'Uribe paraco', '2022-10-07 17:06:44');
 
 -- --------------------------------------------------------
 
@@ -336,11 +345,8 @@ CREATE TABLE `cargo` (
 --
 
 INSERT INTO `cargo` (`codigo`, `nombre`) VALUES
-(1008, 'Responsable Operativos'),
-(1009, 'RESPONSABLE DE MARKETING'),
 (1010, 'Responsable de las ventas'),
 (1011, 'Responsable de las personas'),
-(1012, 'Exito del cliente'),
 (1013, 'Responsable financiero'),
 (1015, 'Responsable de ventas'),
 (1016, 'Responsable de las personas'),
@@ -362,28 +368,7 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`codigo`, `nombre`) VALUES
-(5, 'Antioquias'),
-(13, 'Bolivar'),
-(18, 'Caqueta'),
-(19, 'amalfi'),
-(20, 'cundinamarca'),
-(24, 'wadulagu'),
-(26, 'wadul'),
-(28, 'wadulagu'),
-(41, 'Huila'),
-(43, 'Gritolandia'),
-(48, 'Culicolo'),
-(52, 'Nariño'),
-(85, 'Negrolandia'),
-(91, 'Amazonas'),
-(94, 'Guainia'),
-(989, 'dfgdfg'),
-(1046, 'chupaloalmil'),
-(23122, 'asdefsesfe'),
-(34588, 'hj,j,'),
-(78488, 'dfsdf'),
-(82852, 'ghjfghj'),
-(85485487, 'fgsfdg');
+(5, 'Antioquia');
 
 -- --------------------------------------------------------
 
@@ -414,9 +399,10 @@ CREATE TABLE `empleo` (
 --
 
 INSERT INTO `empleo` (`codigo`, `nombre`, `municipio`, `direccion`, `cargo`, `vacantes`, `jornada`, `experiencia`, `sector`, `funcion`, `empresa`, `descripcion`, `salario`, `tipo_contrato`, `logo`) VALUES
-(26, 'Desarrollado Back End', 5400, 'Carrera 32 #45-67', 1010, 10, 'Diurna - Noctur', 'Experiencia minima de 6 meses', 108, 'Desarrollador Back End', '897465', 'Se solicita un desarrollador back end que programe con java, spring y js', 3000000, 6, 'be01aafba01c6c095d23afaa50b63d8a.jpg'),
-(27, 'Jardinero', 5148, 'Carrera 32 #45-87', 1011, 0, 'Por Establecer', 'Sin Experiencia', 108, 'Cortar hierba, que mas va ser', '897465', 'Se solicita un jardinero que moche hierbaaaa', 1000000, 2, '7a42dab27e1844c7eeb05b91c8cde25b.jpg'),
-(28, 'Diseñador', 5002, 'Avenida 2 Edificio Dos Santos', 1009, 5, 'Diurna', 'Minima de 6 meses', 108, 'Diseñador que tenga experiencia con Adobe XD', '9736547', 'Se solicita un diseñador u animador 3D', 3000000, 4, 'logo.png');
+(37, 'Baretologo Forense', 5021, 'Carrera 76 #54-65', 1010, 3, 'Diurna', 'Sin Experiencia', 112, 'Vender bareta a lo que mas marque', '877', 'Se solicita alguien que sepa vender bareta de la buena', 10000000, 2, 'be01aafba01c6c095d23afaa50b63d8a.jpg'),
+(41, 'Desarrollador full Stack', 5400, 'Calle 24 #18-41', 1016, 0, 'Nocturna', 'Experiencia minima de 6 meses', 112, 'Desarrollador Back End', '877', 'Se solicita un desarrollador back end que programe con php', 5000000, 4, '7a42dab27e1844c7eeb05b91c8cde25b.jpg'),
+(42, 'Diseñador 3D', 5148, 'Calle 24 #18-41', 1010, 5, 'Nocturna', 'Sin Experiencia', 116, 'Diseñador que tenga experiencia con Adobe XD', '988', 'Se solicita un diseñador con muy buena creatividad para diseño de interfaces, anuncios, etc.', 2500000, 4, 'red satelital.jpg'),
+(43, 'Tecnico en Aviación', 5400, 'Carrera 76 #54-65', 1017, 2, 'Diurna', 'Minima de 6 meses', 112, 'Auxiliar de Vuelo', '5646', 'Se solicita un auxiliar de vuelo con muy buena actitud', 2000000, 3, '21545464-un-botón-de-pin-con-la-bandera-de-la-república-francesa-aislado-sobre-fondo-blanco-con-trazado-de-re.jpg');
 
 -- --------------------------------------------------------
 
@@ -436,15 +422,34 @@ CREATE TABLE `municipio` (
 
 INSERT INTO `municipio` (`codigo`, `nombre`, `departamento`) VALUES
 (5001, 'Medellin', 5),
-(5002, 'Abejorral', 5),
-(5004, 'Abriaqui', 5),
 (5021, 'Alejandrias', 5),
+(5120, 'Caceres', 5),
+(5125, 'Caicedo', 5),
 (5148, 'El Carmen de Viboral', 5),
-(5318, 'Guarne', 5),
-(5376, 'La Ceja', 5),
 (5400, 'La Union', 5),
-(5667, 'San Rafael', 5),
-(5809, 'Titiribi', 5);
+(5678, 'Andes', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notificacion`
+--
+
+CREATE TABLE `notificacion` (
+  `codigo` int(11) NOT NULL,
+  `usuario` varchar(11) NOT NULL,
+  `asunto` varchar(50) NOT NULL,
+  `cuerpo` varchar(600) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `notificacion`
+--
+
+INSERT INTO `notificacion` (`codigo`, `usuario`, `asunto`, `cuerpo`, `fecha`, `estado`) VALUES
+(1, '1001', 'Prueba', 'Esto es una prueba para verificar la vista de las notificaciones y su correcto funcionamiento', '2022-10-05 19:31:17', 'leida');
 
 -- --------------------------------------------------------
 
@@ -485,10 +490,12 @@ CREATE TABLE `postulacion` (
 --
 
 INSERT INTO `postulacion` (`codigo`, `usuario`, `empleo`, `estado`, `fecha`) VALUES
-(26, '1008', 28, 'Pendiente', '2022-09-26 00:00:00'),
-(30, '1001', 27, 'aprobado', '2022-09-27 00:00:00'),
-(31, '1001', 28, 'Pendiente', '2022-09-28 00:00:00'),
-(32, '2001', 27, 'aprobado', '2022-09-28 00:00:00');
+(51, '1003', 41, 'aprobado', '2022-10-05 08:50:49'),
+(52, '1003', 37, 'aprobado', '2022-10-05 08:52:00'),
+(53, '1003', 43, 'aprobado', '2022-10-07 17:06:14'),
+(54, '1002', 37, 'Pendiente', '2022-10-07 17:19:39'),
+(55, '1002', 42, 'Pendiente', '2022-10-07 19:07:51'),
+(58, '1002', 43, 'Pendiente', '2022-10-07 19:29:30');
 
 -- --------------------------------------------------------
 
@@ -509,13 +516,9 @@ INSERT INTO `sector` (`codigo`, `nombre`) VALUES
 (106, 'Sector transporte'),
 (107, 'sector comunicaciones'),
 (108, 'sector comercial'),
-(109, 'sector turístico'),
-(110, 'sector sanitario'),
-(111, 'sector educativo'),
 (112, 'sector de las artes'),
-(113, 'sector financiero'),
 (114, 'sector empresarial'),
-(115, 'sector de monitoreo');
+(116, 'Sector de las artes marciales');
 
 -- --------------------------------------------------------
 
@@ -536,9 +539,7 @@ INSERT INTO `tipo_contrato` (`codigo`, `nombre`) VALUES
 (1, 'Contrato a término fijos'),
 (2, 'Contrato a Término Indefinido'),
 (3, 'Contrato de Obra o labor '),
-(4, 'Contrato de aprendizaje'),
-(5, 'Contrato temporal, ocasional o accidental '),
-(6, 'Contrato civil por prestación de servicios');
+(4, 'Contrato de aprendizaje');
 
 -- --------------------------------------------------------
 
@@ -556,20 +557,24 @@ CREATE TABLE `usuario` (
   `contrasena` varchar(200) NOT NULL,
   `perfil` int(2) NOT NULL,
   `hoja_vida` varchar(260) DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL
+  `imagen` varchar(255) DEFAULT NULL,
+  `estado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `telefono`, `direccion`, `correo`, `contrasena`, `perfil`, `hoja_vida`, `imagen`) VALUES
-('0345', 'Tienda Pelusa', NULL, '3457283627', 'Calle 67 #45-98', 'tienda@pelusa.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 2, NULL, NULL),
-('1001', 'Cristian', 'Cardona', '3897653749', 'Carrera 12 #12-34', 'cristian@gmail.com', '$2y$04$3bWKBXfh3YdT5gFfWf1xCe0w850fLzBjCmYZ0rxgLj0zrb3b9lfYa', 1, 'MARIANA MOLINA CARDONA.pdf', '3606d11ba67e1241c998764869e43fde.jpg'),
-('1008', 'Andres', 'Suarez', '3986754637', 'Avenida 3 con carrera 32', 'suarez10@gmail.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 1, 'SIMON CARDONA JURADO.pdf', '2c8676e6035c00a6bdcbafd6e7351ac4.jpg'),
-('2001', 'Eduardo', 'Piesdeoro', '3847382947', 'Carrera 32 #45-56', 'eduardin@gmail.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 1, 'Pasabordo Cristian Camilo.pdf', NULL),
-('897465', 'Tienda La Garbinga', NULL, '3456780983', 'Carrera 45 #Castro', 'garbin@ga.com', '$2y$04$uB8yGYUTcmPkHVSW0nY30OXgoL8lONi6uSAgNyPgIrXeHn3PklgHO', 2, NULL, 'red satelital.jpg'),
-('9736547', 'Tienda Los Venecos', NULL, '3546828467', 'Avenida 2 con carrera 33', 'losvene@gmail.com', '$2y$04$xmn5.lFxwSJT7flcca8F4.iNVtUeS6ykeqjjA6ZneJlZpHNU5yqCi', 2, NULL, NULL);
+INSERT INTO `usuario` (`id`, `nombre`, `apellido`, `telefono`, `direccion`, `correo`, `contrasena`, `perfil`, `hoja_vida`, `imagen`, `estado`) VALUES
+('1001', 'Cristian', 'Cardona', '3897653749', 'Calle 65 #45', 'cristian@gmail.com', '$2y$04$PfI5fLxYiuOFWW/Xf4dRFe77kERiHGoCEGVncUyPPlyrUgz3hJ4H2', 3, 'MARIANA MOLINA CARDONA.pdf', '7a42dab27e1844c7eeb05b91c8cde25b.jpg', '1'),
+('1002', 'Kick', 'Buttowski', '3426472637', 'Carrera Peligro', 'cc1001447@gmail.com', '$2y$04$uYUp3ZlCCCmdHLWEA4jgcejZIvBpGtOZacySl1p7HU22K9iNyEUrC', 1, 'SIMON CARDONA JURADO.pdf', '', '1'),
+('1003', 'Capitan', 'Perico', '3546725373', 'Barrio Antioquia', 'barrio@gmail.com', '$2y$04$wXOaVv4JBFc9TIw/O/4dcOgiIxp.8ARNQiMInr/DqFxM2iorboNCG', 1, 'MARIANA MOLINA CARDONA.pdf', 'be01aafba01c6c095d23afaa50b63d8a.jpg', '0'),
+('1004', 'Yesica', 'Yuyeimy', '3457283923', 'Avenida 2 puñaladas', 'navajazo@gmail.com', '$2y$04$uJvDZrb84O6BRdQ4pWB8nueyacoqOp2.50h5IQ7ZY.c7z7DrQh89a', 1, 'sin_hoja_vida', NULL, '1'),
+('2001', 'Eduardo', 'Piesdeoro', '3847382947', 'Carrera 32 #45-56', 'eduardin@gmail.com', '$2y$04$EWE.ttPwL7nqCXq6hS2av.hZJNgnWxFvAIdTxULotpOJg3BrecYPa', 1, 'Pasabordo Cristian Camilo.pdf', 'red satelital.jpg', '0'),
+('5646', 'Los Picapiedra', NULL, '345638182', 'Calle 54', 'pica@piedra.com', '$2y$04$DH.KsruGc0U3fwA2OJC73OhX9ukCoqy.8MTpONox8MMNXkePc.Zc6', 2, NULL, 'francia.jpg', '1'),
+('5675', 'Tienda la 54', NULL, '5345834573', 'Carrera 32', 'la54@gmail.com', '$2y$04$7QetPzQHsrGVd/fmgmzjpuoaTsrR7HRg0dO3oouWQBB8IkWBlu4z6', 2, NULL, NULL, '1'),
+('877', 'Tienda Los Venecos', NULL, '111111', 'Carrera 32', 'vene@gmail.com', '$2y$04$WDa26RHlkDbeqcRqkGzP7.XYDP488mvumDhhe9R8Hfrdzf6mkheNi', 2, NULL, '7a42dab27e1844c7eeb05b91c8cde25b.jpg', '1'),
+('988', 'Los Chimichanga', NULL, '354722936', 'Calle 45', 'chimi@changa.com', '$2y$04$pGE/Cgf9xKnZg0ZNxcdCUeVm0sa.LSich/wg3QHA4iicQ6yUI/k.C', 2, NULL, NULL, '1');
 
 --
 -- Índices para tablas volcadas
@@ -613,6 +618,13 @@ ALTER TABLE `municipio`
   ADD KEY `departamento` (`departamento`);
 
 --
+-- Indices de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD PRIMARY KEY (`codigo`),
+  ADD KEY `fk_notificacion_usuario` (`usuario`);
+
+--
 -- Indices de la tabla `perfil`
 --
 ALTER TABLE `perfil`
@@ -653,19 +665,25 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `codigo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codigo` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1018;
+  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1022;
 
 --
 -- AUTO_INCREMENT de la tabla `empleo`
 --
 ALTER TABLE `empleo`
-  MODIFY `codigo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `codigo` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -677,19 +695,19 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de la tabla `postulacion`
 --
 ALTER TABLE `postulacion`
-  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `codigo` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `sector`
 --
 ALTER TABLE `sector`
-  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `codigo` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_contrato`
 --
 ALTER TABLE `tipo_contrato`
-  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas
@@ -699,7 +717,7 @@ ALTER TABLE `tipo_contrato`
 -- Filtros para la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  ADD CONSTRAINT `FK_calificacion_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`);
+  ADD CONSTRAINT `FK_calificacion_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `empleo`
@@ -708,7 +726,7 @@ ALTER TABLE `empleo`
   ADD CONSTRAINT `FK_empleo_cargo` FOREIGN KEY (`cargo`) REFERENCES `cargo` (`codigo`),
   ADD CONSTRAINT `FK_empleo_sector` FOREIGN KEY (`sector`) REFERENCES `sector` (`codigo`),
   ADD CONSTRAINT `FK_empleo_tipo_contrato` FOREIGN KEY (`tipo_contrato`) REFERENCES `tipo_contrato` (`codigo`),
-  ADD CONSTRAINT `FK_empleo_usuario` FOREIGN KEY (`empresa`) REFERENCES `usuario` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_empleo_usuario` FOREIGN KEY (`empresa`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `empleo_ibfk_5` FOREIGN KEY (`municipio`) REFERENCES `municipio` (`codigo`);
 
 --
@@ -716,6 +734,12 @@ ALTER TABLE `empleo`
 --
 ALTER TABLE `municipio`
   ADD CONSTRAINT `FK_municipio_departamento` FOREIGN KEY (`departamento`) REFERENCES `departamento` (`codigo`);
+
+--
+-- Filtros para la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD CONSTRAINT `fk_notificacion_usuario` FOREIGN KEY (`usuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `postulacion`
