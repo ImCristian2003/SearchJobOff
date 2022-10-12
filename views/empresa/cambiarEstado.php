@@ -115,7 +115,9 @@
                 </select>
                 <!-----Campos paa validar el cambio de estado de una postulación-------->
                 <input type="hidden" name="codigo" value="<?=$_POST['id']?>">
+                <input type="hidden" name="id_usuario" value="<?=$_POST['id_usuario']?>">
                 <input type="hidden" name="empleo" value="<?=$_POST['empleo']?>">
+                <input type="hidden" name="nombre_empleo" value="<?=$_POST['nombre_empleo']?>">
                 <input type="hidden" name="vacantes" value="<?=$_POST['vacantes']?>">
                 <input type="submit" value="Cambiar">
             </form>

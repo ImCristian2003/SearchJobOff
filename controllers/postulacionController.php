@@ -2,6 +2,7 @@
 
     require_once "models/postulacionModel.php";
     require_once "models/empleoModel.php";
+    require_once "models/notificacionModel.php";
 
     class PostulacionController{
 
@@ -101,6 +102,7 @@
                 //Guardar los datos del estado y codigo de la postulación
                 $estado = $_POST['estado'];
                 $codigo = (int) $_POST['codigo'];
+                $id_empleado = $_POST['id_usuario'];
 
                 //Si ninguno está vacío
                 if(!empty($estado) && !empty($codigo)){
@@ -114,6 +116,19 @@
                         $postulaciones = $postulacion->eliminarPostulacionEstado();
                         //Si se elimina de forma correcta
                         if($postulaciones){
+                            //En caso de que funcione, crear una notificación para el usuario
+                            $empleo_nombre = $_POST['nombre_empleo'];
+                            //Cuerpo de la notificación
+                            $asunto = "rechazado";
+                            $cuerpo = "Lo sentimos, pero tu solicitud al empleo ".
+                            $empleo_nombre." ha sido rechazada";
+                            //Instancia y proceso para crear la notificación
+                            $notificacion = new NotificacionModel();
+                            $notificacion->setUsuario($id_empleado);
+                            $notificacion->setAsunto($asunto);
+                            $notificacion->setCuerpo($cuerpo);
+                            $guardar = $notificacion->guardarNotificacion();
+
                             //Sesión de rechazado
                             $_SESSION['rechazado'] = "Complete";
                             //Redirección
@@ -149,6 +164,20 @@
                             $empleos = $empleo1->restarVacante();
                             //Si se cambia de manera exitosa
                             if($empleos){
+                                //En caso de que funcione, crear una notificación para el usuario
+                                $empleo_nombre = $_POST['nombre_empleo'];
+                                //Cuerpo de la notificación
+                                $asunto = "aprobado";
+                                $cuerpo = "Felicidades! Tu solicitud al empleo ".
+                                $empleo_nombre." ha sido aprobada, hemos tomado tus datos, ".
+                                "por lo cual nos contactaremos lo más pronto posible contigo.";
+                                //Instancia y proceso para crear la notificación
+                                $notificacion = new NotificacionModel();
+                                $notificacion->setUsuario($id_empleado);
+                                $notificacion->setAsunto($asunto);
+                                $notificacion->setCuerpo($cuerpo);
+                                $guardar = $notificacion->guardarNotificacion();
+
                                 //Sesión de aprobado
                                 $_SESSION['aprobado'] = "Complete";
                                 //Redirección

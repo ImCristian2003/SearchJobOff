@@ -285,4 +285,30 @@
             return $validar;
 
         }
+        //Funcion para comprobar la identificación del usuario
+        public function recuperarContrasena(){
+            //Campos que utiliza el recuperar contraseña
+            $correo = $this->correo;
+
+            //Comprobar si existe el usuario
+            $sql = "SELECT * FROM usuario WHERE correo='$correo'";
+            $recuperar = $this->db->query($sql);
+            $result = false;
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($recuperar && $recuperar->num_rows == 1){
+                //cambiar la contraseña del usuario
+                $sql_cambiar = "UPDATE usuario SET contrasena = '{$this->getNueva()}'
+                WHERE correo='$correo'";
+                $nueva = $this->db->query($sql_cambiar);
+                //Si todo sale bien, se almacena true en la variable a retornar
+                if($nueva){
+                    $result = true;
+                }
+
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
+
+        }
     }

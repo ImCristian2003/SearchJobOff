@@ -139,6 +139,28 @@
             text-decoration: none;
             top: 1.5rem;
         }
+        .aviso-bien{
+            background: green;
+            border-radius: 1rem;
+            color: #fff;
+            font-size: 1.5rem;
+            left: 40%;
+            letter-spacing: 1px;
+            padding: 1.5rem 2.5rem;
+            position: absolute;
+            top:10%;
+        }
+        .aviso-fallo{
+            background: red;
+            border-radius: 1rem;
+            color: #fff;
+            font-size: 1.5rem;
+            left: 40%;
+            letter-spacing: 1px;
+            padding: 1.5rem 2.5rem;
+            position: absolute;
+            top:10%;
+        }
     
     </style>
 </head>
@@ -152,11 +174,11 @@
             <!-----Mostrar error en un campo en caso de que exista una sesión de fallo o exito-------->
             <?php   if(isset($_SESSION['registro']) && $_SESSION['registro'] == 'Complete'): ?>
                         
-                        <strong>Registro completado correctamente</strong>
+                        <strong class="aviso-bien">Registro completado correctamente</strong>
                 
             <?php   elseif(isset($_SESSION['registro_fail']) && $_SESSION['registro_fail'] == 'Fail'):  ?>
 
-                        <strong>Registro fallido</strong>
+                        <strong class="aviso-fallo">Registro fallido</strong>
 
             <?php   endif; ?>
             <!-----Formulario que guarda el registros de una empresa-------->

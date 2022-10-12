@@ -148,6 +148,9 @@
             padding: 1rem;
             text-align: center;
         }
+        .asunto:first-letter{
+            text-transform: uppercase;
+        }
 
     </style>
 </head>
@@ -198,7 +201,7 @@
                     <!-----ciclo que imprime todos los datos correspondientes-------->
                     <?php while($notificaciones = $not->fetch_object()): ?>
                         <div class="comentario">
-                            <h2><?=$notificaciones->asunto; ?></h2>
+                            <h2 class="asunto"><?=$notificaciones->asunto; ?></h2>
                             <p><?=$notificaciones->cuerpo; ?></p>
                             <span><b> Fecha Publicación:  </b>
                             <!-----Dar formato a la fecha-------->
@@ -207,7 +210,7 @@
                                     echo date_format($date,"Y/m/d H:i:s");
                                 ?>
                             </span>
-                            <?php if(isset($_SESSION['admin']) && $notificaciones->estado == "pendiente"):?>
+                            <?php if(isset($_SESSION['empleado']) && $notificaciones->estado == "no leida"):?>
                                 <a href="../../execute.php?controller=notificacionExecute&action=marcarLeido&codigo=<?=$notificaciones->codigo?>" class="marcar"><span class="icon-pencil"></span> Marcar Como Leida</a>
                             <?php else:?>
                                 <span class="marcar">

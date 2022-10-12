@@ -240,8 +240,7 @@
                 <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'funcion') : ""; ?>
 
-                <label for="empresa">Empresa</label>
-                <input type="number" name="empresa" value="<?=$_SESSION['empresa']->id?>">
+                <input type="hidden" name="empresa" value="<?=$_SESSION['empresa']->id?>">
                 <!-----Mostrar error en un campo en caso de que exista-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'empresa') : ""; ?>
 

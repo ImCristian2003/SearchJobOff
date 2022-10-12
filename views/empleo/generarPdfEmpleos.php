@@ -109,7 +109,7 @@
         
         <div class="container-postulados">
             <div class="details">
-                <h2>Sectores Registrados</h2>
+                <h2>Empleos Registrados</h2>
                 <table border="1">
                     <tr>
                         <th>Codigo</th>

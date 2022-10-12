@@ -350,5 +350,46 @@
             }
 
         }
+        //Función para recuperar la contraseña
+        public function recuperarContrasena(){
+            //Validar que exista el post
+            if(isset($_POST)){
+                //Verificar existencia de los datos
+                $correo = !empty($_POST['correo']) ? $_POST['correo'] : false;
+                //Verificar que no estén vacíos
+                if(!empty($correo) != false){
+                    //Crear la nueva contraseña
+                    $nueva = rand(1, 9999);
+                    //Instancia de la clase Usuario
+                    $login = new usuarioModel();
+                    //Setters
+                    $login->setCorreo($correo);
+                    $login->setNueva($nueva);
+                    //Función que devuelve los datos registrados
+                    $log = $login->recuperarContrasena();
+                    //Si es true
+                    if($log){
+                        //Redirección para mandar el correo con la nueva contraseña
+                        header("Location: mailRecuperar.php?nueva=$nueva&correo=$correo");
+
+                    }else{
+                        //Redirección y sesión en caso de algún error
+                        $_SESSION['fail1'] = "fail1";
+                        header("Location: recuperarContrasena.php");
+                    }
+
+                }else{
+                    //Redirección y sesión en caso de algún error
+                    $_SESSION['fail'] = "fail";
+                    header("Location: recuperarContrasena.php");
+                }
+
+            }else{
+                //Redirección y sesión en caso de algún error
+                $_SESSION['fail'] = "fail";
+                header("Location: recuperarContrasena.php");
+            }
+
+        }
 
     }

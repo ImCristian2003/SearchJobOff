@@ -222,7 +222,7 @@
                 </form>
                 <?php borrarSesion('fail'); ?>
                 <p>No tienes una cuenta? <b><a href="registro.html">Regístrate</a></b></p>
-                <a href="">Olvidaste tu contraseña?</a>
+                <a href="recuperarContrasena.php">Olvidaste tu contraseña?</a>
             </div>
         </div>
     </div>

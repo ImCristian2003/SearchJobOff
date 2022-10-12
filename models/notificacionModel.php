@@ -204,9 +204,9 @@
             return $validar;
 
         }
-        //Marcar como leída una notificación
+        //Validar si una empresa ya está reportada
         public function validarReporte(){
-            //Consulta que elimina el registro de un empleo correspondiente
+            //Consulta para traer los datos
             $sql = "SELECT * FROM notificacion WHERE usuario = '{$this->getUsuario()}'";
             $cambiar = $this->db->query($sql);
             //Variable a retornar
@@ -217,6 +217,37 @@
             }
             //Retornar la variable
             return $cambiada;
+
+        }
+
+        //Eliminar una notificación
+        public function eliminarNotificacion(){
+            //Consulta para traer los datos
+            $sql = "DELETE FROM notificacion WHERE codigo = {$this->getCodigo()}";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminada = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminada = true;
+            }
+            //Retornar la variable
+            return $eliminada;
+
+        }
+        //Eliminar un reporte
+        public function eliminarReporte(){
+            //Consulta para traer los datos
+            $sql = "DELETE FROM notificacion WHERE usuario = '{$this->getUsuario()}' AND asunto = 'reporte'";
+            $eliminar = $this->db->query($sql);
+            //Variable a retornar
+            $eliminada = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($eliminar){
+                $eliminada = true;
+            }
+            //Retornar la variable
+            return $eliminada;
 
         }
 

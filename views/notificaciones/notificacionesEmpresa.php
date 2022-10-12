@@ -191,7 +191,8 @@
                 <span class="aviso">
                     <span class="icon-notification"></span> 
                     Te recomendamos que al momento de leer una notificación, marques la misma 
-                    como "leída", esto para tener un mayor control de las mismas y en caso de ser 
+                    como "leída" al momento de acatar a la orden (en caso de haberla) de la misma,
+                     esto para tener un mayor control y en caso de ser 
                     algo urgente, no recurrir al bloqueo o eliminación permanente de tu 
                     cuenta.
                 </span>

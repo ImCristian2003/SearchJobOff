@@ -146,6 +146,27 @@
             text-decoration: none;
         }
 
+        .cargar_hoja{
+            width:100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        a.cargar {
+            background: var(--primario);
+            border-radius: 1rem;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            margin: 2rem auto;
+            padding: 0.7rem 2rem;
+            text-decoration: none;
+        }
+
     </style>
 </head>
 <body>
@@ -172,6 +193,9 @@
                 <!-----En caso de no haber cargado la hoja de vida-------->
                 <?php else: ?>
                     <h2>Debes cargar tu hoja de vida para postularte a un empleo</h2>
+                    <div class="cargar_hoja">
+                        <a href="datosUsuario.php" class="cargar">Cargar Hoja de Vida</a>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>

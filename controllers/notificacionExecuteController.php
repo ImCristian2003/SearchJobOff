@@ -15,18 +15,41 @@
                 $leidos = $leido->marcarLeido();
                 //Verificar que haya funcionado la consulta y hacer una redirección
                 if($leidos){
+                    //Crear una sesión para indicar fallo o exito
                     $_SESSION['notificacion'] = "Complete";
-                    header("Location: views/notificaciones/notificacionesAdmin.php");
+                    //Validar quien está logeado para hacer la respectiva redirección
+                    if(isset($_SESSION['admin'])){
+                        header("Location: views/notificaciones/notificacionesAdmin.php");
+                    }else if(isset($_SESSION['empresa'])){
+                        header("Location: views/notificaciones/notificacionesEmpresa.php");
+                    }else{
+                        header("Location: views/notificaciones/notificacionesEmpleado.php");
+                    }
+
                 }else{
                     //Verificar en caso de que no haya funcionado la consulta y hacer una redirección
                     $_SESSION['notificacion_fail'] = "Fail";
-                    header("Location: views/notificaciones/notificacionesAdmin.php");
+                    //Validar quien está logeado para hacer la respectiva redirección
+                    if(isset($_SESSION['admin'])){
+                        header("Location: views/notificaciones/notificacionesAdmin.php");
+                    }else if(isset($_SESSION['empresa'])){
+                        header("Location: views/notificaciones/notificacionesEmpresa.php");
+                    }else{
+                        header("Location: views/notificaciones/notificacionesEmpleado.php");
+                    }
                 }
 
             }else{
                 //Verificar en caso de que no exista el metodo GET
                 $_SESSION['notificacion_fail'] = "Fail";
-                header("Location: views/notificaciones/notificacionesAdmin.php");
+                //Validar quien está logeado para hacer la respectiva redirección
+                if(isset($_SESSION['admin'])){
+                    header("Location: views/notificaciones/notificacionesAdmin.php");
+                }else if(isset($_SESSION['empresa'])){
+                    header("Location: views/notificaciones/notificacionesEmpresa.php");
+                }else{
+                    header("Location: views/notificaciones/notificacionesEmpleado.php");
+                }
             }
 
         }
@@ -69,5 +92,70 @@
             }
 
         }
+        //Borrar una notificación
+        public function eliminarNotificacion(){
 
+            //Verificar que existe el admin y el metodo get
+            if(isset($_SESSION['admin']) && isset($_GET['id'])){
+                //Guardar el codigo
+                $codigo = (int)$_GET['id'];
+                //Verificar que el codigo no sea un valor vacío
+                if(!empty($codigo)){
+                    //Instancia y proceso para borrar la notificación
+                    $notificacion = new NotificacionModel();
+                    $notificacion->setCodigo($codigo);
+                    $eliminado = $notificacion->eliminarNotificacion();
+                    //En caso de que funcione la consulta crear una sesión y redireccionar
+                    if($eliminado){
+                        $_SESSION['complete'] = "Complete";
+                        header("Location: views/notificaciones/administrarNotificaciones.php");
+                    }else{//En caso de que no funcione la consulta crear una sesión y redireccionar
+                        $_SESSION['fail'] = "Fail";
+                        header("Location: views/notificaciones/administrarNotificaciones.php");
+                    }
+
+                }else{//En caso de que no funcione la consulta crear una sesión y redireccionar
+                    $_SESSION['fail'] = "Fail";
+                    header("Location: views/notificaciones/administrarNotificaciones.php");
+                }
+
+            }else{//En caso de que no funcione la consulta crear una sesión y redireccionar
+                $_SESSION['fail'] = "Fail";
+                header("Location: views/notificaciones/administrarNotificaciones.php");
+            }
+
+        }
+        //Borrar un reporte
+        public function eliminarReporte(){
+
+            //Verificar que existe el admin y el metodo get
+            if(isset($_SESSION['admin']) && isset($_GET['codigo'])){
+                //Guardar el codigo
+                $codigo = (int)$_GET['codigo'];
+                //Verificar que el codigo no sea un valor vacío
+                if(!empty($codigo)){
+                    //Instancia y proceso para borrar la notificación
+                    $notificacion = new NotificacionModel();
+                    $notificacion->setUsuario($codigo);
+                    $eliminado = $notificacion->eliminarReporte();
+                    //En caso de que funcione la consulta crear una sesión y redireccionar
+                    if($eliminado){
+                        $_SESSION['complete'] = "Complete";
+                        header("Location: views/empleo/administrarEmpleos.php");
+                    }else{//En caso de que no funcione la consulta crear una sesión y redireccionar
+                        $_SESSION['fail'] = "Fail";
+                        header("Location: views/empleo/administrarEmpleos.php");
+                    }
+
+                }else{//En caso de que no funcione la consulta crear una sesión y redireccionar
+                    $_SESSION['fail'] = "Fail";
+                    header("Location: views/empleo/administrarEmpleos.php");
+                }
+
+            }else{//En caso de que no funcione la consulta crear una sesión y redireccionar
+                $_SESSION['fail'] = "Fail";
+                header("Location: views/empleo/administrarEmpleos.php");
+            }
+
+        }
     }

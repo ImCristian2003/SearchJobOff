@@ -192,7 +192,9 @@
                             <form action="cambiarEstado.php" method="post">
                                 <input type="hidden" name="id" value="<?=$postulacion->codigo_postulacion ?>">
                                 <input type="hidden" name="empleo" value="<?=$postulacion->codigo_empleo ?>">
+                                <input type="hidden" name="nombre_empleo" value="<?=$postulacion->empleo ?>">
                                 <input type="hidden" name="vacantes" value="<?=$postulacion->vacantes ?>">
+                                <input type="hidden" name="id_usuario" value="<?=$postulacion->id ?>">
                                 <input type="submit" value="<?=$postulacion->estado?>">
                             </form>
                         </td>

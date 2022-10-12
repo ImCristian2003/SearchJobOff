@@ -11,6 +11,7 @@
         private $correo;
         private $contrasena;
         private $perfil;
+        private $estado;
         private $imagen;
         //Variable que hace uso de la conexión a la base de datos
         private $db;
@@ -101,12 +102,21 @@
         public function setImagen($imagen){
             $this->imagen = $imagen;
         }
+
+        //Get y set para estado
+        public function getEstado(){
+            return $this->estado;
+        }
+
+        public function setEstado($estado){
+            $this->estado = $estado;
+        }
         
         //Funciones para consultar a la base de datos
         public function guardarAdmin(){
             
             //Consulta para insertar los datos a la tabla usuario
-            $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},null,null)";
+            $sql = "INSERT INTO usuario VALUES('{$this->getId()}','{$this->getNombre()}','{$this->getApellidos()}','{$this->getTelefono()}','{$this->getDireccion()}','{$this->getCorreo()}','{$this->getContrasena()}',{$this->getPerfil()},null,null,'1')";
             $save = $this->db->query($sql);
 
             //Variable que se retorna

@@ -53,7 +53,7 @@
             border-bottom: 1px solid #000;
             border-top: 1px solid #000;
             margin: 2rem auto;
-            width:  80%;
+            width:  98%;
         }
 
         .container-postulados .details table tr td, th{
@@ -122,6 +122,26 @@
             top: 1.5rem;
         }
 
+        td span.caducada{
+            background: red;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+        }
+
+        td span.atiempo{
+            background: green;
+            border-radius:5px;
+            color: #fff;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin: 1rem;
+            padding: 0.6rem 1.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -134,6 +154,26 @@
                 
                 $notificaciones = new NotificacionController();
                 $not = $notificaciones->conseguirNotificaciones();
+                //Sacar la fecha actual
+                $DateAndTime = date('Y-m-d', time());
+                //Función para calcular los días, meses y años que han pasado entre
+                //2 fechas
+                function calcularTiempo($fecha_inicio,$fecha_fin){
+                    //Proceso para crear los valores que se restan
+                    $datetime1 = date_create($fecha_inicio);
+                    $datetime2 = date_create($fecha_fin);
+                    //Función para restar las fechas
+                    $intervalo = date_diff($datetime1,$datetime2);
+                    //Array para devolver los datos
+                    $tiempo = array();
+                    //Ciclo para imprimir los datos
+                    foreach ($intervalo as $valor) {
+                        $tiempo[] = $valor;
+                    }
+                    //Retorno de los valores
+                    return $tiempo;
+            
+                }
                 
             ?>
             <h2>Notificaciones Registradas</h2>
@@ -154,6 +194,7 @@
                     <th>Cuerpo</th>
                     <th>Fecha</th>
                     <th>Estado</th>
+                    <th>Estado de Caducidad</th>
                     <th>Eliminar</th>
                 </tr>
                 <!-----condición para validar que exista una sesión-------->
@@ -167,8 +208,26 @@
                         <td><?=$notificaciones->nombre_usuario ?> - <?=$notificaciones->id ?></td>
                         <td><?=$notificaciones->asunto ?></td>
                         <td><?=$notificaciones->cuerpo ?></td>
-                        <td><?=$notificaciones->fecha ?></td>
+                        <!-----Calcular el tiempo---->
+                        <?php  
+                            $fecha_not = $notificaciones->fecha;
+                        ?>
+                        <td>
+                            <?php 
+                                $datos = calcularTiempo($fecha_not,$DateAndTime); 
+                                if($datos[2] <= 0){
+                                    echo "Ha pasado menos de un día";
+                                }else{
+                                    echo "Han pasado ".$datos[2]." días.";
+                                }
+                            ?>
+                        </td>
                         <td><?=$notificaciones->estado ?></td>
+                        <?php if($datos[2] >= 8 ): ?>
+                            <td><span class="caducada">Caducada!</span></td>
+                        <?php else: ?>
+                            <td><span class="atiempo">Disponible!</span></td>
+                        <?php endif; ?>
                         <td><a href="../../execute.php?controller=notificacionExecute&action=eliminarNotificacion&id=<?=$notificaciones->codigo?>" onclick="return ConfirmDelete()">Eliminar</a></td>
                     </tr>
                         <?php endwhile; ?>

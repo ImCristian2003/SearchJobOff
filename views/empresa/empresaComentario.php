@@ -115,8 +115,7 @@
             <!-----formulario que guarda la calificacion-------->
             <form action="../../execute.php?controller=calificacionExecute&action=guardarCalificacion" method="post">
 
-                <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" value="<?=$_SESSION['empresa']->id?>">
+                <input type="hidden" name="usuario" value="<?=$_SESSION['empresa']->id?>">
                 <!-----Mostrar el error de un campo-------->
                 <?php echo isset($_SESSION['errores']) ? mostrarError($_SESSION['errores'],'usuario') : ""; ?>
 

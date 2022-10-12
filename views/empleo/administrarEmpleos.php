@@ -147,9 +147,9 @@
             ?>
             <h2>Empleos Registrados</h2>
             <?php if(isset($_SESSION['complete']) && $_SESSION['complete'] == "Complete"): ?>
-                <b>Notificación Eliminada con exito</b>
+                <b>Reporte eliminado con exito</b>
             <?php elseif(isset($_SESSION['fail']) && $_SESSION['fail'] == "Fail"): ?>
-                <b>Ocurrió un error al querer borrar la notificación</b>
+                <b>Ocurrió un error al querer eliminar el reporte</b>
             <?php endif; ?>
 
             <?php if(isset($_SESSION['reporte']) && $_SESSION['reporte'] == "Complete"): ?>
@@ -194,13 +194,13 @@
                         <td><?=$empleos->descripcion ?></td>
                         <td><?=number_format($empleos->salario, 0, ",", ".") ?></td>
                         <?php 
-                
+                            //Validar si una empresa está reportada
                             $reporte = new NotificacionController();
                             $reportes = $reporte->validarReporte($empleos->id_empresa);
                             
                         ?>
                         <?php if($reportes): ?>
-                            <td><a href="" class="reportado">Reportado</a></td>
+                            <td><a href="../../execute.php?controller=notificacionExecute&action=eliminarReporte&codigo=<?=$empleos->id_empresa ?>" class="reportado" onclick="return ConfirmDeleteReport()">Reportado</a></td>
                         <?php else: ?>
                             <td><a href="../notificaciones/crearNotificacion.php?empresa=<?=$empleos->id_empresa ?>&codigo_emp=<?=$empleos->codigo?>&nombre_emp=<?=$empleos->nombre ?>" onclick="return ConfirmDelete()" class="reportar">Reportar</a></td>
                         <?php endif; ?>
@@ -227,6 +227,17 @@
         function ConfirmDelete()
         {
             var respuesta = confirm("¿Está seguro que desea reportar este empleo?");
+
+            if (respuesta == true){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        function ConfirmDeleteReport()
+        {
+            var respuesta = confirm("¿Está seguro que desea quitar el reporte de este empleo?");
 
             if (respuesta == true){
                 return true;
