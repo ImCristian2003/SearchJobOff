@@ -89,6 +89,34 @@
 
         }
 
+        //Cantidad de empleos registrados
+        public function contarEmpleos(){
+
+            if(isset($_SESSION['admin'])){
+
+                $contar = new EmpleoModel();
+                $contado = $contar->contarEmpleos();
+
+                return $contado;
+
+            }
+
+        }
+
+        //Mostrar todos los empleos registrados
+        public function mostrarEmpleosAdm(){
+
+            if(isset($_SESSION['admin'])){
+
+                $contar = new EmpleoModel();
+                $contado = $contar->mostrarEmpleosAdm();
+
+                return $contado;
+
+            }
+
+        }
+
         //Funciones para traer los datos de todas las claves foraneas
         public function mostrarMunicipios(){//Función para los municipios
 

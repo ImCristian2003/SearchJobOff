@@ -41,11 +41,45 @@
         }
         //Cantidad de calificaciones registrados
         public function contarCalificaciones(){
-
+            //Verificar que exista la sesión del admin
             if(isset($_SESSION['admin'])){
-
+                //Función para contar las calificaciones
                 $contar = new CalificacionModel();
                 $contado = $contar->contarCalificaciones();
+
+                return $contado;
+
+            }
+
+        }
+        //Cantidad de calificaciones según las estrellas
+        public function reporteCalificacionesEstrellas(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $calificacion = (int)$_POST['calificacion'];
+
+                $contar = new CalificacionModel();
+                $contar->setCalificacion($calificacion);
+                $contado = $contar->reporteCalificacionesEstrellas();
+
+                return $contado;
+
+            }
+
+        }
+        //Cantidad de calificaciones según las fechas
+        public function reporteCalificacionesFecha(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $fecha_inicial = $_POST['fecha_inicial'];
+                $fecha_final = $_POST['fecha_final'];
+
+                $contar = new CalificacionModel();
+                $contar->setFecha($fecha_inicial);
+                $contar->setFechaFinal($fecha_final);
+                $contado = $contar->reporteCalificacionesFecha();
 
                 return $contado;
 

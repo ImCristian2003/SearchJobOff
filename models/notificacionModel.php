@@ -7,6 +7,7 @@
         private $asunto;
         private $cuerpo;
         private $fecha;
+        private $fecha_final;
         private $estado;
         private $empresa;
         //Variable que hace uso de la conexión a la base de datos
@@ -61,6 +62,15 @@
 
         public function setFecha($fecha){
             $this->fecha = $fecha;
+        }
+
+        //Get y set para fecha_final
+        public function getFechaFinal(){
+            return $this->fecha_final;
+        }
+
+        public function setFechaFinal($fecha_final){
+            $this->fecha_final = $fecha_final;
         }
 
         //Get y set para estado
@@ -132,6 +142,77 @@
             $cambiada = false;
             //En caso de que funcione asignar un true a la variable a retornar
             if($cambiar){
+                $cambiada = true;
+            }
+            //Retornar la variable
+            return $cambiada;
+
+        }
+        //Conseguir las notificaciones según el estado
+        public function reporteNotificacionesEstado(){
+            //Consulta para sacar todos los registros según el estado
+            $sql = "SELECT no.*, us.id, us.nombre FROM notificacion as no 
+            INNER JOIN usuario as us 
+            ON no.usuario = us.id
+            WHERE no.estado = '{$this->getEstado()}'";
+            $notificacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($notificacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $notificacion;
+            }
+            //Retorno del resultado
+            return $validar;
+
+        }
+        //Conseguir las notificaciones según la fecha inicial y final
+        public function reporteNotificacionesFecha(){
+            //Consulta para sacar todos los registros según las fechas
+            $sql = "SELECT no.*, us.id, us.nombre FROM notificacion as no 
+            INNER JOIN usuario as us 
+            ON no.usuario = us.id
+            WHERE no.fecha BETWEEN '{$this->getFecha()}' AND '{$this->getFechaFinal()}'";
+            $notificacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($notificacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $notificacion;
+            }
+            //Retorno del resultado
+            return $validar;
+
+        }
+        //Guardar una notificación
+        public function guardarNotificacion(){
+            //Consulta para guardar la notificación
+            $sql = "INSERT INTO notificacion 
+            VALUES(null,'{$this->getUsuario()}','{$this->getAsunto()}',
+            '{$this->getCuerpo()}',NOW(),'no leida')";
+            $notificacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($notificacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $notificacion;
+            }
+            //Retorno del resultado
+            return $validar;
+
+        }
+        //Marcar como leída una notificación
+        public function validarReporte(){
+            //Consulta que elimina el registro de un empleo correspondiente
+            $sql = "SELECT * FROM notificacion WHERE usuario = '{$this->getUsuario()}'";
+            $cambiar = $this->db->query($sql);
+            //Variable a retornar
+            $cambiada = false;
+            //En caso de que funcione asignar un true a la variable a retornar
+            if($cambiar && $cambiar->num_rows >= 1){
                 $cambiada = true;
             }
             //Retornar la variable

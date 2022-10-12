@@ -5,7 +5,7 @@
     require_once "../../config/conexion.php";
     require_once "../../helpers/utils.php";
     require_once "../../autoload.php";
-    if(!isset($_SESSION['admin'])){
+    if(!isset($_SESSION['empresa'])){
         header('Location: ../../index.php');
     } 
     //Instancia para el controlador de calificación
@@ -149,6 +149,10 @@
             text-align: center;
         }
 
+        .asunto:first-letter{
+            text-transform: uppercase;
+        }
+
     </style>
 </head>
 <body>
@@ -181,7 +185,7 @@
                             <strong class="mal">Intento de cambiar la notificacion fallido</strong>
 
                 <?php   endif; ?>
-                <p class="header">Bienvenido <b><?=$_SESSION['admin']->nombre ?>,</b> 
+                <p class="header">Bienvenido <b><?=$_SESSION['empresa']->nombre ?>,</b> 
                 en esta sesión puedes visualizar todas las notificaciones que van dirigidas
                 a tí.</p>
                 <span class="aviso">
@@ -198,7 +202,7 @@
                     <!-----ciclo que imprime todos los datos correspondientes-------->
                     <?php while($notificaciones = $not->fetch_object()): ?>
                         <div class="comentario">
-                            <h2><?=$notificaciones->asunto; ?></h2>
+                            <h2 class="asunto"><?=$notificaciones->asunto; ?></h2>
                             <p><?=$notificaciones->cuerpo; ?></p>
                             <span><b> Fecha Publicación:  </b>
                             <!-----Dar formato a la fecha-------->
@@ -207,7 +211,7 @@
                                     echo date_format($date,"Y/m/d H:i:s");
                                 ?>
                             </span>
-                            <?php if(isset($_SESSION['admin']) && $notificaciones->estado == "pendiente"):?>
+                            <?php if(isset($_SESSION['empresa']) && $notificaciones->estado == "no leida"):?>
                                 <a href="../../execute.php?controller=notificacionExecute&action=marcarLeido&codigo=<?=$notificaciones->codigo?>" class="marcar"><span class="icon-pencil"></span> Marcar Como Leida</a>
                             <?php else:?>
                                 <span class="marcar">

@@ -193,6 +193,7 @@
             </div>
             <div class="caja-derecha">
                 <div class="details">
+                    <a href="../notificaciones/notificacionesEmpleado.php">Notificaciones <span class="icon-bell"></span></a>
                     <a href="datosUsuario.php">Datos Personales <span class="icon-address-book"></span></a>   
                     <a href="../../execute.php?controller=empleado&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
                 </div>  

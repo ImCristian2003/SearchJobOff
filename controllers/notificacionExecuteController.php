@@ -30,5 +30,44 @@
             }
 
         }
+        //Función para guardar una notificaci´n
+        public function guardarNotificacion(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+                //Llenar las variables con campos que llegan del formulario
+                $asunto = isset($_POST['asunto']) ? $_POST['asunto'] : false;
+                $cuerpo = isset($_POST['cuerpo']) ? $_POST['cuerpo'] : false;
+                //Verificar que no estén vacias las variables
+                if(!empty($asunto) && !empty($asunto)){
+                    //Sacar los datos necesarios para insertar
+                    $empresa = $_POST['empresa'];
+                    $codigo_emp = $_POST['codigo_emp'];
+                    $nombre_emp = $_POST['nombre_emp'];
+                    //Instancia y proceso para guardar la notificación
+                    $notificacion = new NotificacionModel();
+                    $notificacion->setUsuario($empresa);
+                    $notificacion->setAsunto($asunto);
+                    $notificacion->setCuerpo($cuerpo);
+                    $guardar = $notificacion->guardarNotificacion();
+                    //En caso de que funcione la consulta crear una sesión y redireccionar
+                    if($guardar){
+                        $_SESSION['reporte'] = "Complete";
+                        header("Location: views/empleo/administrarEmpleos.php");
+                    }else{ //En caso de que no funcione la consulta crear una sesión y redireccionar
+                        $_SESSION['reporte_fail'] = "Fail";
+                        header("Location: views/empleo/administrarEmpleos.php");
+                    }
+
+                }else{ //En caso de que no funcione la consulta crear una sesión y redireccionar
+                    $_SESSION['reporte_fail'] = "Fail";
+                    header("Location: views/empleo/administrarEmpleos.php");
+                }
+
+            }else{ //En caso de que no funcione la consulta crear una sesión y redireccionar
+                $_SESSION['reporte_fail'] = "Fail";
+                header("Location: views/empleo/administrarEmpleos.php");
+            }
+
+        }
 
     }

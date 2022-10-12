@@ -20,5 +20,21 @@
             }
 
         }
+        //Cantidad de usuario según el perfil
+        public function reporteUsuariosPerfil(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $perfil = $_POST['perfil'];
+
+                $contar = new UsuarioModel();
+                $contar->setPerfil($perfil);
+                $contado = $contar->reporteUsuariosPerfil();
+
+                return $contado;
+
+            }
+
+        }
 
     }

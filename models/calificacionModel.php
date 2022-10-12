@@ -8,6 +8,7 @@
         private $calificacion;
         private $descripcion;
         private $fecha;
+        private $fecha_final;
         private $db;
 
         //Constructor que hará uso de la conexion a la base de datos
@@ -59,6 +60,15 @@
 
         public function setFecha($fecha){
             $this->fecha = $fecha;
+        }
+
+        //Get y set para fecha_final
+        public function getFechaFinal(){
+            return $this->fecha_final;
+        }
+
+        public function setFechaFinal($fecha_final){
+            $this->fecha_final = $fecha_final;
         }
 
         //Funciones para consultar a la base de datos
@@ -166,6 +176,44 @@
 
             //Retornar el resultado del proceso
             return $result;
+
+        }
+        //Conseguir las calificaciones segun la cantidad de estrellas
+        public function reporteCalificacionesEstrellas(){
+            //Consulta para sacar todos los registros según las estrellas
+            $sql = "SELECT ca.*, us.id, us.nombre FROM calificacion as ca 
+            INNER JOIN usuario as us 
+            ON ca.usuario = us.id
+            WHERE ca.calificacion = {$this->getCalificacion()}";
+            $calificacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($calificacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $calificacion;
+            }
+            //Retorno del resultado
+            return $validar;
+
+        }
+        //Conseguir las calificaciones segun la fecha inicial y final
+        public function reporteCalificacionesFecha(){
+            //Consulta para sacar todos los registros según las fechas
+            $sql = "SELECT ca.*, us.id, us.nombre FROM calificacion as ca 
+            INNER JOIN usuario as us 
+            ON ca.usuario = us.id
+            WHERE ca.fecha BETWEEN '{$this->getFecha()}' AND '{$this->getFechaFinal()}'";
+            $calificacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($calificacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $calificacion;
+            }
+            //Retorno del resultado
+            return $validar;
 
         }
 

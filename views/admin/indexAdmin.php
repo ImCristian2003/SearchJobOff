@@ -19,6 +19,10 @@
     $contar2 = new CalificacionController();
     $contado2 = $contar2->contarCalificaciones();
 
+    //instancia para saber la cantidad de calificaciones registrados
+    $contar3 = new EmpleoController();
+    $contado3 = $contar3->contarEmpleos();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -182,7 +186,7 @@
 
         .estadisticas{
             width: 100%;
-            height: 100vh;
+            height: 150vh;
         }
 
         .estadisticas .cartas{
@@ -339,6 +343,16 @@
                     </div>
                     <div class="details2">
                         <h3><?=$contado2->calificaciones?></h3>
+                    </div>
+                </div>
+
+                <div class="details-cartas">
+                    <div class="details1 det3">
+                        <span class="icon-newspaper"></span>
+                        <h2>Empleos Disponibles</h2>
+                    </div>
+                    <div class="details2">
+                        <h3><?=$contado3->empleos?></h3>
                     </div>
                 </div>
 

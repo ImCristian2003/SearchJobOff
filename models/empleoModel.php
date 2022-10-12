@@ -199,6 +199,34 @@
             return $val;
 
         }
+        //Función que muestra todos los empleos publicados 
+        public function mostrarEmpleosAdm(){
+            //Consulta para mostrar todos los empleos publicados por una 
+            //su respectiva empresa
+            $sql = "SELECT em.*, mu.nombre as 'nombre_municipio', ca.nombre as 'nombre_cargo', se.nombre as 'nombre_sector', 
+            us.id as 'id_empresa', us.nombre as 'nombre_empresa', tp.nombre as 'nombre_tipocontrato' FROM empleo as em
+            INNER JOIN municipio as mu
+            ON em.municipio = mu.codigo
+            INNER JOIN cargo as ca
+            ON em.cargo = ca.codigo
+            INNER JOIN sector as se
+            ON em.sector = se.codigo
+            INNER JOIN usuario as us
+            ON em.empresa = us.id
+            INNER JOIN tipo_contrato as tp
+            ON em.tipo_contrato = tp.codigo";
+
+            $consulta = $this->db->query($sql);
+            //Variable a retornar
+            $mostrar = false;
+            //En caso de que funcione, asignar los datos a la variable a retornar
+            if($consulta){
+                $mostrar = $consulta;
+            }
+            //Retornar la variable
+            return $mostrar;
+
+        }
         //Obtener un solo empleo
         public function obtenerUno(){
             //Consulta que trae todos los datos del empleo y además el nombre correspondiente
@@ -501,6 +529,23 @@
             }
             //Retorno del resultado
             return $val;
+
+        }
+        //Cantidad de empleos registrados
+        public function contarEmpleos(){
+
+            //Comprobar si existe el usuario
+            $sql = "SELECT COUNT(codigo) as 'empleos' FROM empleo";
+            $login = $this->db->query($sql);
+
+            $result = false;
+            //Comprobar que la consulta funcione y devuelva un solo registro
+            if($login){
+                $result = $login->fetch_object();
+            }
+
+            //Retornar el resultado del proceso
+            return $result;
 
         }
 

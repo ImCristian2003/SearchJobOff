@@ -193,7 +193,7 @@
                 <?php endif; ?>
             </table>
             <?php if($emp->num_rows >= 1 && isset($_POST)): ?>
-                <a href="generarPdfEmpleados.php" class="pdf" target="_blank">Generar PDF</a>
+                <a href="generarPdfEmpleadosBlock.php" class="pdf" target="_blank">Generar PDF</a>
             <?php endif; ?>
             <!-----Borrar todas las sesiones-------->
             <?php borrarSesion('errores'); borrarSesion('complete'); borrarSesion('fail');  borrarSesion('registro'); borrarSesion('registro_fail');?>

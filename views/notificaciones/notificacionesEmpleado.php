@@ -5,7 +5,7 @@
     require_once "../../config/conexion.php";
     require_once "../../helpers/utils.php";
     require_once "../../autoload.php";
-    if(!isset($_SESSION['admin'])){
+    if(!isset($_SESSION['empleado'])){
         header('Location: ../../index.php');
     } 
     //Instancia para el controlador de calificación
@@ -181,7 +181,7 @@
                             <strong class="mal">Intento de cambiar la notificacion fallido</strong>
 
                 <?php   endif; ?>
-                <p class="header">Bienvenido <b><?=$_SESSION['admin']->nombre ?>,</b> 
+                <p class="header">Bienvenido <b><?=$_SESSION['empleado']->nombre ?>,</b> 
                 en esta sesión puedes visualizar todas las notificaciones que van dirigidas
                 a tí.</p>
                 <span class="aviso">

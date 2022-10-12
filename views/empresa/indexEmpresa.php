@@ -191,6 +191,7 @@
         </div>
         <div class="caja-derecha">
             <div class="details">
+            <a href="../notificaciones/notificacionesEmpresa.php">Notificaciones <span class="icon-bell"></span></a>
                 <a href="datosEmpresa.php">Datos Personales <span class="icon-address-book"></span></a>   
                 <a href="../../execute.php?controller=empresa&action=logout">Cerrar Sesión <span class="icon-exit"></span></a>   
             </div>

@@ -7,6 +7,7 @@
         private $empleo;
         private $estado;
         private $fecha;
+        private $fecha_final;
         private $empresa;
         //Variable que hace uso de la conexión a la base de datos
         private $db;
@@ -60,6 +61,15 @@
 
         public function setFecha($fecha){
             $this->fecha = $fecha;
+        }
+
+        //Get y set para fecha_final
+        public function getFechaFinal(){
+            return $this->fecha_final;
+        }
+
+        public function setFechaFinal($fecha_final){
+            $this->fecha_final = $fecha_final;
         }
 
         //Get y set para empresa
@@ -241,6 +251,48 @@
             }
             //Retorno de la variable
             return $validado;
+
+        }
+        //Conseguir las postulaciones según el estado
+        public function reportePostulacionesEstado(){
+            //Consulta para sacar todos los registros según el estado
+            $sql = "SELECT po.*, us.id, us.nombre, em.codigo as 'codigo_empleo', em.nombre as 'nombre_empleo' FROM postulacion as po 
+            INNER JOIN usuario as us 
+            ON po.usuario = us.id
+            INNER JOIN empleo as em 
+            ON po.empleo = em.codigo
+            WHERE po.estado = '{$this->getEstado()}'";
+            $postulacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($postulacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $postulacion;
+            }
+            //Retorno del resultado
+            return $validar;
+
+        }
+        //Conseguir las postulaciones según la fecha inicial y final
+        public function reportePostulacionesFecha(){
+            //Consulta para sacar todos los registros según las fechas
+            $sql = "SELECT po.*, us.id, us.nombre, em.codigo as 'codigo_empleo', em.nombre as 'nombre_empleo' FROM postulacion as po 
+            INNER JOIN usuario as us 
+            ON po.usuario = us.id
+            INNER JOIN empleo as em 
+            ON po.empleo = em.codigo
+            WHERE po.fecha BETWEEN '{$this->getFecha()}' AND '{$this->getFechaFinal()}'";
+            $notificacion = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($notificacion){
+                //Almacenar los datos en la variable a retornar
+                $validar = $notificacion;
+            }
+            //Retorno del resultado
+            return $validar;
 
         }
 

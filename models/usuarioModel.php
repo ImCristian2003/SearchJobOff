@@ -266,4 +266,23 @@
             return $result;
 
         }
+        //Conseguir los usuarios según el perfil
+        public function reporteUsuariosPerfil(){
+            //Consulta para sacar todos los registros según el perfil
+            $sql = "SELECT us.*, pe.nombre as 'nombre_perfil' FROM usuario as us 
+            INNER JOIN perfil as pe 
+            ON us.perfil = pe.codigo
+            WHERE us.perfil = '{$this->getPerfil()}'";
+            $usuario = $this->db->query($sql);
+
+            $validar = false;
+            //Si la consulta ejecutó
+            if($usuario){
+                //Almacenar los datos en la variable a retornar
+                $validar = $usuario;
+            }
+            //Retorno del resultado
+            return $validar;
+
+        }
     }

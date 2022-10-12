@@ -134,13 +134,14 @@
                 </div>
                 <div class="tablas">
 
-                    <a href="../municipios/indexMunicipio.php">Municipios - Veredas <span class="icon-address-book"></span></a>
-                    <a href="../departamentos/indexDepartamento.php">Departamentos <span class="icon-address-book"></span></a>
-                    <a href="../cargos/indexCargo.php">Cargos <span class="icon-address-book"></span></a>
-                    <a href="../perfiles/indexPerfil.php">Perfiles <span class="icon-address-book"></span></a>
-                    <a href="../sectores/indexSector.php">Sectores <span class="icon-address-book"></span></a>
-                    <a href="../contratos/indexContrato.php">Tipos de Contrato <span class="icon-address-book"></span></a>
-                    <a href="../notificaciones/administrarNotificaciones.php">Notificaciones <span class="icon-address-book"></span></a>
+                    <a href="../municipios/indexMunicipio.php">Municipios - Veredas <span class="icon-table2"></span></a>
+                    <a href="../departamentos/indexDepartamento.php">Departamentos <span class="icon-table2"></span></a>
+                    <a href="../cargos/indexCargo.php">Cargos <span class="icon-table2"></span></a>
+                    <a href="../perfiles/indexPerfil.php">Perfiles <span class="icon-table2"></span></a>
+                    <a href="../sectores/indexSector.php">Sectores <span class="icon-table2"></span></a>
+                    <a href="../contratos/indexContrato.php">Tipos de Contrato <span class="icon-table2"></span></a>
+                    <a href="../notificaciones/administrarNotificaciones.php">Notificaciones <span class="icon-table2"></span></a>
+                    <a href="../empleo/administrarEmpleos.php">Empleos <span class="icon-table2"></span></a>
 
                 </div>
             </div>

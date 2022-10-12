@@ -38,4 +38,53 @@
             }
 
         }
+        //Validar los empleos ya reportados
+        public function validarReporte($empresa){
+
+            if(isset($_SESSION['admin'])){
+
+                //Sacar las notificaciones del usuario
+                $reporte = new notificacionModel();
+                $reporte->setUsuario($empresa);
+                $reportes = $reporte->validarReporte();
+
+                return $reportes;
+
+            }
+
+        }
+        //Cantidad de notificaciones según el estado
+        public function reporteNotificacionesEstado(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $estado = $_POST['notificacion'];
+
+                $contar = new NotificacionModel();
+                $contar->setEstado($estado);
+                $contado = $contar->reporteNotificacionesEstado();
+
+                return $contado;
+
+            }
+
+        }
+        //Cantidad de notificaciones según las fechas
+        public function reporteNotificacionesFecha(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $fecha_inicial = $_POST['fecha_inicial'];
+                $fecha_final = $_POST['fecha_final'];
+
+                $contar = new NotificacionModel();
+                $contar->setFecha($fecha_inicial);
+                $contar->setFechaFinal($fecha_final);
+                $contado = $contar->reporteNotificacionesFecha();
+
+                return $contado;
+
+            }
+
+        }
     }

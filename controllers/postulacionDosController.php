@@ -71,5 +71,39 @@
             }
 
         }
+        //Cantidad de postulaciones según el estado
+        public function reportePostulacionesEstado(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $estado = $_POST['postulacion'];
+
+                $contar = new PostulacionModel();
+                $contar->setEstado($estado);
+                $contado = $contar->reportePostulacionesEstado();
+
+                return $contado;
+
+            }
+
+        }
+        //Cantidad de postulaciones según las fechas
+        public function reportePostulacionesFecha(){
+            //Verificar que exista la sesión del admin
+            if(isset($_SESSION['admin']) && isset($_POST)){
+
+                $fecha_inicial = $_POST['fecha_inicial'];
+                $fecha_final = $_POST['fecha_final'];
+
+                $contar = new PostulacionModel();
+                $contar->setFecha($fecha_inicial);
+                $contar->setFechaFinal($fecha_final);
+                $contado = $contar->reportePostulacionesFecha();
+
+                return $contado;
+
+            }
+
+        }
 
     }
