@@ -35,14 +35,15 @@
             <h1>SearchJob</h1>
         </section>
         <nav class="logeo">
-            <a href="registro.html">Crear Cuenta</a>
+            <a href="registro.html">Crear una Cuenta</a>
             <a href="login.php">Acceder</a>
         </nav>
         <section class="entrada">
             <div class="details">
                 <h2>SearchJob</h2>
                 <p>Estamos aquí para ayudarte a encontrar el trabajo ideal para tí <br>
-                Registrate en nuestra pagina y empieza a navegar entre los tantos empleos disponibles.</p>
+                Registrate en nuestra pagina y empieza a navegar entre los tantos empleos disponibles, elige 
+                el que mas se acomode a tu necesidad.</p>
                 <form action="views/empleo/buscarEmpleo.php" method="post">
                     <input type="text" placeholder="Busqueda manual" name="nombre">
                     <select name="id">
