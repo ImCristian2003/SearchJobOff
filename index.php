@@ -43,7 +43,7 @@
                 <h2>SearchJob</h2>
                 <p>Estamos aquí para ayudarte a encontrar el trabajo ideal para tí <br>
                 Registrate en nuestra pagina y empieza a navegar entre los tantos empleos disponibles, elige 
-                el que mas se acomode a tu necesidad y disponibilidad.</p>
+                el que mas se acomode a tu necesidad.</p>
                 <form action="views/empleo/buscarEmpleo.php" method="post">
                     <input type="text" placeholder="Busqueda manual" name="nombre">
                     <select name="id">
